@@ -10,11 +10,27 @@
 	
 	<security:http>
 		<security:csrf disabled="true"/>
-		<security:form-login />
+		<security:form-login login-page="/user/login" default-target-url="/main/home" always-use-default-target="true"/>
+		<security:logout logout-success-url="/main/home"/>
+		<security:remember-me/>
 	</security:http>
 	
 	<security:authentication-manager>
-
+		<security:authentication-provider>
+			<security:jdbc-user-service 
+				data-source-ref="dataSource"
+				users-by-username-query="
+					SELECT id, password, 1 
+					FROM User
+					WHERE id = ?
+				"
+				authorities-by-username-query="
+					SELECT userId, role
+					FROM Authority
+					WHERE userId = ?
+				"
+			/>
+		</security:authentication-provider>
 	</security:authentication-manager>
 
 </beans>
