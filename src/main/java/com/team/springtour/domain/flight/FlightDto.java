@@ -1,4 +1,4 @@
-package com.team.springtour.domain.Flight;
+package com.team.springtour.domain.flight;
 
 import lombok.Data;
 
