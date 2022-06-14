@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class FlightDto {
 
-	private String planenumber;
-	private String departuredate;
-	private String returndate;
-	private String departureport;
-	private String retrunport;
+	private String planeNumber;
+	private String departureDate;
+	private String returnDate;
+	private String departurePort;
+	private String retrunPort;
 	
 }
