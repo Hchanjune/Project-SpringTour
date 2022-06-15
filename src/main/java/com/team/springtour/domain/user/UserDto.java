@@ -19,5 +19,6 @@ public class UserDto {
 	private String email;
 	private String grade;
 	private LocalDateTime inserted;
+	private String authKey;
 	
 }

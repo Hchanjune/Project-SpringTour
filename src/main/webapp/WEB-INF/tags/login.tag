@@ -21,8 +21,16 @@
 	</div>
 </sec:authorize>
 
+<sec:authorize  access="hasRole('GUEST')">
+	<sec:authentication property="principal" var="principal" />
+	<div class="col justify-content-right" align="right">
+		<a href="" class="nav-link disabled">${principal.username }님 이메일 인증이 필요합니다.</a>
+		<input form="resendRegisterMailForm" type="submit" value="인증메일 재전송" />
+		<input form="loginTagLogoutForm" type="submit" value="로그아웃" />
+	</div>
+</sec:authorize>
 
-<sec:authorize access="isAuthenticated()">
+<sec:authorize  access="hasRole('USER')">
 	<sec:authentication property="principal" var="principal" />
 	<div class="col justify-content-right" align="right">
 		<a href="" class="nav-link disabled">${principal.username }님 반갑습니다.</a>
@@ -36,4 +44,10 @@
 
 <div class="d-none">
 	<form action="${appRoot }/user/register" id="loginTagRegisterForm"></form>
+</div>
+
+<div class="d-none">
+	<form action="${appRoot }/user/resend" id="resendRegisterMailForm" method="post">
+		<input type="hidden" name="userId" value="${principal.username }" />
+	</form>
 </div>
