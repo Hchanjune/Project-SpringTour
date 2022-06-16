@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>  
 
 <!DOCTYPE html>
 <html>
@@ -15,6 +16,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	<tag:login/>
+	<tag:navBar/>
 
 	<div class="container">
 		<div class="row">
@@ -67,7 +71,7 @@
 						</tr>
 					</c:forEach>
 				</table>
-
+				<button><a href="${appRoot}/serviceCenter/notice/insert">글쓰기</a></button>
 				
 			</div>
 		</div>
