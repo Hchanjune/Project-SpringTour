@@ -4,7 +4,7 @@
 
 <c:url value="/main/home" var="homeLink"/>
 <c:url value="/user/register" var="registerLink"/>
-
+<c:url value="/serviceCenter/notice/notice" var="noticeLink"/>
 <nav class="navbar navbar-expand-sm bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="${homeLink }">Spring Tour</a>
@@ -22,7 +22,7 @@
             <a class="nav-link active" aria-current="page" href="${homeLink }">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${homeLink }">Link</a>
+            <a class="nav-link" href="${noticeLink }">Notice</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="${homeLink }" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

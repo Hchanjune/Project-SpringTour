@@ -1,5 +1,6 @@
 package com.team.springtour.controller.serviceCenter;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +39,11 @@ public class ServiceCenterController {
 	}
 	
 	@PostMapping("notice/insert")
-	public String insertNotice(ServiceCenterDto dto, RedirectAttributes rttr) {
+	public String insertNotice(ServiceCenterDto dto, RedirectAttributes rttr, Principal principal ) {
 		
+		dto.setWriter(principal.getName());
 		boolean success = service.insertBoard(dto);
+		
 		if (success) {
 			rttr.addFlashAttribute("message", "새글이 등록되었습니다.");
 		} else {
