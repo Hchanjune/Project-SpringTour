@@ -75,4 +75,8 @@ public class UserService {
 		mailService.mailSendWithUserKey(user.getEmail(), user.getId(), request);
 	}
 
+	public UserDto getUserById(String userId) {
+		return userMapper.selectUserById(userId);
+	}
+
 }
