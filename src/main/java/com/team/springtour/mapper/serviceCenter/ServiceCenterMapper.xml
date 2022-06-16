@@ -1,1 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.springtour.mapper.serviceCenter.ServiceCenterMapper">
+
+
+	<select id="selectBoard" resultType="com.team.springtour.domain.serviceCenter.ServiceCenterDto">
+		SELECT indexId, writer, title, body, inserted
+		FROM ServiceCenter
+		ORDER BY indexId DESC
+	</select>
+
+	<select id="selectBoardByIndexId" resultType="com.team.springtour.domain.serviceCenter.ServiceCenterDto">
+		SELECT indexId, 
+			   writer, 
+			   title, 
+			   body, 
+			  inserted
+		FROM ServiceCenter
+		WHERE indexId = #{indexId}
+	</select>
+	
+	<insert id="insertBoard" useGeneratedKeys="true" keyColumn="indexId" keyProperty="indexId">
+		INSERT INTO ServiceCenter (title, body, writer)
+		VALUES (#{title}, #{body}, #{writer})
+	</insert>
+
+</mapper>

@@ -1,5 +1,7 @@
 package com.team.springtour.service.user;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.team.springtour.domain.user.AuthorityDto;
 import com.team.springtour.domain.user.UserDto;
 import com.team.springtour.mapper.user.AuthorityMapper;
 import com.team.springtour.mapper.user.UserMapper;
@@ -65,8 +66,8 @@ public class UserService {
 	}
 
 	public boolean checkUserLoginAuthority(String userId) {
-		AuthorityDto auth = authMapper.selectRoleByUserId(userId);
-		if (auth.getRole().equals("ROLE_USER") || auth.getRole().equals("ROLE_ADMIN")) {
+		List<String> authList = authMapper.selectRoleByUserId(userId);
+		if (authList.contains("ROLE_USER") || authList.contains("ROLE_ADMIN")) {
 			return true;
 		}else {
 			return false;

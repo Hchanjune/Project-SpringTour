@@ -13,6 +13,8 @@
 		<security:form-login login-page="/user/login" default-target-url="/user/loginAuthority" always-use-default-target="true"/>
 		<security:logout logout-success-url="/main/home"/>
 		<security:remember-me/>
+		
+		<security:intercept-url pattern="/serviceCenter/notice/insert" access="hasRole('ADMIN')"/>
 	</security:http>
 	
 	<security:authentication-manager>

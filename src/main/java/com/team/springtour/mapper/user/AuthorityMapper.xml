@@ -3,8 +3,8 @@
 
 <mapper namespace="com.team.springtour.mapper.user.AuthorityMapper">
 	
-	<select id="selectRoleByUserId" resultType="com.team.springtour.domain.user.AuthorityDto">
-		SELECT userId, role FROM Authority
+	<select id="selectRoleByUserId" resultType="String">
+		SELECT role FROM Authority
 		WHERE userId = #{userId}
 	</select>
 	
