@@ -2,8 +2,13 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
+
+
 <c:url value="/main/home" var="homeLink"/>
 <c:url value="/user/register" var="registerLink"/>
+<c:url value="/serviceCenter/notice/notice" var="noticeLink"/>
+
+
 
 <nav class="navbar navbar-expand-sm bg-light">
   <div class="container-fluid">
@@ -22,7 +27,7 @@
             <a class="nav-link active" aria-current="page" href="${homeLink }">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${homeLink }">Link</a>
+            <a class="nav-link" href="${noticeLink }">Notice</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="${homeLink }" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -37,13 +42,13 @@
               <li><a class="dropdown-item" href="${homeLink }">Something else here</a></li>
             </ul>
           </li>
-          
+          <!-- 
           <sec:authorize access="not isAuthenticated()">
 	          <li class="nav-item">
 	            <a class="nav-link" href="${registerLink }">회원가입</a>
 	          </li>
           </sec:authorize>
-          
+           -->
         </ul>
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

@@ -26,6 +26,14 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
+		
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		
 		<!-- aws java sdk https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/get-started.html  -->
 		<dependency>
 			<groupId>software.amazon.awssdk</groupId>
@@ -126,6 +134,14 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		<!-- Spring-Context- Support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>

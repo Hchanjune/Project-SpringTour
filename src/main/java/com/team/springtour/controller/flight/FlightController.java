@@ -1,5 +1,9 @@
 package com.team.springtour.controller.flight;
 
+
+public class FlightController {
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,4 +17,5 @@ public class FlightController {
 		
 		return "flight";
 	}
+
 }

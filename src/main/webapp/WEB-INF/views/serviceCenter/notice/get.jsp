@@ -16,5 +16,7 @@
 </head>
 <body>
 
+ <h1>${board.indexId }</h1>
+
 </body>
 </html>
