@@ -18,12 +18,6 @@
 <body>
 	<tag:navBar></tag:navBar>
 	
-	<h1>제목</h1>
-	
-	<a href="/springtour/tourPackage/GolfTour">${tourList[0].packageName}</a>
-	<a href="/springtour/tourPackage/SilverTour">${tourList[1].packageName}</a>
-	<a href="/springtour/tourPackage/HoneymoonTour">${tourList[2].packageName}</a>
-	
 	
 </body>
 </html>
