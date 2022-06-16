@@ -24,6 +24,7 @@
 				아이디 : <input type="text" name="username" /><br />
 				비밀번호 : <input type="password" name="password"/><br />
 				<input type="checkbox" name="remember-me"/> 로그인 상태 유지<br />
+				<input form="loginPageRegisterForm" type="submit" value="회원가입" />
 				<input type="submit" value="로그인" />
 			</form>
 			<div class="col">
@@ -36,7 +37,10 @@
 			</div>
 		</div>
 	</div>
-	
+
+<div class="d-none">
+	<form action="${appRoot }/user/register" id="loginPageRegisterForm"></form>
+</div>	
 
 </body>
 </html>

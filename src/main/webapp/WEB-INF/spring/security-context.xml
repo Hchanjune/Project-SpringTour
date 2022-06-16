@@ -10,7 +10,7 @@
 	
 	<security:http>
 		<security:csrf disabled="true"/>
-		<security:form-login login-page="/user/login" default-target-url="/main/home" always-use-default-target="true"/>
+		<security:form-login login-page="/user/login" default-target-url="/user/loginAuthority" always-use-default-target="true"/>
 		<security:logout logout-success-url="/main/home"/>
 		<security:remember-me/>
 	</security:http>
