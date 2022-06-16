@@ -54,10 +54,6 @@ public class UserService {
 
 	public boolean confirmUser(String userId, String authKey) {
 		UserDto user = userMapper.selectUserById(userId);
-		
-		System.out.println(user.getAuthKey());
-		System.out.println(authKey);
-		
 		if (user.getAuthKey().equals(authKey)) {
 			return userMapper.updateUserAuthority(user.getId(), "ROLE_USER") == 1;
 		}else {
