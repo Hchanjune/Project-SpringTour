@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>  
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -13,27 +14,29 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+
+
+
+
 <title>Insert title here</title>
 </head>
 <body>
 
 	<tag:login/>
 	<tag:navBar/>
+	<tag:sub_notice/>
 
 	<div class="container">
 		<div class="row">
-			<div class="col-4">
-				<nav class="nav flex-column">
-					<a class="nav-link disabled">고객센터</a>
-					<a class="nav-link" href="#">공지사항</a>
-					<a class="nav-link" href="#">묻고답하기</a>
-					<a class="nav-link" href="#">자주묻는질문</a>
-				</nav>
-			</div>
-			<div class="col-8">
+			<div class="col">
 				
-				
-					<h1>공지사항</h1> <br />
+				<div class="">
+					<h3>공지사항</h3>
+					 <span>공지사항을 알려드립니다.</span>
+				</div>
+					
+					 
+					<br />
 					<div class="col-lg-4">
 						<c:url value="/serviceCenter/notice/notice" var="notice"></c:url>
 						<form action="${notice }" class="d-flex" role="search">
@@ -71,7 +74,13 @@
 						</tr>
 					</c:forEach>
 				</table>
-				<button><a href="${appRoot}/serviceCenter/notice/insert">글쓰기</a></button>
+
+				<sec:authorize access="hasRole('ADMIN')">
+					<sec:authentication property="principal" var="principal" />
+					<div class="col justify-content-right" align="right">
+						<button><a href="${appRoot}/serviceCenter/notice/insert">글쓰기</a></button>
+					</div>
+				</sec:authorize>
 				
 			</div>
 		</div>
