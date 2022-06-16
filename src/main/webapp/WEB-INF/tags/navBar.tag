@@ -2,9 +2,14 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
+
+
 <c:url value="/main/home" var="homeLink"/>
 <c:url value="/user/register" var="registerLink"/>
 <c:url value="/serviceCenter/notice/notice" var="noticeLink"/>
+
+
+
 <nav class="navbar navbar-expand-sm bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="${homeLink }">Spring Tour</a>
