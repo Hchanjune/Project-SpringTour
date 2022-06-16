@@ -17,11 +17,40 @@
 <body>
 <tag:login/>
 <tag:navBar/>
-아이디 : ${user.id } <br />
-이름 : ${user.name } <br />
-생년월일 : ${user.birthDate } <br />
-메일 : ${user.email } <br />
-주소 : ${user.address } <br />
+	<div class="container">
+		<form id="userRegisterForm" class="row g-3" action="${appRoot }/user/register" method="post">
+			<div class="row g-3">
+				<div class="col-md-3">
+					<label for="userInfoUserId" class="form-label">아이디</label><br />
+					<input type="text" readonly class="form-control" value="${user.id }" id="userInfoUserId" >
+				</div>
+			</div>
+			
+			<div class="row g-3">
+				<div class="col-md-4">
+					<label for="userInfoUserName" class="form-label">이름</label>
+					<input type="text" readonly class="form-control" id="userInfoUserName" value="${user.name }">
+				</div>
+				<div class="col-md-4">
+					<label for="userInfoUserBirthDate" class="form-label">생년월일</label>
+					<input type="date" readonly class="form-control" id="userInfoUserBirthDate" value="${user.birthDate }">
+				</div>
+			</div>
+			
+			<div class="col-8">
+				<label for="userInfoUserAddress" class="form-label">주소</label>
+				<input type="text" readonly name="address" class="form-control" id="userInfoUserAddress" placeholder="주소를 입력해주세요" value="${user.address }" required>
+			</div>
+			
+			<div class="col-8">
+				<label for="userInfoUserEmail" class="form-label">이메일</label>
+				<div class="input-group mb-3">
+					<input type="text" readonly name="email" class="form-control" id="userInfoUserEmail" value="${user.email }">
+				</div>
+			</div>
+			
+		</form>
+	</div>
 
 </body>
 </html>
