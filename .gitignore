@@ -6,4 +6,3 @@ build/
 .settings/
 .springBeans
 *.properties
-src/main/webapp/WEB-INF/views/tourPackage/tourChoice.jsp

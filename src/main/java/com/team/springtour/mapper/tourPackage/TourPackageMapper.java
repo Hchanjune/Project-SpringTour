@@ -7,5 +7,5 @@ import com.team.springtour.domain.tourPackage.TourPackageDto;
 public interface TourPackageMapper {
 
 	List<TourPackageDto> selectTourPackageAll();
-
+	
 }

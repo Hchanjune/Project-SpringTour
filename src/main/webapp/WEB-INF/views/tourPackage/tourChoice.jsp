@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*"%>
-<% request.setCharacterEncoding("utf-8"); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -18,11 +17,54 @@
 <body>
 	<tag:navBar></tag:navBar>
 	
-	<h1>제목</h1>
+
+	<h1></h1>
 	
-	<a href="/springtour/tourPackage/GolfTour">${tourList[0].packageName}</a>
-	<a href="/springtour/tourPackage/SilverTour">${tourList[1].packageName}</a>
-	<a href="/springtour/tourPackage/HoneymoonTour">${tourList[2].packageName}</a>
+	<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card h-100">
+    <a href="/springtour/tourPackage/golfTour">
+      <img src="/springtour/resources/img/hanoi.jpg" class="card-img-top" alt="...">
+      </a>
+      <div class="card-body">
+        <h5 class="card-title">${tourList[0].packageName }</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+    <a href="/springtour/tourPackage/silverTour">
+      <img src="/springtour/resources/img/Tokyo.jpg" class="card-img-top" alt="...">
+      </a>
+      <div class="card-body">
+        <h5 class="card-title">${tourList[1].packageName }</h5>
+        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+    <a href="/springtour/tourPackage/honeymoonTour">
+      <img src="/springtour/resources/img/hawai.jpg" class="card-img-top" alt="...">
+      </a>
+     	<div class="card-body">
+        <h5 class="card-title">${tourList[2].packageName }</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
+    </div>
+  </div>
+</div>
+
 	
 	
 </body>
