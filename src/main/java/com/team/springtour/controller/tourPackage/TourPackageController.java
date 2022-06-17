@@ -18,26 +18,26 @@ public class TourPackageController {
 	@Autowired
 	private TourPackageService service;
 	
-	@GetMapping("TourChoice")
+	@GetMapping("tourChoice")
 	public void choicePage(Model model) {
 		
 		List<TourPackageDto> list = service.TourList();
-		System.out.println(list);
+//		System.out.println(list);
 		model.addAttribute("tourList",list);
 	
 	}
 	// getmapping 값이 view의 jsp와 같으면 void를 사용한다
-	@GetMapping("HoneymoonTour")
+	@GetMapping("honeymoonTour")
 	public void honeymoon() {
 			
 	}
 	
-	@GetMapping("GolfTour")
+	@GetMapping("golfTour")
 	public void golf() {
 		
 	}
 	
-	@GetMapping("SilverTour")
+	@GetMapping("silverTour")
 	public void silver() {
 		
 	}
