@@ -20,4 +20,6 @@ public interface UserMapper {
 
 	int updateUserAuthority(@Param("userId")String userId, @Param("auth")String auth);
 
+	int updateUserInfoByUserId(UserDto user);
+
 }

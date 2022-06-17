@@ -103,9 +103,31 @@ public class UserController {
 	}
 	
 	@PostMapping("myPage")
-	public void myPage(String userId, Principal principal, Model model) {
+	public String myPage(String userId, Principal principal, Model model) {
 		UserDto user = userService.getUserById(userId);
 		model.addAttribute("user", user);
+		return "/user/myPage";
+	}
+	
+	private boolean authorityCheck(String id, Principal principal, HttpServletRequest request) {
+		return request.isUserInRole("ROLE_ADMIN") || (principal.getName().equals(id));
+	}
+	
+	@PostMapping("modifyInfo")
+	public String modifyUserInfo(UserDto user, Principal principal, Model model, RedirectAttributes rttr, HttpServletRequest request) {
+		boolean success = false;
+		if (authorityCheck(user.getId(), principal, request)) {
+			success = userService.modifyUserInfo(user);
+		}
+		if (success) {
+			model.addAttribute("user", user);
+			return "/user/myPage";
+		}else{
+			String resultMessage;
+			resultMessage = "회원 정보 수정 과정에서 오류가 발생하였습니다.";
+			rttr.addFlashAttribute("resultMessage", resultMessage);
+			return "redirect:/main/home";
+		}
 	}
 
 }

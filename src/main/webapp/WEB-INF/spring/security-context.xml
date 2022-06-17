@@ -15,6 +15,7 @@
 		<security:remember-me/>
 		
 		<security:intercept-url pattern="/serviceCenter/notice/insert" access="hasRole('ADMIN')"/>
+		<security:intercept-url pattern="/user/memberPage" access="hasAnyRole('USER','ADMIN')"/>
 	</security:http>
 	
 	<security:authentication-manager>
