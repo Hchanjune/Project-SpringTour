@@ -79,4 +79,8 @@ public class UserService {
 		return userMapper.selectUserById(userId);
 	}
 
+	public boolean modifyUserInfo(UserDto user) {
+		return userMapper.updateUserInfoByUserId(user) == 1;
+	}
+
 }

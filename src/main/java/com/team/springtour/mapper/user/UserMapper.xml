@@ -44,6 +44,13 @@
 		WHERE id = #{userId}
 	</update>
 	
+	<update id="updateUserInfoByUserId">
+		UPDATE User
+		SET birthDate = #{birthDate},
+			address = #{address}
+		WHERE id = #{id}
+	</update>
+	
 </mapper>
 
 

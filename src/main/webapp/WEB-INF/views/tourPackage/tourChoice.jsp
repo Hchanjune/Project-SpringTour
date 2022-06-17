@@ -17,6 +17,7 @@
 <body>
 	<tag:navBar></tag:navBar>
 	
+
 	<h1></h1>
 	
 	<div class="row row-cols-1 row-cols-md-3 g-4">
@@ -63,8 +64,7 @@
     </div>
   </div>
 </div>
-	
-	
+
 	
 	
 </body>
