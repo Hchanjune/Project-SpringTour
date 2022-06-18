@@ -27,9 +27,7 @@ public class UserService {
 
 	@Transactional
 	public boolean registerUser(UserDto user, HttpServletRequest request) {
-		
-		user.setPassword(encodePassword(user.getPassword()));
-		
+		user.setPassword(encodePassword(user.getPassword()));	
 		int registerUser = userMapper.insertUser(user);
 		int registerAuthority = userMapper.insertAuthority(user.getId());
 		if (registerUser == 1 && registerAuthority == 1) {
@@ -51,11 +49,12 @@ public class UserService {
 	public boolean checkUserEmail(String email) {
 		return userMapper.countUserEmail(email) > 0;
 	}
-
+	
+	@Transactional
 	public boolean confirmUser(String userId, String authKey) {
 		UserDto user = userMapper.selectUserById(userId);
 		if (user.getAuthKey().equals(authKey)) {
-			return userMapper.updateUserAuthority(user.getId(), "ROLE_USER") == 1;
+			return userMapper.updateUserAuthority(user.getId(), "ROLE_USER") == 1 && userMapper.updateUserAuthKey(user.getId()) == 1;
 		}else {
 			return false;
 		}
@@ -81,6 +80,10 @@ public class UserService {
 
 	public boolean modifyUserInfo(UserDto user) {
 		return userMapper.updateUserInfoByUserId(user) == 1;
+	}
+
+	public List<UserDto> getUserListAll() {
+		return userMapper.selectUserListAll();
 	}
 
 }
