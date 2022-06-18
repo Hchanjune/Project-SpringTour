@@ -86,4 +86,11 @@ public class UserService {
 		return userMapper.selectUserListAll();
 	}
 
+	public void forgotIdService(String email) {
+		String userId = userMapper.selectUserIdByEmail(email);
+		String title = "[SpringTour] 요청하신 아이디 찾기 결과입니다.";
+		String body = "<p>고객님의 아이디는" + userId + "입니다.</p>";
+		mailService.sendMail(email, title, body);
+	}
+
 }

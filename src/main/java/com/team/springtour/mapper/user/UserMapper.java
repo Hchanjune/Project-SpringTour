@@ -28,4 +28,6 @@ public interface UserMapper {
 
 	int updateUserAuthKey(String userId);
 
+	String selectUserIdByEmail(String email);
+
 }

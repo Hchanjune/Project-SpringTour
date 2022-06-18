@@ -20,47 +20,64 @@
 </script>
 </head>
 <body>
-<tag:login/>
-<tag:navBar/>
-	<div class="container">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>아이디</th>
-					<th>이름</th>
-					<th>생년월일</th>
-					<th>주소</th>
-					<th>이메일</th>
-					<th>회원 등급</th>
-					<th>가입일시</th>
-					<th>인증상태</th>
-				</tr>
-			</thead>
+
+
+	<div class="container-fluid">
+		<!-- Header -->
+		<div class="row">
+			<div class="col-12">
+				<tag:login/>
+				<tag:navBar/>
+			</div>
+		</div>
+		<!-- Body -->
+		<div class="row">
+			<!-- Left -->
+			<div class="col-1">
+
+			</div>
+			<!-- Main -->
+			<div class="col-11">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>아이디</th>
+							<th>이름</th>
+							<th>생년월일</th>
+							<th>이메일</th>
+							<th>회원 등급</th>
+							<th>인증상태</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<c:forEach items="${userList }" var="user">
+							<tr>
+								<td>${user.id }</td>
+								<td>
+									<form action="${appRoot }/user/myPage" id="userListLinkForm" method="post">
+										<input type="hidden" name="userId" value="${user.id }" />
+										<input type="submit" value="${user.name }" />
+									</form>
+								</td>
+								<td>${user.birthDate }</td>
+								<td>${user.email }</td>
+								<td>${user.grade }</td>
+								<td>${user.authKey }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				
+				</table>
+			</div>
+		</div>
+		<!-- Footer -->
+		<div class="row">
+			<div class="col-12">
 			
-			<tbody>
-				<c:forEach items="${userList }" var="user">
-					<tr>
-						<td>${user.id }</td>
-						<td>
-							<form action="${appRoot }/user/myPage" id="userListLinkForm" method="post">
-								<input type="hidden" name="userId" value="${user.id }" />
-								<input type="submit" value="${user.name }" />
-							</form>
-						</td>
-						<td>${user.birthDate }</td>
-						<td>${user.address }</td>
-						<td>${user.email }</td>
-						<td>${user.grade }</td>
-						<td>${user.inserted }</td>
-						<td>${user.authKey }</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		
-		</table>
-	
+			</div>
+		</div>
 	</div>
-	
 	
 
 </body>

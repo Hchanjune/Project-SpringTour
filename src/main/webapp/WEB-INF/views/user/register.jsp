@@ -111,6 +111,12 @@
 				$("#registerButton").attr("disabled", "");
 			}
 		}
+		
+		$("#registerButton").click(function(){
+			$(this).hide();
+			$("#registerMessageDiv").removeClass("d-none");
+			$("#registerMessage").text("처리중입니다! 잠시만 기다려주세요");
+		});
 	});
 </script>
 <body>
@@ -163,10 +169,14 @@
 				</div>
 				<p>이메일 주소를 정확히 입력해주세요! 가입인증 메일이 발송됩니다.</p>
 				<p id="emailCheckMessage"></p>
+				<button id="registerButton" type="submit" class="btn btn-primary" disabled>회원 가입</button>
+				<div id="registerMessageDiv" class="alert alert-primary d-none">
+					<p id="registerMessage"></p>
+				</div>
 			</div>
 			
 			<div class="col-12">
-				<button id="registerButton" type="submit" class="btn btn-primary" disabled>회원 가입</button>
+				
 			</div>
 		</form>
 	</div>
