@@ -6,6 +6,10 @@ import com.team.springtour.domain.tourPackage.TourPackageDto;
 
 public interface TourPackageMapper {
 
+	int insertBoard(TourPackageDto tourPackage);
+
+	TourPackageDto getTourPackageByPackageName(String packageName);
+
 	List<TourPackageDto> selectTourPackageAll();
 	
 }
