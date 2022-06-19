@@ -17,10 +17,41 @@
 			$(this).hide();
 			$("#findIdEmailInput").attr("readonly", "");
 			$("#findIdMessage").css("color", "blue");
-			$("#findIdMessage").text("메일이 발송되었습니다.");
+			$("#findIdMessage").text("메일을 발송중입니다 잠시만 기다려주세요.");	
+		});
+		
+		$("#checkEmailaddressInDBbutton").click(function(e){
+			e.preventDefault();
+			$(this).attr("disabled", "");
+			const data = {
+					email : $("#findIdForm").find("[name=email]").val()
+				}
+			$.ajax({
+				url : "${appRoot}/user/check",
+				method : "get",
+				data : data,
+				success : function(data){
+					switch (data) {
+						case "available":
+							$("#checkEmailMessage").css("color", "red");
+							$("#checkEmailMessage").text("존재하지 않는 메일 주소 입니다.");
+							$("#findIdButton").attr("disabled", "");
+							break;
+						case "unavailable":
+							$("#findIdButton").removeAttr("disabled");
+							$("#checkEmailMessage").text(" ");
+							break;
+					}
+				},
+				error : function(){
+					$("#checkEmailMessage").text("메일주소 확인 중 문제 발생, 다시 시도해 주세요");
+				},
+				complete : function(){
+					$("#checkEmailaddressInDBbutton").removeAttr("disabled");
+				}
+			});	
 		});
 	});
-	
 </script>
 </head>
 <body>
@@ -29,12 +60,14 @@
 		<h3>아이디 찾기</h3>
 		<br />
 		<p>가입하실때 등록하신 이메일을 입력하여 주세요.</p>
-		<form action="${appRoot }/user/forgotId" method="post">
+		<form id="findIdForm" action="${appRoot }/user/forgotId" method="post">
 			<input type="email" name="email" id="findIdEmailInput" placeholder="example@spring.com"/>
-			<button type="submit" id="findIdButton">찾기</button>
+			<button id="checkEmailaddressInDBbutton">조회</button>
+			<button type="submit" id="findIdButton" disabled>아이디 발송</button>
 		</form>
 		<br />
 		<p>가입하신 이메일로 아이디가 발송됩니다.</p>
+		<p id="checkEmailMessage"></p>
 		<p id="findIdMessage"></p>
 		<div style="text-align:center;">
 			<button onclick="self.close();"> 닫기 </button>
