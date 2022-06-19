@@ -14,31 +14,55 @@
 <title>Welcome</title>
 </head>
 <body>
-	<tag:login/>
-	<tag:navBar/>
-	<div class="container">
-	<c:if test="${not empty resultMessage}">
-		<div class="alert alert-primary">
-			${resultMessage }
-		</div>
-	</c:if>
-	<h1>Welcome to Spring Tour!</h1>
-	<p><span>ServerTime : </span><span style="color:red">${serverTime }</span></p>
-	<p><span>Locale : </span><span style="color:red">${locale }</span></p>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum dignissimos quae vel animi sequi consectetur ducimus voluptatibus sint earum inventore fugit modi tenetur cum eveniet assumenda odit fugiat. Soluta repudiandae!</p>	
 	
-	<h2>Description</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa architecto placeat deserunt odio hic quis reprehenderit tempora doloribus blanditiis debitis voluptates odit. Beatae sit consectetur porro explicabo veritatis dolorem impedit.</p>
-	<p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni at mollitia aspernatur velit beatae dolorem? Consequuntur aut facere excepturi quaerat doloremque similique error illum unde perferendis accusamus libero sed aspernatur!</span>
-	<span>Unde officia omnis rerum nam voluptatem mollitia nemo debitis ipsa quia consequatur eveniet possimus molestias cupiditate magni dolor ipsam dolore vitae odit delectus iusto tenetur corporis accusamus praesentium doloremque optio!</span>
-	<span>Numquam suscipit eos ratione tempore laudantium impedit laborum molestias earum nobis. Cumque ipsam qui adipisci iusto vitae dolore odit odio sapiente excepturi quis autem reiciendis aperiam doloribus natus officiis repellat.</span>
-	<span>Autem neque ullam quaerat maiores aspernatur in sit consequatur hic itaque accusantium. Numquam omnis repudiandae beatae quis laudantium ad officia iste unde voluptates eos aliquid fugit itaque. Debitis illo dicta!</span>
-	<span>Doloremque non error blanditiis iusto tenetur quae nam sed velit quia fugiat ullam fugit neque deserunt itaque amet accusamus sequi rem optio quasi placeat atque ipsa molestiae repellat nihil laudantium!</span>
-	<span>Quis minus porro eveniet quos nemo numquam adipisci magnam nobis velit odio ea veniam in eligendi autem nulla dolores delectus odit incidunt enim ut blanditiis. Vel doloribus est dignissimos reiciendis!</span></p>
-
-	<h3 style="color:red"><i class="fa-solid fa-location-dot"></i> Start a new Trip Now!!!</h3>
-	<p>You can Write a Post about Review where you've travled Right below Here by clicking this button! <br />
-	There is also a menubar upside, u can check the Reviews! on the board</p>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<tag:login/>
+				<tag:navBar/>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-1">
+				<p>메뉴123123123123123123</p><br />
+				<p>메뉴</p><br />
+				<p>메뉴</p><br />
+				<p>메뉴</p><br />
+				<p>메뉴</p><br />
+			</div>
+			<div class="col-11">
+					<c:if test="${not empty resultMessage}">
+						<div class="alert alert-primary">
+							${resultMessage }
+						</div>
+					</c:if>
+					<h1>Welcome to Spring Tour!</h1>
+					<p><span>ServerTime : </span><span style="color:red">${serverTime }</span></p>
+					<p><span>Locale : </span><span style="color:red">${locale }</span></p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum dignissimos quae vel animi sequi consectetur ducimus voluptatibus sint earum inventore fugit modi tenetur cum eveniet assumenda odit fugiat. Soluta repudiandae!</p>	
+					
+					<h2>Description</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa architecto placeat deserunt odio hic quis reprehenderit tempora doloribus blanditiis debitis voluptates odit. Beatae sit consectetur porro explicabo veritatis dolorem impedit.</p>
+					<p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni at mollitia aspernatur velit beatae dolorem? Consequuntur aut facere excepturi quaerat doloremque similique error illum unde perferendis accusamus libero sed aspernatur!</span>
+					<span>Unde officia omnis rerum nam voluptatem mollitia nemo debitis ipsa quia consequatur eveniet possimus molestias cupiditate magni dolor ipsam dolore vitae odit delectus iusto tenetur corporis accusamus praesentium doloremque optio!</span>
+					<span>Numquam suscipit eos ratione tempore laudantium impedit laborum molestias earum nobis. Cumque ipsam qui adipisci iusto vitae dolore odit odio sapiente excepturi quis autem reiciendis aperiam doloribus natus officiis repellat.</span>
+					<span>Autem neque ullam quaerat maiores aspernatur in sit consequatur hic itaque accusantium. Numquam omnis repudiandae beatae quis laudantium ad officia iste unde voluptates eos aliquid fugit itaque. Debitis illo dicta!</span>
+					<span>Doloremque non error blanditiis iusto tenetur quae nam sed velit quia fugiat ullam fugit neque deserunt itaque amet accusamus sequi rem optio quasi placeat atque ipsa molestiae repellat nihil laudantium!</span>
+					<span>Quis minus porro eveniet quos nemo numquam adipisci magnam nobis velit odio ea veniam in eligendi autem nulla dolores delectus odit incidunt enim ut blanditiis. Vel doloribus est dignissimos reiciendis!</span></p>
+				
+					<h3 style="color:red"><i class="fa-solid fa-location-dot"></i> Start a new Trip Now!!!</h3>
+					<p>You can Write a Post about Review where you've travled Right below Here by clicking this button! <br />
+					There is also a menubar upside, u can check the Reviews! on the board</p>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-12">
+			
+			</div>
+		</div>
+		
 	</div>
 </body>
 </html>

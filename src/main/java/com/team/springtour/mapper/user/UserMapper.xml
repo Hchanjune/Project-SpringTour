@@ -20,6 +20,12 @@
 		VALUES (#{userId})
 	</insert>
 	
+	<update id="updateUserAuthKey">
+		UPDATE User
+		SET authKey = "인증 완료"
+		WHERE id = #{userId}
+	</update>
+	
 	<update id="updateUserAuthority">
 		UPDATE Authority 
 		SET role = #{auth}
@@ -46,10 +52,32 @@
 	
 	<update id="updateUserInfoByUserId">
 		UPDATE User
-		SET birthDate = #{birthDate},
-			address = #{address}
+		SET name = #{name},
+			birthDate = #{birthDate},
+			address = #{address},
+			email = #{email},
+			grade = #{grade},
+			inserted = #{inserted}
 		WHERE id = #{id}
 	</update>
+	
+	<select id="selectUserListAll" resultType="com.team.springtour.domain.user.UserDto">
+		SELECT id, 
+				password, 
+				name, 
+				birthDate, 
+				address, 
+				email, 
+				grade, 
+				inserted, 
+				authKey 
+		FROM User
+	</select>
+	
+	<select id="selectUserIdByEmail" resultType="string">
+		SELECT id FROM User
+		WHERE email = #{email}
+	</select>
 	
 </mapper>
 

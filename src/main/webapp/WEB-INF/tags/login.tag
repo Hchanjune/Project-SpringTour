@@ -36,6 +36,10 @@
 		<a href="" class="nav-link disabled">${principal.username }님 반갑습니다.</a>
 		<input form="loginTagMyPageForm" type="submit" value="마이페이지" />
 		<input form="loginTagLogoutForm" type="submit" value="로그아웃" />
+		<br />
+		<sec:authorize  access="hasRole('ADMIN')">
+			<a href="${appRoot }/user/userList">회원관리</a>
+		</sec:authorize>
 	</div>
 </sec:authorize>
 
