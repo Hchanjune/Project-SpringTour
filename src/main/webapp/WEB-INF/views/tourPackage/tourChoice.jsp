@@ -15,6 +15,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<tag:login/>
 	<tag:navBar></tag:navBar>
 	
 	<div class="container">
