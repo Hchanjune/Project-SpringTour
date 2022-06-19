@@ -12,11 +12,29 @@
 		   city,
 		   flightDepartTicket,
 		   flightReturnTicket
-	FROM TourPackage;
+	FROM TourPackage;	
+	</select>
+
+
+	<insert id="insertBoard">
+		INSERT INTO TourPackage (packageName,price,bookable,country,city,flightDepartTicket,flightReturnTicket)
+		VALUES (#{packageName},#{price},#{bookable},#{country},#{city},#{flightDepartTicket},#{flightReturnTicket})
+	</insert>
 	
+	<select id="getTourPackageByPackageName" resultType="com.team.springtour.domain.tourPackage.TourPackageDto">
+		SELECT packageName,
+		   price,
+		   bookable,
+		   country,
+		   city,
+		   flightDepartTicket,
+		   flightReturnTicket
+		FROM TourPackage
+		WHERE packageName = #{packageName};	
 	
 	</select>
 
+	
 
 
 </mapper>

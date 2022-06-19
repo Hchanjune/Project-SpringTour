@@ -1,6 +1,7 @@
 package com.team.springtour.domain.tourPackage;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,6 +17,7 @@ public class TourPackageDto {
 	private String city;
 	private String flightDepartTicket;
 	private String flightReturnTicket;
-	
+	private List<String> fileName;
+	private boolean hasFile;
 	
 }

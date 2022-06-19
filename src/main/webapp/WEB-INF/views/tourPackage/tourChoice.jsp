@@ -17,53 +17,60 @@
 <body>
 	<tag:navBar></tag:navBar>
 	
-	<h1></h1>
-	
-	<div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card h-100">
-    <a href="/springtour/tourPackage/golfTour">
-      <img src="/springtour/resources/img/hanoi.jpg" class="card-img-top" alt="...">
-      </a>
-      <div class="card-body">
-        <h5 class="card-title">${tourList[0].packageName }</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-    <a href="/springtour/tourPackage/silverTour">
-      <img src="/springtour/resources/img/Tokyo.jpg" class="card-img-top" alt="...">
-      </a>
-      <div class="card-body">
-        <h5 class="card-title">${tourList[1].packageName }</h5>
-        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-    <a href="/springtour/tourPackage/honeymoonTour">
-      <img src="/springtour/resources/img/hawai.jpg" class="card-img-top" alt="...">
-      </a>
-     	<div class="card-body">
-        <h5 class="card-title">${tourList[2].packageName }</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </div>
-    </div>
-  </div>
-</div>
-	
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1>패키지 목록</h1>
+				<c:if test="${not empty message }">
+					<div class="alert alert-primary">
+						${message }
+					</div>
+				</c:if>
+				
+				<!-- table.table>thead>tr>th*3^^tbody -->
+				<table class="table">
+					<thead>
+						<tr>
+							<th>패키지명</th>
+							<th>가격</th>
+							<th>가능/불가능</th>
+							<th>국가</th>
+							<th>도시</th>
+							<th><i class="fa-solid fa-calendar"></i></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${tourList }" var="tour">
+							<tr>
+								
+								<td>
+													
+									<c:url value="/tourPackage/tourInfo" var="tourInfoUrl">
+										<c:param name="packageName" value="${tour.packageName }"></c:param>
+										
+									</c:url>
+									
+									<a href="${tourInfoUrl }">
+										<c:out value="${tour.packageName }" />
+									</a>
+									
+								</td>
+								<td>${tour.price }</td>
+								<td>${tour.bookable }</td>
+								<td>${tour.country}</td>	
+								<td>${tour.city}</td> 						
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+					<sec:authorize access="hasRole('ADMIN')">
+					<div class="col justify-content-right" align="right">
+						<button><a href="${appRoot}/tourPackage/insert">글쓰기</a></button>
+					</div>
+				</sec:authorize>
+			</div>
+		</div>
+	</div>
 	
 	
 	
