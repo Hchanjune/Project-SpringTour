@@ -1,11 +1,15 @@
 package com.team.springtour.controller.user;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -101,5 +105,53 @@ public class UserController {
 		return "redirect:/main/home";
 	}
 	
+	@PostMapping("myPage")
+	public String myPage(String userId, Principal principal, Model model) {
+		UserDto user = userService.getUserById(userId);
+		model.addAttribute("user", user);
+		return "/user/myPage";
+	}
 	
+	private boolean authorityCheck(String id, Principal principal, HttpServletRequest request) {
+		return request.isUserInRole("ROLE_ADMIN") || (principal.getName().equals(id));
+	}
+	
+	@PostMapping("modifyInfo")
+	public String modifyUserInfo(UserDto user, String insertedTime, Principal principal, Model model, RedirectAttributes rttr, HttpServletRequest request) {
+		
+		boolean success = false;
+		if (authorityCheck(user.getId(), principal, request)) {
+			LocalDateTime inserted = LocalDateTime.parse(insertedTime, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss") );
+			user.setInserted(inserted);
+			success = userService.modifyUserInfo(user);
+		}
+		if (success) {
+			model.addAttribute("user", user);
+			model.addAttribute("insertedTime", user.getInserted().toString());
+			return "/user/myPage";
+		}else{
+			String resultMessage;
+			resultMessage = "회원 정보 수정 과정에서 오류가 발생하였습니다.";
+			rttr.addFlashAttribute("resultMessage", resultMessage);
+			return "redirect:/main/home";
+		}
+		
+	}
+	
+	@GetMapping("userList")
+	public void userListPage(Model model) {
+		List<UserDto> userList = userService.getUserListAll();
+		model.addAttribute("userList", userList);
+	}
+	
+	@GetMapping("forgotId")
+	public void forgotIdPage() {
+		
+	}
+	
+	@PostMapping("forgotId")
+	public void forgotIdService(String email) {
+		userService.forgotIdService(email);
+	}
+
 }
