@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.team.springtour.domain.flight.FlightDto;
 import com.team.springtour.domain.tourPackage.TourPackageDto;
 import com.team.springtour.mapper.tourPackage.TourPackageMapper;
 
@@ -23,7 +24,7 @@ public class TourPackageService {
 	}
 
 	
-	public boolean insertTourPackage(TourPackageDto tourPackage, MultipartFile[] file) {
+	public boolean insertTourPackage(TourPackageDto tourPackage) {
 		
 		
 		int cnt=mapper.insertBoard(tourPackage);
@@ -54,6 +55,18 @@ public class TourPackageService {
 	public boolean deleteTourPackage() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+
+	public boolean getAuthByUserId(String userId) {
+		List<String> authList = mapper.selectAuthByUserId(userId);
+		return authList.contains("ROLE_ADMIN");
+	}
+
+
+	public List<FlightDto> FlightList() {
+		// TODO Auto-generated method stub
+		return mapper.selectFlightAll();
 	}
 
 
