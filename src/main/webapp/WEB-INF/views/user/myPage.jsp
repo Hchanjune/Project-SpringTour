@@ -22,6 +22,7 @@
 			$("#userInfoUserAddress").removeAttr("readonly");
 			$("#userInfoModifySubmitButton").show();
 			$("#userInfoModifyResetButton").show();
+			$("#userInfoModifyPasswordButton").show();
 		});
 		
 		$("#userInfoModifyByAdminButton").click(function(){
@@ -29,7 +30,7 @@
 			$("#userInfoModifyButton").hide()
 			$("#userInfoModifyPasswordButton").hide();
 			$("#userInfoWithdrawButton").hide();
-			$("#userInfoUserGrade").removeAttr("readonly");
+			$("#userInfoUserGrade").removeAttr("disabled");
 			$("#userInfoUserName").removeAttr("readonly");
 			$("#userInfoUserBirthDate").removeAttr("readonly");
 			$("#userInfoUserAddress").removeAttr("readonly");
@@ -37,6 +38,7 @@
 			$("#userInfoUserInserted").removeAttr("readonly");
 			$("#userInfoModifySubmitButton").show();
 			$("#userInfoModifyResetButton").show();
+			$("#userInfoModifyPasswordButton").show();
 		});
 		
 	});
@@ -66,7 +68,14 @@
 							
 							<div class="col-md-3">
 								<label for="userInfoUserGrade" class="form-label">회원 등급</label><br />
-								<input type="text" name="grade" readonly class="form-control" value="${user.grade }" id="userInfoUserGrade" >
+								<%-- <input type="text" name="grade" readonly class="form-control" value="${user.grade }" id="userInfoUserGrade" > --%>
+								<select disabled id="userInfoUserGrade" name="grade" id="userInfoUserGrade" class="form-control" size="1">
+								  <option <c:if test="${user.grade eq 'Silver'}">selected</c:if> value="Silver">Silver</option>
+								  <option <c:if test="${user.grade eq 'Gold'}">selected</c:if> value="Gold">Gold</option>
+								  <option <c:if test="${user.grade eq 'VIP'}">selected</c:if> value="VIP">VIP</option>
+								  <option <c:if test="${user.grade eq '관리자'}">selected</c:if> value="관리자">관리자</option>
+								</select>
+							
 							</div>
 						</div>
 						
@@ -80,6 +89,7 @@
 								<input type="date" name="birthDate" readonly class="form-control" id="userInfoUserBirthDate" value="${user.birthDate }">
 							</div>
 						</div>
+		
 						
 						<div class="col-8">
 							<label for="userInfoUserAddress" class="form-label">주소</label>
@@ -104,7 +114,7 @@
 					<div>
 						<c:if test="${principal.username == user.id }">
 							<button id="userInfoModifyButton">회원정보 수정</button>
-							<button id="userInfoModifyPasswordButton">비밀번호 변경</button>
+							<button id="userInfoModifyPasswordButton" type="submit" form="userInfoModifyPasswordForm"  style="display : none;">비밀번호 변경</button>
 							<button id="userInfoWithdrawButton">회원 탈퇴</button>
 						</c:if>
 						
@@ -123,6 +133,11 @@
 			<div class="col-12">
 				<div class="d-none" >
 					<form action="${appRoot }/user/myPage" id="userInfoModifyResetForm" method="post">
+						<input type="hidden" name="userId" value="${user.id }" />
+					</form>
+				</div>	
+				<div class="d-none" >
+					<form action="${appRoot }/user/changePassword" id="userInfoModifyPasswordForm" method="post">
 						<input type="hidden" name="userId" value="${user.id }" />
 					</form>
 				</div>	
