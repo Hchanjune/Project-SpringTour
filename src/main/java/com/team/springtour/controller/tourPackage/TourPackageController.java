@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.team.springtour.domain.flight.FlightDto;
 import com.team.springtour.domain.tourPackage.TourPackageDto;
 import com.team.springtour.service.tourPackage.TourPackageService;
 
@@ -33,24 +36,17 @@ public class TourPackageController {
 	}
 
 	@GetMapping("insert")
-	public void insert() {
-
+	public void insert(Model model) {
+		List<FlightDto> flightList = service.FlightList();
+		model.addAttribute("flightList",flightList);
 	}
 
 	@PostMapping("insert")
-	public String tourInsert(TourPackageDto tourPackage, RedirectAttributes rttr, Principal principal,
-			MultipartFile[] file) {
+	public String tourInsert(TourPackageDto tourPackage, RedirectAttributes rttr, Principal principal) {
 
-		if (file != null) {
-			List<String> fileList = new ArrayList<String>();
-			for (MultipartFile f : file) {
-				fileList.add(f.getOriginalFilename());
-			}
-			tourPackage.setFileName(fileList);
-		}
 
-		boolean success = service.insertTourPackage(tourPackage, file);
-
+		System.out.println(tourPackage);
+		boolean success = service.insertTourPackage(tourPackage);
 		if (success) {
 			rttr.addFlashAttribute("message", "새 패키지가 등록되었습니다.");
 		} else {
@@ -64,17 +60,31 @@ public class TourPackageController {
 	@GetMapping("tourInfo")
 	public String tourinfo(@RequestParam("packageName") String packageName, Model model) {
 
+		
 		TourPackageDto tourPackage = service.getTourPackageByPackageName(packageName);
 		model.addAttribute("tourPackage",tourPackage);
 		return "/tourPackage/tourInfo";
 	}
 
+	
+	private boolean authorityCheck( Principal principal) {
+		return service.getAuthByUserId(principal.getName());
+	}
+	
 	@PostMapping("modify")
 	public String tourModify(@RequestParam(name = "removeFileList", required = false) ArrayList<String> removeFileList,
 			Principal principal, MultipartFile[] addFileList, RedirectAttributes rttr) {
-
+			
+		boolean work = authorityCheck(principal);
 		boolean success = service.updateTourPackage(removeFileList, addFileList);
 
+		if (work) {
+			rttr.addFlashAttribute("message", "글에 접근할수 있습니다");
+		} else {
+			rttr.addFlashAttribute("message", "글에 접근할수 없습니다");
+		}
+		System.out.println(work);
+		
 		if (success) {
 			rttr.addFlashAttribute("message", "글이 수정되었습니다.");
 		} else {

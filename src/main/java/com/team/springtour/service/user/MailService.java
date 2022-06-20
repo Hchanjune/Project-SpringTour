@@ -72,6 +72,22 @@ public class MailService {
 		}
 	}
 	
+	public void mailSendWithChangePasswordLink(String email, String userId, HttpServletRequest request) {
+		String key = generateRandomKey(false, 20);
+		userMapper.insertUserPasswordChangeKey(userId, key);
+		MimeMessage mail = mailSender.createMimeMessage();
+		String html = "<a href='http://localhost:8080" + request.getContextPath() + "/user/pwChange?userId=" + userId + "&pwChangeKey=" + key + "'>변경하기</a></p>";
+				
+		try {
+			mail.setSubject("[SpringTour] 비밀번호 변경 메일 입니다", "utf-8");
+			mail.setText(html, "utf-8", "html");
+			mail.addRecipient(RecipientType.TO, new InternetAddress(email));
+			mailSender.send(mail);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void sendMail(String email, String title, String body) {
 		MimeMessage mail = mailSender.createMimeMessage();
 		try {

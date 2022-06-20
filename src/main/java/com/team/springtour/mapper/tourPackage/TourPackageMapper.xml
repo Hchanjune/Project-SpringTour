@@ -15,7 +15,15 @@
 	FROM TourPackage;	
 	</select>
 
-
+	<select id = "selectFlightAll" resultType="com.team.springtour.domain.flight.FlightDto">
+	
+	SELECT planeNumber,
+		   departureDate,
+		   returnDate,
+		   departurePort,
+		   returnPort
+	FROM Flight;
+	</select>
 	<insert id="insertBoard">
 		INSERT INTO TourPackage (packageName,price,bookable,country,city,flightDepartTicket,flightReturnTicket)
 		VALUES (#{packageName},#{price},#{bookable},#{country},#{city},#{flightDepartTicket},#{flightReturnTicket})
@@ -33,7 +41,11 @@
 		WHERE packageName = #{packageName};	
 	
 	</select>
-
+	
+	<select id="selectAuthByUserId" resultType="string">
+		SELECT role FROM Authority
+		WHERE userId = #{userId}
+	</select>
 	
 
 
