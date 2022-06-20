@@ -18,6 +18,7 @@ public class UserDto {
 	private String address;
 	private String email;
 	private String grade;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd'T'HH:mm:SS")
 	private LocalDateTime inserted;
 	private String authKey;
 	

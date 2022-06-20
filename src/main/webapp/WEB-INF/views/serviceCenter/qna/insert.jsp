@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>    
+<%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>   
 
 <!DOCTYPE html>
 <html>
@@ -25,10 +26,10 @@
 		<div class="row">
 			<div class="col">
 
-				<c:url value="/serviceCenter/notice/insert" var="noticeUrl"></c:url>
+				<c:url value="/serviceCenter/qna/insert" var="qnaUrl"></c:url>
 				<h1>글 작성</h1>
 				
-				<form action="${noticeUrl }" method="post" enctype="multipart/form-data">
+				<form action="${qnaUrl }" method="post" enctype="multipart/form-data">
 					<div>
 						<label class="form-label" for="input1">제목</label>
 						<input class="form-control" type="text" name="title" required id="input1" />
@@ -52,6 +53,7 @@
 			</div>
 		</div>
 	</div>
+	
 
 </body>
 </html>
