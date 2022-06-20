@@ -9,7 +9,7 @@ public class FlightDto {
 	private String departureDate;
 	private String returnDate;
 	private String departurePort;
-	private String retrunPort;
+	private String returnPort;
 	
 }
 
