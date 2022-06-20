@@ -90,7 +90,7 @@ public class ServiceCenterController {
 		}
 		
 		dto.setWriter(principal.getName());
-		boolean success = service.insertBoard(dto);
+		boolean success = service.insertBoard(dto, file);
 		
 		if (success) {
 			rttr.addFlashAttribute("message", "새글이 등록되었습니다.");
@@ -115,14 +115,16 @@ public class ServiceCenterController {
 	// ADMIN만 수정가능
 	@PostMapping("modify")
 	public String modifyService (ServiceCenterDto post,
+								 @RequestParam(name= "removeFileList", required = false) ArrayList<String> removeFileList,
+								 MultipartFile[] addFileList,
 						         Principal principal,
 						         RedirectAttributes rttr) {
 		ServiceCenterDto oldPost = service.getPostByIndexId(post.getIndexId());
 		System.out.println(oldPost);
-		
+	
 		if (oldPost.getWriter().equals(principal.getName())) {
 			
-			boolean success = service.updatePost(post);
+			boolean success = service.updatePost(post, removeFileList, addFileList);
 			
 			if (success) {
 				rttr.addFlashAttribute("message", "글이 수정되었습니다.");
@@ -136,7 +138,7 @@ public class ServiceCenterController {
 		rttr.addAttribute("indexId", post.getIndexId());
 		
 
-		return "redirect:serviceCenter/notice/insert"; 
+		return "redirect:/serviceCenter/notice"; 
 	}
 
 	@PostMapping("remove")

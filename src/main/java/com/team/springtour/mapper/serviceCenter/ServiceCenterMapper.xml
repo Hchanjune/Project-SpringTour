@@ -76,10 +76,9 @@
 	
 	<update id="updatePost" >
 		UPDATE ServiceCenter
-		SET title = #{title}
+		SET title = #{title},
 		    body = #{body}
-		    writer = #{writer}
-		WHERE indexId = #{indexId}    
+		WHERE indexId = #{indexId}	    
 	</update>
 	
 	
@@ -88,5 +87,26 @@
 		WHERE indexId = #{indexId }
 	</delete>
 	
+	<insert id="insertFile">
+		INSERT INTO ServiceCenterNoticeFile (noticeIndexId, fileName)
+		VALUES (#{noticeIndexId}, #{fileName})
+	</insert>
 	
+	<delete id="deleteFileByNoticeId">
+		DELETE FROM ServiceCenterNoticeFile
+		WHERE noticeIndexId	= #{noticeIndexId}
+	</delete>
+	
+	<select id="selectFileNameByNotice" resultType="String">
+		SELECT fileName
+		FROM ServiceCenterNoticeFile
+		WHERE noticeIndexId = #{noticeIndexId}
+	</select>
+	
+	
+	<delete id="deleteFileByNoticeIdAndFileName">
+		DELETE FROM ServiceCenterNoticeFile
+		WHERE noticeIndexId = #{noticeIndexId}
+		   AND fileName = #{fileName}
+	</delete>
 </mapper>
