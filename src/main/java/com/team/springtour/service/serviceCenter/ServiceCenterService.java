@@ -71,8 +71,10 @@ public class ServiceCenterService {
 		//파일 등록
 		if (files != null) {
 			for (MultipartFile file : files) {
-				mapper.insertFile(indexId, file.getOriginalFilename());
-				saveFileAwsS3(indexId, file); // s3에 업로드
+				if (file.getSize() > 0) {
+					mapper.insertFile(indexId, file.getOriginalFilename());
+					saveFileAwsS3(indexId, file); // s3에 업로드			
+				}
 			}
 		}
 	}

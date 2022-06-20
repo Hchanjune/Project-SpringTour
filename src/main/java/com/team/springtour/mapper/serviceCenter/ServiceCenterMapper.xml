@@ -106,7 +106,7 @@
 	
 	<delete id="deleteFileByNoticeIdAndFileName">
 		DELETE FROM ServiceCenterNoticeFile
-		WHERE noticeIndexId = #{noticeIndexId}
+		WHERE noticeIndexId = #{indexId}
 		   AND fileName = #{fileName}
 	</delete>
 </mapper>
