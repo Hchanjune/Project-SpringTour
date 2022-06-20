@@ -34,7 +34,12 @@
 	<sec:authentication property="principal" var="principal" />
 	<div class="col justify-content-right" align="right">
 		<a href="" class="nav-link disabled">${principal.username }님 반갑습니다.</a>
+		<input form="loginTagMyPageForm" type="submit" value="마이페이지" />
 		<input form="loginTagLogoutForm" type="submit" value="로그아웃" />
+		<br />
+		<sec:authorize  access="hasRole('ADMIN')">
+			<a href="${appRoot }/user/userList">회원관리</a>
+		</sec:authorize>
 	</div>
 </sec:authorize>
 
@@ -48,6 +53,12 @@
 
 <div class="d-none">
 	<form action="${appRoot }/user/resend" id="resendRegisterMailForm" method="post">
+		<input type="hidden" name="userId" value="${principal.username }" />
+	</form>
+</div>
+
+<div class="d-none">
+	<form action="${appRoot }/user/myPage" id="loginTagMyPageForm" method="post">
 		<input type="hidden" name="userId" value="${principal.username }" />
 	</form>
 </div>
