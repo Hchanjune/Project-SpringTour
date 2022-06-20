@@ -27,6 +27,14 @@ public interface ServiceCenterMapper {
 
 	List<ServiceCenterDto> selectSearchAll(@Param("type")String type, @Param("keyword")String string);
 
+	void insertFile(@Param("noticeIndexId")int noticeIndexId, @Param("fileName")String fileName);
+
+	List<String> selectFileNameByNotice(int noticeIndexId);
+
+	void deleteFileByNoticeId(int indexId);
+
+	void deleteFileByNoticeIdAndFileName(@Param("indexId")int indexId, @Param("fileName")String fileName);
+
 	
 
 
