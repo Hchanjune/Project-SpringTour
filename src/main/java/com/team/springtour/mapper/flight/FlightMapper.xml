@@ -1,1 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team.springtour.mapper.flight.FlightMapper">
+
+	<select id="selectFlightListAll" resultType="com.team.springtour.domain.flight.FlightDto">
+	
+	SELECT planeNumber,
+		   departureDate,
+		   returnDate,
+		   departurePort,
+		   returnPort
+	FROM Flight;	
+	</select>
+	
+	
+	<select id="selectFlightListFromTo" resultType="com.team.springtour.domain.flight.FlightDto">
+	
+	SELECT planeNumber,
+		   departureDate,
+		   returnDate,
+		   departurePort,
+		   returnPort
+	FROM Flight
+	WHERE departurePort = #{depart} and returnPort = #{arrive};	
+	</select>
+	
+	
+	
+	
+</mapper>	
