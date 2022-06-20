@@ -30,4 +30,10 @@ public interface UserMapper {
 
 	String selectUserIdByEmail(String email);
 
+	void insertUserPasswordChangeKey(@Param("userId")String userId, @Param("pwChangeKey")String key);
+
+	int updateUserPasswordChangeKey(String userId);
+
+	int updateUserPasswordByUserId(@Param("userId")String userId, @Param("newPassword")String updatedPassword);
+
 }
