@@ -153,5 +153,63 @@ public class UserController {
 	public void forgotIdService(String email) {
 		userService.forgotIdService(email);
 	}
-
+	
+	@GetMapping("forgotPw")
+	public void forgotPwPage() {
+		
+	}
+	
+	@PostMapping("forgotPw")
+	public void forgotPwService(String id, String email, HttpServletRequest request) {
+		userService.forgotPwService(id, email, request);
+	}
+	
+	@GetMapping("checkFindPw")
+	@ResponseBody
+	public String idAndEmailCheck(String id, String email) {
+		boolean matches = userService.idAndEmailCheck(id, email);
+		if (matches) {
+			return "true";
+		}else {
+			return "false";
+		}
+	}
+	
+	@GetMapping("pwChange")
+	public String pwChangePage(String userId, String pwChangeKey, RedirectAttributes rttr) {
+		boolean success = userService.confirmUserPwChangeKey(userId, pwChangeKey);
+		String resultMessage;
+		if (success) {
+			resultMessage = "인증이 완료 되었습니다! 비밀번호를 변경하여 주세요.";
+			rttr.addFlashAttribute("userId", userId);
+		}else {
+			resultMessage = "만료된 링크입니다.";
+		}
+		rttr.addFlashAttribute("resultMessage", resultMessage);
+		
+		return "redirect:/user/changePassword";
+	}
+	
+	@GetMapping("changePassword")
+	public void pwChangePage() {
+		
+	}
+	
+	@PostMapping("changePassword")
+	public void pwChangePage(String userId, Model model) {
+		model.addAttribute("userId", userId);
+	}
+	
+	@PostMapping("modifyPassword")
+	public String modifyPassword(String userId, String newPassword, RedirectAttributes rttr) {
+		boolean success = userService.modifyUserPasswordByUserId(userId, newPassword);
+		String resultMessage;
+		if (success) {
+			resultMessage = "비밀번호가 성공적으로 변경 되었습니다.";
+		}else {
+			resultMessage = "비밀번호 변경 중 오류가 발생하였습니다.";
+		}
+		rttr.addFlashAttribute("resultMessage", resultMessage);
+		return "redirect:/main/home";
+	}
 }
