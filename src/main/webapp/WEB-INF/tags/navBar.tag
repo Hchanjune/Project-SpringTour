@@ -6,8 +6,9 @@
 
 <c:url value="/main/home" var="homeLink"/>
 <c:url value="/user/register" var="registerLink"/>
-<c:url value="/serviceCenter/notice/notice" var="noticeLink"/>
+<c:url value="/serviceCenter/notice" var="noticeLink"/>
 <c:url value="/tourPackage/tourChoice" var="tourPackageLink"/>
+
 
 
 

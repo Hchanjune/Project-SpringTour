@@ -18,9 +18,9 @@
 <body>
 	<tag:navBar></tag:navBar>
 	</br> </br>
-	<div id="container">
+	<div id="container" align="center">
 		<div class="divaa">
-			<h1 align="center">항공권예매</h1>
+			<h1>항공권예매</h1>
 			
 			</br> </br> </br>
 			
@@ -28,12 +28,12 @@
 			<select class="selectOptions" id="Depart">
 				<option>출발지 선택</option>
 				<optgroup label="국내">
-					<option value="INC" style="width: 100%">인천 국제공항</option>
+					<option value="INC">인천 국제공항</option>
 				</optgroup>
 				<optgroup label="해외">
-					<option value="HAN" style="width: 100%">노이바이 국제공항</option>
-					<option value="HNL" style="width: 100%">호놀룰루 국제공항</option>
-					<option value="HND" style="width: 100%">도쿄 국제공항</option>
+					<option value="HAN"">노이바이 국제공항</option>
+					<option value="HNL"">호놀룰루 국제공항</option>
+					<option value="HND"">도쿄 국제공항</option>
 				</optgroup>
 			</select> 
 			
@@ -43,22 +43,60 @@
 			<select class="selectOptions" id="Arrive">
 				<option>도착지 선택</option>
 				<optgroup label="국내">
-					<option value="INC" style="width: 100%">인천 국제공항</option>
+					<option value="INC">인천 국제공항</option>
 				</optgroup>
 				<optgroup label="해외">
-					<option value="HAN" style="width: 100%">노이바이 국제공항</option>
-					<option value="HNL" style="width: 100%">호놀룰루 국제공항</option>
-					<option value="HND" style="width: 100%">도쿄 국제공항</option>
+					<option value="HAN">노이바이 국제공항</option>
+					<option value="HNL">호놀룰루 국제공항</option>
+					<option value="HND">도쿄 국제공항</option>
 				</optgroup>
 			</select>
+			
+			<br> <br>
+			
+			<input type="button" class="booksubmit" id="reservationsubmit" value="비행기 조회">
 		</div>
-
+		
+		<div>
+			
+			<h3>운항 정보</h3>
+			<table >
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+						<th >조회수</th>
+					</tr>
+				</thead>							
+				<tbody>	
+							
+				<c:forEach var = "n" items = "${list }">
+					<tr>
+						<td>${n.id }</td>
+						<td><a href="detail?id=${n.id }">${n.title }</a></td>
+						<td>${n.writerId}</td>
+						<td>
+							<fmt:formatDate pattern = "yyyy:MM:dd hh:mm:ss" value="${n.regdate }"/>							
+						</td>
+						<td>
+							<fmt:formatNumber pattern = "####,###" value="${n.hit}" />							
+						</td>
+					</tr>
+				</c:forEach>				
+					
+				</tbody>
+			</table>
+		</div>
+		
+		
 	</div>
-
-	</br> </br> 
 	
-	<div class="btnSubmit" align="center" style="text-align: center;">
-		<input type="button" class="booksubmit" id="reservationsubmit" value="비행기 조회">
+
+	
+	
+		
 	</div>
 
 

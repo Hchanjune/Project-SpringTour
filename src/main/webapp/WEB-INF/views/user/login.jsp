@@ -18,6 +18,10 @@
 		$("#forgotIdPopUpButton").click(function(){
 			window.open("${appRoot}/user/forgotId", 'forgotIdPopUp', 'width=400, height=300, left=200, top=100, menubar=no, status=no, toolbar=no');
 		});
+		
+		$("#forgotPwPopUpButton").click(function(){
+			window.open("${appRoot}/user/forgotPw", 'forgotPwPopUp', 'width=400, height=300, left=200, top=100, menubar=no, status=no, toolbar=no');
+		});
 	});
 
 </script>
@@ -39,7 +43,7 @@
 				<div class="row">	
 					<div class="col">
 						<button id="forgotIdPopUpButton">아이디 찾기</button>
-						<button>비밀번호 찾기</button>
+						<button id="forgotPwPopUpButton">비밀번호 찾기</button>
 					</div>
 				</div>
 			</div>

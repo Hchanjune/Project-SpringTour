@@ -6,7 +6,7 @@
 	<!-- User SignIn -->
 	
 	<select id="selectUserById" resultType="com.team.springtour.domain.user.UserDto">
-		SELECT id, password, name, birthDate, address, email, grade, inserted, authKey FROM User
+		SELECT id, password, name, birthDate, address, email, grade, inserted, authKey, passwordChangeKey FROM User
 		WHERE id = #{userId}
 	</select>
 	
@@ -50,6 +50,12 @@
 		WHERE id = #{userId}
 	</update>
 	
+	<update id="insertUserPasswordChangeKey">
+		UPDATE User
+		SET passwordChangeKey = #{pwChangeKey}
+		WHERE id = #{userId}
+	</update>
+	
 	<update id="updateUserInfoByUserId">
 		UPDATE User
 		SET name = #{name},
@@ -78,6 +84,18 @@
 		SELECT id FROM User
 		WHERE email = #{email}
 	</select>
+	
+	<update id="updateUserPasswordChangeKey">
+		UPDATE User
+		SET passwordChangeKey = "null"
+		WHERE id = #{userId}
+	</update>
+	
+	<update id="updateUserPasswordByUserId">
+		UPDATE User
+		SET password = #{newPassword}
+		WHERE id = #{userId}
+	</update>
 	
 </mapper>
 

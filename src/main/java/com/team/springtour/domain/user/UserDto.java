@@ -21,5 +21,6 @@ public class UserDto {
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd'T'HH:mm:SS")
 	private LocalDateTime inserted;
 	private String authKey;
+	private String passwordChangeKey;
 	
 }

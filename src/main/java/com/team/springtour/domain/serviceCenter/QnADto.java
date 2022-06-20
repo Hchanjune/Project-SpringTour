@@ -1,19 +1,17 @@
 package com.team.springtour.domain.serviceCenter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import lombok.Data;
 @Data
-public class ServiceCenterDto {
-
+public class QnADto {
+	
 	private int indexId;
-	private String writer;
+	private String country;
 	private String title;
 	private String body;
+	private String userId;
 	private LocalDateTime inserted;
-	private List<String> fileName;
-	
-	
+	private String answer;
 	
 }
