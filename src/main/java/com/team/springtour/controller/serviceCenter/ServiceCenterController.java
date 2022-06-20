@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-<<<<<<< Updated upstream
 import org.springframework.web.multipart.MultipartFile;
-=======
->>>>>>> Stashed changes
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.springtour.domain.serviceCenter.PostPageDto;
@@ -102,9 +99,8 @@ public class ServiceCenterController {
 		}
 		
 		return "redirect:/serviceCenter/notice";
-<<<<<<< Updated upstream
+
 	}
-	
 	
 	
 	@GetMapping("notice/get")
@@ -139,44 +135,7 @@ public class ServiceCenterController {
 		
 		rttr.addAttribute("indexId", post.getIndexId());
 		
-=======
-	}
-	
-	
-	
-	@GetMapping("notice/get")
-	public void getPost(int indexId, Principal principal,  Model model) {
-		ServiceCenterDto serviceCenter = service.getPostByIndexId(indexId);
-		System.out.println(serviceCenter);
-		model.addAttribute("post", serviceCenter);
-		
-	}
-	
-	
-	// ADMIN만 수정가능
-	@PostMapping("modify")
-	public String modifyService (ServiceCenterDto post,
-						         Principal principal,
-						         RedirectAttributes rttr) {
-		ServiceCenterDto oldPost = service.getPostByIndexId(post.getIndexId());
-		System.out.println(oldPost);
-		
-		if (oldPost.getWriter().equals(principal.getName())) {
-			
-			boolean success = service.updatePost(post);
-			
-			if (success) {
-				rttr.addFlashAttribute("message", "글이 수정되었습니다.");
-			}else {
-				rttr.addFlashAttribute("message", "글이 수정되지 않았습니다.");
-			}
-		}else {
-			rttr.addFlashAttribute("message", "권한이 없습니다.");
-		}
-		
-		rttr.addAttribute("indexId", post.getIndexId());
-		
->>>>>>> Stashed changes
+
 		return "redirect:serviceCenter/notice/insert"; 
 	}
 
