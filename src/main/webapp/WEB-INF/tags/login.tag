@@ -58,7 +58,7 @@
 </div>
 
 <div class="d-none">
-	<form action="${appRoot }/user/myPage" id="loginTagMyPageForm" method="post">
+	<form action="${appRoot }/user/myPage" id="loginTagMyPageForm">
 		<input type="hidden" name="userId" value="${principal.username }" />
 	</form>
 </div>
