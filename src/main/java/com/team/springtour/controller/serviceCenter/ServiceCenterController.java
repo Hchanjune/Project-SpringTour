@@ -106,7 +106,7 @@ public class ServiceCenterController {
 	@GetMapping("notice/get")
 	public void getPost(int indexId, Principal principal,  Model model) {
 		ServiceCenterDto serviceCenter = service.getPostByIndexId(indexId);
-		System.out.println(serviceCenter);
+		//System.out.println(serviceCenter);
 		model.addAttribute("post", serviceCenter);
 		
 	}
@@ -120,8 +120,9 @@ public class ServiceCenterController {
 						         Principal principal,
 						         RedirectAttributes rttr) {
 		ServiceCenterDto oldPost = service.getPostByIndexId(post.getIndexId());
-		System.out.println(oldPost);
-	
+		//System.out.println(oldPost);
+		System.out.println(addFileList);
+		System.out.println(removeFileList);
 		if (oldPost.getWriter().equals(principal.getName())) {
 			
 			boolean success = service.updatePost(post, removeFileList, addFileList);
