@@ -105,9 +105,9 @@ public class UserController {
 		return "redirect:/main/home";
 	}
 	
-	@PostMapping("myPage")
-	public String myPage(String userId, Principal principal, Model model) {
-		UserDto user = userService.getUserById(userId);
+	@GetMapping("myPage")
+	public String myPage(Principal principal, Model model) {
+		UserDto user = userService.getUserById(principal.getName());
 		model.addAttribute("user", user);
 		return "/user/myPage";
 	}
