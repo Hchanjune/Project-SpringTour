@@ -35,7 +35,7 @@
 							<a class="nav-link disabled" ></a>
 						</h3>
 							<a class="nav-link" href="${appRoot }/serviceCenter/notice">공지사항</a>
-							<a class="nav-link" href="${appRoot }/serviceCenter/qna/qnaList">묻고답하기</a>
+							<a class="nav-link" href="${appRoot }/serviceCenter/qnaList">묻고답하기</a>
 							<a class="nav-link" href="${appRoot }/serviceCenter/freq">자주묻는질문</a>
 							<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 					</div>
@@ -50,7 +50,7 @@
 						<br />
 						<div class="nav justify-content-end">
 
-							<form action="${appRoot }/serviceCenter/search" class="d-flex">
+							<form action="${appRoot }/serviceCenter/notice" class="d-flex" method="post">
 								<div class="input-group">
 									<!-- select.form-select>option*3 -->
 									<select name="type" id="" class="form-select"
@@ -96,6 +96,7 @@
 									<td>${post.inserted }</td>
 								</tr>
 							</c:forEach>
+							
 						</table>
 					</section>
 
