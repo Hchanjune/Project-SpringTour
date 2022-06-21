@@ -22,29 +22,63 @@
 	
 	<tag:login/>
 	<tag:navBar/>
-	
 
-	<div class="container">
+
+	<br />
+	<div class="containder-fluid" style="margin: 25px;">
 		<div class="row">
-			<div class="col-4">
-				<nav class="nav flex-column">
-				
-							<a class="nav-link disabled">고객센터</a>
-							<a class="nav-link" href="${appRoot }/serviceCenter/notice">공지사항</a>
-							<a class="nav-link" href="${appRoot }/serviceCenter/qnaList">묻고답하기</a>
-							<a class="nav-link" href="${appRoot }/serviceCenter/freq">자주묻는질문</a>
-			
-				</nav>
+			<div class="col-2 navbar-left">
+
+				<div class="navbar_menu"
+					style="background: #C2E2E8; text-align: center;">
+
+					<h3
+						style="background: #E6FFFF; text-align: center; padding-top: 10px;">
+						고객센터
+						<a class="nav-link disabled"></a>
+					</h3>
+					<a class="nav-link" href="${appRoot }/serviceCenter/notice">공지사항</a>
+					<a class="nav-link" href="${appRoot }/serviceCenter/qnaList">묻고답하기</a>
+					<a class="nav-link" href="${appRoot }/serviceCenter/freq">자주묻는질문</a>
+					<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+				</div>
 			</div>
-			
-			<div class="col-8">
-				<h1>묻고답하기</h1> <br />
+
+
+			<div class="col-10">
+				<div class="">
+					<h1>묻고답하기</h1>
+					<br />
+
+					<div class="nav justify-content-end">
+
+						<form action="${appRoot }/serviceCenter/qnaList" class="d-flex"
+							method="post">
+							<div class="input-group">
+								<!-- select.form-select>option*3 -->
+								<select name="type" id="" class="form-select"
+									style="flex: 0 0 100px;">
+									<option value="all"
+										${param.type != 'title' && param.type != 'body' ? 'selected' : '' }>전체</option>
+									<option value="title" ${param.type=='title' ? 'selected' : '' }>제목</option>
+									<option value="body" ${param.type=='body' ? 'selected' : '' }>본문</option>
+								</select>
+
+								<input type="search" class="form-control" name="keyword" />
+								<button class="btn btn-outline-success">
+									<i class="fa-solid fa-magnifying-glass"></i>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<br />
 
 				<table class="table">
 					<thead>
-						<tr>
+						<tr class="col justify-content-center" align="center">
 							<th>번호</th>
-							<th>나라</th>
+							<th>패키지명</th>
 							<th>제목</th>
 							<th>작성자</th>
 							<th>작성일</th>
@@ -52,37 +86,48 @@
 						</tr>
 					</thead>
 					<c:forEach items="${qnaPost }" var="list">
-						<tr>
+						<tr class="col justify-content-center" align="center">
 							<td>${list.indexId }</td>
-							<td>${list.country }</td>
+							<td>${list.packageName }</td>
 							<td>
 
-								<c:url value="${appRoot }/qna/get" var="link">
+								<c:url value="/serviceCenter/qna/qnaPage" var="link">
 									<c:param name="indexId" value="${list.indexId }"></c:param>
 								</c:url>
 								<a href="${link }"> ${list.title } </a>
 
 							</td>
-							<td>${list.userId }</td>
+							<td>${list.writer }</td>
 							<td>${list.inserted }</td>
-							<td>${list.answer }</td>
+							<c:choose>
+								<c:when test="${not empty list.answer }"><td>답변 완료</td></c:when>
+								<c:otherwise><td>확인중</td></c:otherwise>
+							</c:choose>
+							
+					
 						</tr>
 					</c:forEach>
 				</table>
 
 
-				<div class="col justify-content-right" align="right">
-					<button>
-						<a href="${appRoot}/qna/insert">문의하기</a>
-					</button>
-				</div>
+				<sec:authorize access="isAuthenticated()">
+					<sec:authentication property="principal" var="principal" />
+					<div class="col justify-content-right" align="right">
+						<button class="btn btn-primary" style="background: #E6FFFF;">
+							<a href="${appRoot}/serviceCenter/qna/insert">문의하기</a>
+						</button>
+					</div>
+				</sec:authorize>
+
+				<br />
+				<tag:noticepagination path="qnaList" />
 
 			</div>
-			
-		</div>	
+		</div>
 	</div>
 
-	
-	
+
+
+
 </body>
 </html>

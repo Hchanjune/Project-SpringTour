@@ -30,8 +30,6 @@
 	<select id="listServiceCenterPage" resultType="com.team.springtour.domain.serviceCenter.ServiceCenterDto">
 		SELECT indexId, writer, title, body, inserted
 		FROM ServiceCenter
-
-		
 		GROUP BY indexId
 		ORDER BY indexId DESC
 		LIMIT #{from}, #{row}
@@ -55,9 +53,9 @@
 				</when>
 			</choose>
 		</if>
-		GROUP BY indexId
+		
 		ORDER BY indexId DESC
-	
+		LIMIT #{from}, #{row}
 	</select>
 	
 	
@@ -71,8 +69,27 @@
 		SELECT Count(indexId)
 		FROM ServiceCenter
 	</select>
-	
-	
+
+	<select id="countSearchedPostPage" resultType="int">
+		SELECT Count(indexId)
+		FROM ServiceCenter
+		
+		<if test="keyword != '%%'">
+			<choose>
+				<when test="type == 'all'">
+					WHERE title LIKE #{keyword } OR
+					body LIKE #{keyword }
+				</when>
+				<when test="type == 'title'">
+					WHERE title LIKE #{keyword }
+				</when>
+				<when test="type == 'body'">
+					WHERE body LIKE #{keyword }
+				</when>
+			</choose>
+		</if>
+
+	</select>
 	
 	<update id="updatePost" >
 		UPDATE ServiceCenter

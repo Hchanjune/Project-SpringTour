@@ -35,7 +35,6 @@ public class ServiceCenterController {
 	// pagination
 	@GetMapping("notice")
 	public String postPage(@RequestParam(name = "page", defaultValue = "1")int page, 
-			               
 							Model model) {
 		
 		int rowPerPage = 5;
@@ -58,13 +57,31 @@ public class ServiceCenterController {
 		return "/serviceCenter/notice";
 	}
 	
-	 @RequestMapping("search")
-	 public String postSearch(@RequestParam(name ="keyword")String keyword, @RequestParam("type")String type,
-			                 Model model) {
-		 List<ServiceCenterDto> searchPost = service.searchPost(type, keyword);
-		 model.addAttribute("post", searchPost);
+	 @PostMapping("notice")
+	 public void postSearch(@RequestParam(name ="keyword")String keyword, @RequestParam("type")String type,
+			 					@RequestParam(name = "page", defaultValue = "1")int page,
+			 					Model model) {
+	
+			int rowPerPage = 3;
+
+			List<ServiceCenterDto> searchPost = service.searchPost(type, keyword, page, rowPerPage);
+			System.out.println(page);
+			
+			
+
+			int totalRecords = service.countSearchedPostPage(type,keyword);
+			int end = (totalRecords - 1) / rowPerPage + 1;
+
+			PostPageDto postPage = new PostPageDto();
+			postPage.setCurrent(page);
+			postPage.setEnd(end);
+
+			System.out.println(postPage);
+
+			model.addAttribute("page", searchPost);
+			model.addAttribute("pageInfo", postPage);
+
 		 
-		 return "/serviceCenter/notice";
 	 }
 
 
