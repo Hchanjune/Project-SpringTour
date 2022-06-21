@@ -17,9 +17,6 @@
 
 
 
-
-
-
 <title>Insert title here</title>
 </head>
 <body>
@@ -28,10 +25,9 @@
 	<tag:navBar/>
 
 	<br />
-	<div class="containder-fluid">
-		<div class="container" style="margin:10px;">
+	<div class="containder-fluid" style="margin:25px;"> 
 			<div class="row">
-				<div class="col-3 navbar-left">
+				<div class="col-2 navbar-left">
 
 					<div class="navbar_menu" style="background: #C2E2E8; text-align: center;">
 
@@ -39,14 +35,14 @@
 							<a class="nav-link disabled" ></a>
 						</h3>
 							<a class="nav-link" href="${appRoot }/serviceCenter/notice">공지사항</a>
-							<a class="nav-link" href="${appRoot }/serviceCenter/qna/qnaList">묻고답하기</a>
+							<a class="nav-link" href="${appRoot }/serviceCenter/qnaList">묻고답하기</a>
 							<a class="nav-link" href="${appRoot }/serviceCenter/freq">자주묻는질문</a>
 							<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 					</div>
 				</div>
 
 
-				<div class="col-9">
+				<div class="col-10">
 					<div class="">
 
 						<h1>공지사항</h1>
@@ -95,7 +91,7 @@
 											<c:param name="indexId" value="${post.indexId }"></c:param>
 										</c:url>
 										<a href="${link }"> ${post.title } </a>
-
+											
 									</td>
 									<td>${post.inserted }</td>
 								</tr>
@@ -119,7 +115,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	
 
 
 

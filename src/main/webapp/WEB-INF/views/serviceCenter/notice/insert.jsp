@@ -25,7 +25,7 @@
 		<div class="row">
 			<div class="col">
 
-				<c:url value="/serviceCenter/notice/insert" var="noticeUrl"></c:url>
+				<c:url value="/serviceCenter/notice/insert" var="noticeUrl" ></c:url>
 				<h1>글 작성</h1>
 				
 				<form action="${noticeUrl }" method="post" enctype="multipart/form-data">
