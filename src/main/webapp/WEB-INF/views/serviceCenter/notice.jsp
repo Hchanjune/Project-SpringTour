@@ -50,7 +50,7 @@
 						<br />
 						<div class="nav justify-content-end">
 
-							<form action="${appRoot }/serviceCenter/search" class="d-flex">
+							<form action="${appRoot }/serviceCenter/notice" class="d-flex" method="post">
 								<div class="input-group">
 									<!-- select.form-select>option*3 -->
 									<select name="type" id="" class="form-select"
@@ -96,6 +96,7 @@
 									<td>${post.inserted }</td>
 								</tr>
 							</c:forEach>
+							
 						</table>
 					</section>
 

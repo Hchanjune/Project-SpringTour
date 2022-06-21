@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>   
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +17,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<sec:authentication property="principal" var="principal" />
 	<tag:login/>
 	<tag:navBar/>
 				
@@ -26,26 +26,35 @@
 		<div class="row">
 			<div class="col">
 
-				<c:url value="/serviceCenter/qna/insert" var="qnaUrl"></c:url>
 				<h1>글 작성</h1>
 				
-				<form action="${qnaUrl }" method="post" enctype="multipart/form-data">
+				<form action="${appRoot }/serviceCenter/qna/insert" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="writer" value="principal.username" />
 					<div>
 						<label class="form-label" for="input1">제목</label>
-						<input class="form-control" type="text" name="title" required id="input1" />
+						<input class="form-control" type="text" name="title" required  />
+					</div>
+					<div>
+						<label for="insertQnaPackageName">패키지 명</label>
+						<select class="form-select" name="packageName" id="insertQnaPackageName">
+							<option selected>패키지 선택</option>
+							<c:forEach items="${tourList }" var="tourPackage">
+								<option><c:out value="${tourPackage.packageName }"></c:out></option>
+							</c:forEach>
+						</select>
 					</div>
 					
 					<div>
 						<label class="form-label" for="textarea1">본문</label>
-						<textarea class="form-control" name="body" id="textarea1" cols="30" rows="10"></textarea>
+						<textarea class="form-control" name="body"  cols="30" rows="10"></textarea>
 					</div>
 					
-					<div>
+					<!-- <div>
 						<label for="fileInput1" class="form-label">
 							파일
 						</label>
 						<input class="form-control mb-3" multiple="multiple" type="file" name="file" accept="image/*"/>
-					</div>
+					</div> -->
 					
 					<button class="btn btn-primary">작성</button>
 				

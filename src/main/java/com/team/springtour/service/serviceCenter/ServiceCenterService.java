@@ -195,10 +195,22 @@ public class ServiceCenterService {
 	
 	
 	
-	public List<ServiceCenterDto> searchPost(String type, String keyword) {
+	public List<ServiceCenterDto> searchPost(String type, String keyword, int page, int rowPerPage) {
+		String searchKeyword = "%" + keyword + "%";
 		
-		return mapper.selectSearchAll(type, "%" + keyword + "%");
+		int from = (page-1) * rowPerPage;
+		
+		return mapper.selectSearchAll(type, searchKeyword, from, rowPerPage);
 	}
+
+
+	public int countSearchedPostPage(String type, String keyword) {
+		String searchKeyword = "%" + keyword + "%";
+		
+		return mapper.countSearchedPostPage(type, searchKeyword);
+	}
+	
+
 	
 }
 

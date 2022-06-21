@@ -25,7 +25,10 @@ public interface ServiceCenterMapper {
 
 	int deletePost(int indexId);
 
-	List<ServiceCenterDto> selectSearchAll(@Param("type")String type, @Param("keyword")String string);
+	List<ServiceCenterDto> selectSearchAll(@Param("type")String type, 
+											@Param("keyword")String searchKeyword, 
+											@Param("from") int from, 
+											@Param("row")int row);
 
 	void insertFile(@Param("noticeIndexId")int noticeIndexId, @Param("fileName")String fileName);
 
@@ -34,6 +37,8 @@ public interface ServiceCenterMapper {
 	void deleteFileByNoticeId(int indexId);
 
 	void deleteFileByNoticeIdAndFileName(@Param("indexId")int indexId, @Param("fileName")String fileName);
+
+	int countSearchedPostPage(@Param("type")String type, @Param("keyword")String searchKeyword);
 
 	
 
