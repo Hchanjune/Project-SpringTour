@@ -51,14 +51,14 @@
 			<div class="col-12">
 				<tag:login/>
 				<tag:navBar/>
-			</div>
+			</div>`
 		</div>
 		
 		<div class="row">
-			<div class="col-1">
+			<div class="col-2">
 				<tag:userSideMenu/>
 			</div>
-			<div class="col-11">
+			<div class="col-10">
 						<form id="userInfoForm" class="row g-3" action="${appRoot }/user/modifyInfo" method="post">
 						<div class="row g-3">
 							<div class="col-md-3">
@@ -132,8 +132,8 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="d-none" >
-					<form action="${appRoot }/user/myPage" id="userInfoModifyResetForm" method="post">
-						<input type="hidden" name="userId" value="${user.id }" />
+					<form action="${appRoot }/user/myPage" id="userInfoModifyResetForm">
+						<input type="hidden" name="userId" value="${user.id }" /> 
 					</form>
 				</div>	
 				<div class="d-none" >
