@@ -31,7 +31,12 @@ public class DirectMessageService {
 	}
 
 	public DirectMessageDto getMessageByIndexId(int messageId) {
+		
 		return messageMapper.selectMessageByIndexId(messageId);
+	}
+	
+	public void setMessageReadInfoReadByIndexId(int messageId) {
+		messageMapper.updateMessageReadInfoByIndexId(messageId);
 	}
 	
 }

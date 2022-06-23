@@ -63,11 +63,25 @@ public class DirectMessageController {
 	
 	@PostMapping("readMessage")
 	public ModelAndView readMessagePage(int messageId) {
+		messageService.setMessageReadInfoReadByIndexId(messageId);
 		DirectMessageDto message = messageService.getMessageByIndexId(messageId);
 		ModelAndView mav = new ModelAndView();
-		/*mav.setViewName("user/readMessage");*/
 		mav.addObject("message", message);
 		return mav;
+	}
+	
+	@PostMapping("messageInfo")
+	public ModelAndView getMessageInfoPage(int messageId) {
+		DirectMessageDto message = messageService.getMessageByIndexId(messageId);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("message", message);
+		return mav;
+	}
+	
+	@PostMapping("replyMessage")
+	public String replyMessage(String sender, Model model) {
+		model.addAttribute("receiver", sender);
+		return "user/writeMessage";
 	}
 	
 	

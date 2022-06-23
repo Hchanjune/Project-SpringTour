@@ -16,4 +16,6 @@ public interface DirectMessageMapper {
 
 	DirectMessageDto selectMessageByIndexId(int messageId);
 
+	void updateMessageReadInfoByIndexId(int messageId);
+
 }

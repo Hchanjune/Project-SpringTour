@@ -22,11 +22,15 @@
 			<input class="form-control" type="text" name="title" value="${message.title }" id="receivedMessageTitle" readonly/>
 			<label for="receivedMessageBody">내용</label>
 			<textarea class="form-control" name="body" cols="30" rows="10" id="receivedMessageBody" readonly>${message.body }</textarea>
-		<div>
+		<div style="text-align:right;">
 			<form action="${appRoot }/user/replyMessage" id="replyMessageForm" method="post">
 				<input type="hidden" name="sender" value="${message.sender }" />
 				<button form="replyMessageForm" type="submit">답장쓰기</button>
 			</form>
+		</div>
+		<div style="text-align:center;">
+				<br />
+				<button onclick="self.close();"> 닫기 </button>
 		</div>
 	</div>
 </body>

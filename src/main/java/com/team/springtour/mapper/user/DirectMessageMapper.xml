@@ -33,6 +33,12 @@
 		WHERE indexId = #{messageId}
 	</select>
 	
+	<update id="updateMessageReadInfoByIndexId">
+		UPDATE DirectMessage
+		SET readInfo = 1
+		WHERE indexId = #{messageId}
+	</update>
+	
 	
 </mapper>
 

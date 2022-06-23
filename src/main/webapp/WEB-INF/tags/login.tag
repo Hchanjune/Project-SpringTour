@@ -39,7 +39,7 @@
 		<input form="loginTagMyPageForm" type="submit" value="마이페이지" />
 		<input form="loginTagLogoutForm" type="submit" value="로그아웃" />
 		<br />
-		<p id="loginTagMessageAlert"></p>
+		<p id="loginTagMessageAlertParagraph">새로운 메시지가 <a id="loginTagMessageAlert" href="${appRoot }/user/dmReceiveList"></a>개 있습니다</p>
 		<sec:authorize  access="hasRole('ADMIN')">
 			<a href="${appRoot }/user/userList">회원관리</a>
 		</sec:authorize>
@@ -52,10 +52,11 @@
 				method : "get",
 				data : {"userId" : userId},
 				success : function(data){
-					$("#loginTagMessageAlert").text("새로운 메시지가 " + data + "개 있습니다.");
+					$("#loginTagMessageAlert").text(data);
 				},
 				error : function(){
-					$("#loginTagMessageAlert").text("메시지 정보를 불러오는데 실패하였습니다.");
+					$("#loginTagMessageAlert").hide();
+					$("#loginTagMessageAlertParagraph").text("메시지 정보를 불러오는데 실패하였습니다.");
 				},
 				complete : function(){
 				}
