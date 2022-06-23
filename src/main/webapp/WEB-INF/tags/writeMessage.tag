@@ -8,7 +8,6 @@
 					'width=800, height=550, left=200, top=100, menubar=no, status=no, toolbar=no');
 		});
 	});
-	
 </script>
 
 <div>
