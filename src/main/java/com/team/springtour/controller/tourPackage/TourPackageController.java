@@ -109,22 +109,5 @@ public class TourPackageController {
 		return "redirect:/tourPackage/tourChoice";
 	}
 
-	
-	
-	// getmapping 값이 view의 jsp와 같으면 void를 사용한다
-	@GetMapping("honeymoonTour")
-	public void honeymoon() {
-			
-	}
-
-	@GetMapping("golfTour")
-	public void golf() {
-
-	}
-
-	@GetMapping("silverTour")
-	public void silver() {
-
-	}
 
 }
