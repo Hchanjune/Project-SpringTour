@@ -71,11 +71,15 @@
 						<div class="col">
 							<h1>
 								댓글
-								<sec:authorize access="isAuthenticated()">														
+								<sec:authorize access="isAuthenticated()">	
+								<sec:authentication property="principal" var="principal" />
+								<c:if test="${principal.username == review.writer }">													
 										<button id="edit-button1" class="btn btn-secondary">
 											<i class="fa-solid fa-pen-to-square"></i>
-										</button>								
-								</sec:authorize>
+										</button>					
+								</c:if>			
+								</sec:authorize>					
+								
 							</h1>
 
 							<c:if test="${not empty message }">

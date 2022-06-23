@@ -65,6 +65,7 @@ public class ReviewController {
 	public void get(Model model,int indexId) {
 	
 		ReviewDto dto= service.getReviewByIndexId(indexId);
+		
 		model.addAttribute("review",dto);
 		
 	}
