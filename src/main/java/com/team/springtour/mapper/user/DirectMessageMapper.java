@@ -12,4 +12,8 @@ public interface DirectMessageMapper {
 
 	int insertDirectMessage(DirectMessageDto message);
 
+	int countMessageByUserId(String userId);
+
+	DirectMessageDto selectMessageByIndexId(int messageId);
+
 }

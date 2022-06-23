@@ -13,10 +13,12 @@
 		<security:form-login login-page="/user/login" default-target-url="/user/loginAuthority" always-use-default-target="true"/>
 		<security:logout logout-success-url="/main/home"/>
 		<security:remember-me/>
+		<!-- UserPages -->
+		<security:intercept-url pattern="/user/memberPage" access="hasAnyRole('USER','ADMIN')"/>
+		
 		
 		<security:intercept-url pattern="/tourPackage/insert" access="hasRole('ADMIN')"/>
 		<security:intercept-url pattern="/serviceCenter/notice/insert" access="hasRole('ADMIN')"/>
-		<security:intercept-url pattern="/user/memberPage" access="hasAnyRole('USER','ADMIN')"/>
 		<security:intercept-url pattern="/serviceCenter/qna/insert" access="isAuthenticated()"/>
 	</security:http>
 	

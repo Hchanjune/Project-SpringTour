@@ -25,5 +25,13 @@ public class DirectMessageService {
 	public boolean sendMessage(DirectMessageDto message) {
 		return messageMapper.insertDirectMessage(message) == 1;
 	}
+
+	public int countMessageByUserId(String userId) {
+		return messageMapper.countMessageByUserId(userId);
+	}
+
+	public DirectMessageDto getMessageByIndexId(int messageId) {
+		return messageMapper.selectMessageByIndexId(messageId);
+	}
 	
 }

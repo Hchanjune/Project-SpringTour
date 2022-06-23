@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.springtour.domain.user.DirectMessageDto;
@@ -51,5 +53,23 @@ public class DirectMessageController {
 		rttr.addFlashAttribute("resultMessage", resultMessage);
 		return "redirect:/user/writeMessage";
 	}
+	
+	@GetMapping("messageCount")
+	@ResponseBody
+	public int getMessageCount(String userId) {
+		int messageCount = messageService.countMessageByUserId(userId);
+		return messageCount;
+	}
+	
+	@PostMapping("readMessage")
+	public ModelAndView readMessagePage(int messageId) {
+		DirectMessageDto message = messageService.getMessageByIndexId(messageId);
+		ModelAndView mav = new ModelAndView();
+		/*mav.setViewName("user/readMessage");*/
+		mav.addObject("message", message);
+		return mav;
+	}
+	
+	
 
 }
