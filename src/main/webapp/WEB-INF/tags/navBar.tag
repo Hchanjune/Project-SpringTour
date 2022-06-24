@@ -35,7 +35,7 @@
             <a class="nav-link" href="${tourPackageLink }">TourPackage</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${flightReserveLink }">FlightReserve</a>
+            <a class="nav-link" href="${flightReserveLink }">FlightInfoe</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="${homeLink }" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
