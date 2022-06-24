@@ -183,7 +183,93 @@ public class ServiceCenterController {
 	}
 	
 	
+	
+	
+	
+	// freq - 자주묻는질문 
+	
+	@PostMapping("freqPost")
+	public String getFreqPost(Principal principal,  Model model) {
+		ServiceCenterDto freq = service.getFreqPost();
+		//System.out.println(serviceCenter);
+		model.addAttribute("freqPost", freq);
+		
+		return "/serviceCenter/freq";
+	}
+	
+	
+	@GetMapping("freq")
+	public String freqPostPage(@RequestParam(name = "page", defaultValue = "1")int page, 
+							Model model) {
+		
+		int rowPerPage = 5;
+		
+		List<ServiceCenterDto> freqPost = service.listFreqPage(page, rowPerPage);
+		
+		int totalRecords = service.countFreqPostPage();
+		int end = (totalRecords - 1) / rowPerPage + 1;
+		
+		
+		PostPageDto freqPostPage = new PostPageDto();
+		freqPostPage.setCurrent(page);
+		freqPostPage.setEnd(end);
+		
+		System.out.println(freqPostPage);
+		
+		model.addAttribute("Page", freqPost);
+		model.addAttribute("pageInfo", freqPostPage);
+		
+		return "/serviceCenter/freq";
+	}
+	
+	 @PostMapping("freq")
+	 public void freqPostSearch(@RequestParam(name ="keyword")String keyword, @RequestParam("type")String type,
+			 					@RequestParam(name = "page", defaultValue = "1")int page,
+			 					Model model) {
+	
+			int rowPerPage = 3;
 
+			List<ServiceCenterDto> freqSearchPost = service.freqSearchPost(type, keyword, page, rowPerPage);
+			System.out.println(page);
+
+
+			int totalRecords = service.countSearchedPostPage(type,keyword);
+			int end = (totalRecords - 1) / rowPerPage + 1;
+
+			PostPageDto freqPostPage = new PostPageDto();
+			freqPostPage.setCurrent(page);
+			freqPostPage.setEnd(end);
+
+			System.out.println(freqPostPage);
+
+			model.addAttribute("Page", freqSearchPost);
+			model.addAttribute("pageInfo", freqPostPage);
+
+		 
+	 }
+	 
+	 
+		// 자주묻는질문 글쓰기 등록(ONLY ADMIN)
+		@GetMapping("freqInsert")
+		public void freqInsert() {
+		
+		}
+		
+		@PostMapping("freqInsert")
+		public String freqInsert(ServiceCenterDto freq, 
+								Principal principal, 
+								Model model) { 
+			
+			freq.setWriter(principal.getName());
+		
+			boolean list = service.insertFreq(freq);
+			
+			model.addAttribute("freqList", list);
+			return "redirect:/serviceCenter/freq";
+		
+
+		}
+	
 }
  
 

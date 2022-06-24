@@ -15,6 +15,8 @@ public class QnADto {
 	private LocalDateTime inserted;
 	private String answer;
 	private List<String> fileName;
+	private int noticeIndexId;
+	private boolean hasFile;
 	
 	
 }

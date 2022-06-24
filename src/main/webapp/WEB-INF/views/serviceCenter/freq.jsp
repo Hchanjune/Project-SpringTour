@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>  
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -16,7 +19,119 @@
 </head>
 <body>
 	
+	<tag:login/>
+	<tag:navBar/>
+
+	<br />
+	<div class="containder-fluid" style="margin: 25px;">
+		<div class="row">
+			<div class="col-2 navbar-left">
+				<div class="navbar_menu"
+					style="background: #C2E2E8; text-align: center;">
+					<h3
+						style="background: #E6FFFF; text-align: center; padding-top: 10px;">
+						고객센터
+						<a class="nav-link disabled"></a>
+					</h3>
+					<a class="nav-link" href="${appRoot }/serviceCenter/notice">공지사항</a>
+					<a class="nav-link" href="${appRoot }/serviceCenter/qnaList">묻고답하기</a>
+					<a class="nav-link" href="${appRoot }/serviceCenter/freq">자주묻는질문</a>
+					<br /><br /><br /><br><br /><br /><br /><br /><br /><br />
+				</div>
+			</div>
+
+
+			<div class="col-10">
+				<div class="">
+					<h1>자주묻는질문</h1>
+					<br />
+					<div class="nav justify-content-end">
+
+						<form action="${appRoot }/serviceCenter/freq" class="d-flex"
+							method="post">
+							<div class="input-group">
+								<!-- select.form-select>option*3 -->
+								<select name="type" id="" class="form-select"
+									style="flex: 0 0 100px;">
+									<option value="all"
+										${param.type != 'title' && param.type != 'body' ? 'selected' : '' }>전체</option>
+									<%-- <option value="title" ${param.type=='title' ? 'selected' : '' }>제목</option> --%>
+									<option value="body" ${param.type=='body' ? 'selected' : '' }>본문</option>
+								</select>
+
+								<input type="search" class="form-control" name="keyword" />
+								<button class="btn btn-outline-success">
+									<i class="fa-solid fa-magnifying-glass"></i>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				
+				
+				<br />
+				<table class="table">
+					
+					<form action="${appRoot }/serviceCenter/freq" class="d-flex" method="post">
+
+						<ul class="nav nav-tabs">
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="#">전체</a>	
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" href="#">항공</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" href="#">예약</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" href="#">투어상품</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" href="#">결제</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" href="#">기타문의</a>
+							</li>
+
+						</ul>
+					</form>
+					
+					<br />
+					<tbody>
+						
+						 <tr>
+      						<td scope="row">Q ${freqList.body }</td>
+
+					</tbody>
+				</table>
+
+
+
+				<sec:authorize access="hasRole('ADMIN')">
+					<sec:authentication property="principal" var="principal" />
+					<div class="col justify-content-right" align="right">
+						<button class="btn btn-primary" style="background: #E6FFFF;">
+							<a href="${appRoot}/serviceCenter/freqInsert">글쓰기</a>
+						</button>
+					</div>
+				</sec:authorize>
+			</div>
+		</div>
+	</div>
 	
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>

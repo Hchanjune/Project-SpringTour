@@ -41,9 +41,23 @@ public interface ServiceCenterMapper {
 	int countSearchedPostPage(@Param("type")String type, @Param("keyword")String searchKeyword);
 
 	
-
-
 	
+	
+	
+	
+	ServiceCenterDto selectFreqPost();
+
+	List<ServiceCenterDto> listFreqPage(@Param("from")int from, @Param("row")int row);
+
+	int countFreqPostPage();
+
+	List<ServiceCenterDto> selectFreqSearchAll(@Param("type")String type, 
+												@Param("Keyword")String Keyword, 
+												@Param("from")int from, 
+												@Param("row")int row);
+
+	int insertFreqList(ServiceCenterDto freq);
+
 
 	
 }
