@@ -15,6 +15,13 @@
 		<security:remember-me/>
 		<!-- UserPages -->
 		<security:intercept-url pattern="/user/memberPage" access="hasAnyRole('USER','ADMIN')"/>
+		<security:intercept-url pattern="/user/myPage" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/user/dmReceiveList" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/user/dmSendList" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/user/messageInfo" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/user/readMessage" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/user/writeMessage" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/user/userList" access="hasAnyRole('ADMIN')"/>
 		
 		
 		<security:intercept-url pattern="/tourPackage/insert" access="hasRole('ADMIN')"/>

@@ -126,4 +126,59 @@
 		WHERE noticeIndexId = #{indexId}
 		   AND fileName = #{fileName}
 	</delete>
+
+
+
+	<!-- freq - 자주묻는 질문 -->
+
+	
+	<select id="selectFreqPost" resultType="com.team.springtour.domain.serviceCenter.ServiceCenterDto">
+		SELECT body
+		FROM ServiceCenter
+	</select>
+
+
+	<select id="listFreqPage" resultType="com.team.springtour.domain.serviceCenter.ServiceCenterDto">
+		SELECT indexId, body
+		FROM ServiceCenter
+		GROUP BY indexId
+		ORDER BY indexId DESC
+		LIMIT #{from}, #{row}
+	</select>
+	
+	
+	<insert id="insertFreqList" useGeneratedKeys="true" keyColumn="indexId" keyProperty="indexId">
+		INSERT INTO ServiceCenter (title, writer, body)
+		VALUES (#{title}, #{writer}, #{body})
+	</insert>
+
+
+	<select id="selectFreqSearchAll" resultType="com.team.springtour.domain.serviceCenter.ServiceCenterDto">
+		SELECT indexId, body
+		FROM ServiceCenter
+		
+		<if test="keyword != '%%'">
+			<choose>
+				<when test="type == 'all'">
+					WHERE title LIKE #{keyword } OR
+					      body LIKE #{keyword }
+				</when>
+				
+				<when test="type == 'body'">
+					WHERE body LIKE #{keyword }
+				</when>
+			</choose>
+		</if>
+		
+		ORDER BY indexId DESC
+		LIMIT #{from}, #{row}
+	</select>
+	
+	<select id="countFreqPostPage" resultType="int">
+		SELECT Count(indexId)
+		FROM ServiceCenter
+	</select>
+	
+	
+
 </mapper>

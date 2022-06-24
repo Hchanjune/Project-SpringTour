@@ -132,6 +132,8 @@ public class ServiceCenterService {
 	public int countPostPage() {
 		return mapper.countPostPage();
 	}
+	
+	
 
 	public ServiceCenterDto getPostByIndexId(int indexId) {
 		ServiceCenterDto notice = mapper.selectBoardByIndexId(indexId);
@@ -191,25 +193,68 @@ public class ServiceCenterService {
 		
 		s3.deleteObject(deleteObjectRequest);
 	}
-	
-	
-	
+
 	
 	public List<ServiceCenterDto> searchPost(String type, String keyword, int page, int rowPerPage) {
-		String searchKeyword = "%" + keyword + "%";
+		String Keyword = "%" + keyword + "%";
 		
 		int from = (page-1) * rowPerPage;
 		
-		return mapper.selectSearchAll(type, searchKeyword, from, rowPerPage);
+		return mapper.selectSearchAll(type, Keyword, from, rowPerPage);
 	}
 
 
 	public int countSearchedPostPage(String type, String keyword) {
+		String Keyword = "%" + keyword + "%";
+		
+		return mapper.countSearchedPostPage(type, Keyword);
+	}
+
+	
+	
+	
+	
+	
+	
+	// freq - 자주묻는 질문 
+
+	public ServiceCenterDto getFreqPost() {
+		ServiceCenterDto freq = mapper.selectFreqPost();
+		return freq;
+	}
+
+
+	public List<ServiceCenterDto> listFreqPage(int page, int rowPerPage) {
+		
+		int from = (page-1) * rowPerPage;
+		
+		return mapper.listFreqPage(from, rowPerPage);
+	}
+
+
+	public List<ServiceCenterDto> freqSearchPost(String type, String keyword, int page, int rowPerPage) {
 		String searchKeyword = "%" + keyword + "%";
 		
-		return mapper.countSearchedPostPage(type, searchKeyword);
+		int from = (page-1) * rowPerPage;
+		
+		return mapper.selectFreqSearchAll(type, searchKeyword, from, rowPerPage);
 	}
-	
+
+
+	public int countFreqPostPage() {
+		return mapper.countFreqPostPage();
+	}
+
+
+
+	public boolean insertFreq(ServiceCenterDto freq) {
+		
+		int cnt = mapper.insertFreqList(freq);
+		
+		return cnt == 1;
+	}
+
+
 
 	
 }

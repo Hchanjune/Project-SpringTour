@@ -52,68 +52,12 @@ public class QnAService {
 	}
 	
 	@Transactional
-	public boolean insertQnA(QnADto qna, MultipartFile[] files) {
+	public boolean insertQnA(QnADto qna) {
 		
 		int cnt = mapper.insertQnA(qna);
-		
-		addFiles(qna.getIndexId(), files);
-		
+
 		return cnt == 1;
 	}
-	
-	private void addFiles(int indexId, MultipartFile[] files) {
-		//파일 등록
-		if (files != null) {
-			for (MultipartFile file : files) {
-				if (file.getSize() > 0) {
-					mapper.insertQnaFile(indexId, file.getOriginalFilename());
-					saveFileAwsS3(indexId, file); // s3에 업로드			
-				}
-			}
-		}
-	}
-	
-	private void saveFileAwsS3(int indexId, MultipartFile file) {
-		String key = "ServiceCenter/" + indexId + "/" + file.getOriginalFilename();
-		
-		PutObjectRequest putObjectRequest = PutObjectRequest.builder()
-				.acl(ObjectCannedACL.PUBLIC_READ)
-				.bucket(bucketName)
-				.key(key)
-				.build();
-		
-		RequestBody requestBody;
-		try {
-			requestBody = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
-			s3.putObject(putObjectRequest, requestBody);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-		
-		
-	}
-
-	private void saveFile(int indexId, MultipartFile file) {
-		// 디렉토리 만들기		
-		String pathStr = "C:/imgtmp/notice/" + indexId + "/";
-		File path = new File(pathStr);
-		path.mkdirs();
-		
-		// 작성할 파일
-		File des = new File(pathStr + file.getOriginalFilename());
-		
-		try {
-			// 파일 저장
-			file.transferTo(des);
-		} catch (IllegalStateException | IOException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-		
-	}
-	
 
 
 	/*	public QnADto qnaPageByIndexId(int indexId) {
@@ -136,10 +80,7 @@ public class QnAService {
 	
 	public QnADto getQnaPostByIndexId(int indexId) {
 		QnADto qnaList = mapper.selectQnaPostByIndexId(indexId);
-		List<String> fileNames = mapper.selectFileNameByQnaList(indexId);
-		
-		qnaList.setFileName(fileNames);
-		
+
 		return qnaList;
 	}
 	
@@ -158,47 +99,17 @@ public class QnAService {
 	}
 
 	@Transactional
-	public boolean updateQnaPost(QnADto qnaPost, ArrayList<String> removeFileList, MultipartFile[] addFileList) {
-		if(removeFileList != null) {
-			for(String fileName : removeFileList) {
-				deleteFromAwsS3(qnaPost.getIndexId(), fileName);
-				mapper.deleteFileByQnaIdAndFileName(qnaPost.getIndexId(), fileName);
-			}
-		}
-		
-		if(addFileList != null) {
-			addFiles(qnaPost.getIndexId(), addFileList);
-		}
+	public boolean updateQnaPost(QnADto qnaPost) {
+	
 		int cnt = mapper.updateQnaPost(qnaPost);
 		return cnt == 1;
 	}
 
 	@Transactional
 	public boolean deletePost(int indexId) {
-		
-		List<String> fileList = mapper.selectFileNameByQnaList(indexId);
-		removeFiles(indexId, fileList);
+
 		return mapper.deleteQnaPost(indexId) == 1;
 	}
 	
-	
-	private void removeFiles (int indexId, List<String> fileList) {
-		
-		for (String fileName : fileList) {
-			deleteFromAwsS3(indexId, fileName);
-		}
-		mapper.deleteFileByQnaId(indexId);
-	}
 
-	private void deleteFromAwsS3(int indexId, String fileName) {
-		String key = "serviceCenter/" + indexId + "/" + fileName;
-		
-		DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
-				.bucket(bucketName)
-				.key(key)
-				.build();
-		
-		s3.deleteObject(deleteObjectRequest);
-	}
-	
 }

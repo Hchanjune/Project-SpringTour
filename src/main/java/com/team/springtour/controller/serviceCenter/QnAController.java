@@ -1,7 +1,6 @@
 package com.team.springtour.controller.serviceCenter;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.springtour.domain.serviceCenter.PostPageDto;
 import com.team.springtour.domain.serviceCenter.QnADto;
-import com.team.springtour.domain.serviceCenter.ServiceCenterDto;
+import com.team.springtour.domain.serviceCenter.QnAreplyDto;
 import com.team.springtour.domain.tourPackage.TourPackageDto;
 import com.team.springtour.service.serviceCenter.QnAService;
+import com.team.springtour.service.serviceCenter.QnAreplyService;
 import com.team.springtour.service.tourPackage.TourPackageService;
 
 @Controller
@@ -27,6 +26,9 @@ public class QnAController {
 
 	@Autowired
 	private QnAService service;
+	
+	@Autowired
+	private QnAreplyService replyService;
 	
 	@Autowired
 	private TourPackageService tourPackageService;
@@ -90,22 +92,14 @@ public class QnAController {
 	 
 	@PostMapping("qna/insert")
 	public String insert2(QnADto qna, Principal principal,
-							MultipartFile[] file,
 							RedirectAttributes rttr) {
 		
-		if (file != null) {
-			List<String> fileList = new ArrayList<String>();
-			for (MultipartFile f : file) {
-				fileList.add(f.getOriginalFilename());
-			}
-			qna.setFileName(fileList);
-		}
-		
+
 
 		System.out.println(principal.getName());
 		System.out.println(qna);
 		qna.setWriter(principal.getName());
-		boolean success = service.insertQnA(qna,file);
+		boolean success = service.insertQnA(qna);
 		
 		if (success) {
 			rttr.addFlashAttribute("message", "새글이 등록되었습니다.");
@@ -122,23 +116,23 @@ public class QnAController {
 	@GetMapping("qna/qnaPage")
 	public void qnaPage(int indexId, Principal principal, Model model) {
 		QnADto qna = service.getQnaPostByIndexId(indexId);
-		model.addAttribute("qnaPost", qna);
 		
+		model.addAttribute("qnaPost", qna);
 	}
+	
+	
+	
 	
 	@PostMapping("qna/modify")
 	public String qnaModify (QnADto qnaPost,
-								 @RequestParam(name= "removeFileList", required = false) ArrayList<String> removeFileList,
-								 MultipartFile[] addFileList,
 						         Principal principal,
 						         RedirectAttributes rttr) {
 		QnADto oldQnaPost = service.getQnaPostByIndexId(qnaPost.getIndexId());
 		//System.out.println(oldQnaPost);
-		System.out.println(addFileList);
-		System.out.println(removeFileList);
+		
 		if (oldQnaPost.getWriter().equals(principal.getName())) {
 			
-			boolean success = service.updateQnaPost(qnaPost, removeFileList, addFileList);
+			boolean success = service.updateQnaPost(qnaPost);
 			
 			if (success) {
 				rttr.addFlashAttribute("message", "글이 수정되었습니다.");
