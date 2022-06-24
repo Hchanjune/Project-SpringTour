@@ -23,7 +23,7 @@
 	FROM Flight;
 	</select>
 	
-	<insert id="insertBoard">
+	<insert id="insertTourPackage">
 		INSERT INTO TourPackage (packageName,price,bookable,country,city,flightDepartTicket,flightReturnTicket)
 		VALUES (#{packageName},#{price},#{bookable},#{country},#{city},#{flightDepartTicket},#{flightReturnTicket})
 	</insert>
@@ -44,4 +44,42 @@
 		SELECT role FROM Authority
 		WHERE userId = #{userId}
 	</select>
+	
+	<insert id="insertFile">
+		INSERT INTO TourPackageFile (tourPackageName, fileName)
+		VALUES (#{tourPackageName},#{fileName})
+	</insert>
+	
+	<select id="selectFileNameByPackage" resultType="string">
+	SELECT fileName
+	FROM TourPackageFile
+	WHERE tourPackageName = #{tourPackageName}
+	
+	</select>
+	
+	<update id="updateTourPackage">
+		UPDATE TourPackage
+		SET price = #{price},
+			country = #{country},
+			city = #{city}
+		WHERE 
+		    packageName = #{packageName}
+	</update>
+	
+	<delete id="deleteFileByPackageIdAndFileName">
+		DELETE FROM TourPackageFile
+		WHERE tourPackageName = #{packageName}
+	 	AND fileName = #{fileName}
+	</delete>
+	
+	<delete id="deleteTourPackage">
+		DELETE FROM TourPackage
+		WHERE packageName = #{packageName }
+	</delete>
+	
+	<delete id="deleteFileByTourPackageName">
+	DELETE FROM TourPackageFile
+	WHERE tourPackageName = #{tourPackageName}
+	</delete>
+	
 </mapper>

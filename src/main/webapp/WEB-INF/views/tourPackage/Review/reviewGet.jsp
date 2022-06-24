@@ -71,11 +71,15 @@
 						<div class="col">
 							<h1>
 								댓글
-								<sec:authorize access="isAuthenticated()">														
+								<sec:authorize access="isAuthenticated()">	
+								
+																			
 										<button id="edit-button1" class="btn btn-secondary">
 											<i class="fa-solid fa-pen-to-square"></i>
-										</button>								
-								</sec:authorize>
+										</button>					
+						
+								</sec:authorize>					
+								
 							</h1>
 
 							<c:if test="${not empty message }">
@@ -102,7 +106,7 @@
 
 								<div>
 									<label for="input3" class="form-label">작성자</label> <input
-										id="input 3" class="form-control" type="text"
+										id="input3" class="form-control" type="text"
 										value="${review.writer}" readonly />
 								</div>
 
