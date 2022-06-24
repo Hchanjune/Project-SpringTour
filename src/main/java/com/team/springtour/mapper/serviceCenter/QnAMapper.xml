@@ -100,28 +100,6 @@
 		WHERE indexId = #{indexId}
 	</select>
 	
+
 	
-	<insert id="insertQnaFile">
-		INSERT INTO ServiceCenterNoticeFile
-		WHERE noticeIndexId	= #{noticeIndexId}
-	</insert>
-
-
-	<select  id="selectFileNameByQnaList" resultType="String">
-		SELECT fileName
-		FROM ServiceCenterNoticeFile
-		WHERE noticeIndexId = #{noticeIndexId}
-	</select>
-
-	<delete id="deleteFileByQnaIdAndFileName">
-		DELETE FROM ServiceCenterNoticeFile
-		WHERE noticeIndexId = #{indexId}
-		AND fileName = #{fileName}
-	</delete>
-	
-	<delete id="deleteFileByQnaId">
-		DELETE FROM ServiceCenterNoticeFile
-		WHERE noticeIndexId	= #{noticeIndexId}
-	</delete>
-
 </mapper>

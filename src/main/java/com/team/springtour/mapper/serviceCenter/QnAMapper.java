@@ -25,17 +25,10 @@ public interface QnAMapper {
 
 	QnADto selectQnaPostByIndexId(int indexId);
 
-	void insertQnaFile(@Param("noticeIndexId")int noticeIndexId, @Param("fileName")String Filename);
-
-	List<String> selectFileNameByQnaList(int noticeIndexId);
-
-	void deleteFileByQnaIdAndFileName(@Param("indexId")int indexId, @Param("fileName")String fileName);
-
 	int updateQnaPost(QnADto qnaPost);
 
 	int deleteQnaPost(int indexId);
 
-	void deleteFileByQnaId(int indexId);
 
 	
 
