@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -43,18 +44,18 @@ public class TourPackageController {
 
 	@PostMapping("insert")
 	public String tourInsert(TourPackageDto dto, RedirectAttributes rttr, Principal principal,
-			MultipartFile[] files) {
+			MultipartFile[] file) {
 
-		if (files != null) {
+		if (file != null) {
 			List<String> fileList = new ArrayList<String>();
-			for (MultipartFile f : files) {
+			for (MultipartFile f : file) {
 				fileList.add(f.getOriginalFilename());
 			}
 			dto.setFileName(fileList);
 		}
 
 	//	dto.setPackageName(principal.getName());
-		boolean success = service.insertTourPackage(dto,files);
+		boolean success = service.insertTourPackage(dto,file);
 		if (success) {
 			rttr.addFlashAttribute("message", "새 패키지가 등록되었습니다.");
 		} else {
@@ -65,7 +66,7 @@ public class TourPackageController {
 
 	}
 
-	@GetMapping("tourInfo")
+	@RequestMapping(value="tourInfo",method= {RequestMethod.POST,RequestMethod.GET})
 	public void tourinfo(@RequestParam("packageName") String packageName, Model model) {
 
 		TourPackageDto tourPackage = service.getTourPackageByPackageName(packageName);
@@ -85,8 +86,10 @@ public class TourPackageController {
 			MultipartFile[] addFileList,
 			RedirectAttributes rttr) {
 		
+	//		System.out.println(addFileList[0].getOriginalFilename());
 		if (authorityCheck(principal)) {
-			boolean success = service.updateTourPackage(dto,removeFileList,addFileList);
+			
+			boolean success = service.updateTourPackage(dto,addFileList,removeFileList);
 			
 			if (success) {
 				rttr.addFlashAttribute("message", "글이 수정되었습니다.");
@@ -99,7 +102,7 @@ public class TourPackageController {
 		}
 		
 		rttr.addAttribute("packageName", dto.getPackageName());
-		return "redirect:/tourPackage/tourChoice";
+		return "redirect:/tourPackage/tourInfo";
 	}
 	
 	@PostMapping("remove")

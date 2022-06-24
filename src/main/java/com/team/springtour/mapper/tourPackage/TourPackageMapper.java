@@ -2,6 +2,7 @@ package com.team.springtour.mapper.tourPackage;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team.springtour.domain.flight.FlightDto;
@@ -23,17 +24,17 @@ public interface TourPackageMapper {
 
 
 
-	void insertFile(@RequestParam("packageName")String packageName, @RequestParam("fileName")String filename);
+	void insertFile(@Param("tourPackageName")String tourPackageName, @Param("fileName")String filename);
 
-	List<String> selectFileNameByBoard(String packageName);
+	List<String> selectFileNameByPackage(String packageName);
 
 	int updateTourPackage(TourPackageDto dto);
 
-	void deleteFileByBoardIdAndFileName(@RequestParam("tourPackgeName")String packageName, @RequestParam("fileName")String fileName);
+	void deleteFileByPackageIdAndFileName(@Param("packageName")String packageName, @Param("fileName")String fileName);
 
 	int deleteTourPackage(String packageName);
 
-	void deleteFileByBoardId(String packageName);
+	void deleteFileByTourPackageName(String packageName);
 
 
 	

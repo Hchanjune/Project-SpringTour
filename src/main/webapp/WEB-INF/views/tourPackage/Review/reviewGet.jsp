@@ -72,12 +72,12 @@
 							<h1>
 								댓글
 								<sec:authorize access="isAuthenticated()">	
-								<sec:authentication property="principal" var="principal" />
-								<c:if test="${principal.username == review.writer }">													
+								
+																			
 										<button id="edit-button1" class="btn btn-secondary">
 											<i class="fa-solid fa-pen-to-square"></i>
 										</button>					
-								</c:if>			
+						
 								</sec:authorize>					
 								
 							</h1>
@@ -106,7 +106,7 @@
 
 								<div>
 									<label for="input3" class="form-label">작성자</label> <input
-										id="input 3" class="form-control" type="text"
+										id="input3" class="form-control" type="text"
 										value="${review.writer}" readonly />
 								</div>
 

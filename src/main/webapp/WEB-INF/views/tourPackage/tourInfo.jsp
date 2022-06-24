@@ -24,10 +24,13 @@
 <script>
 	$(document).ready(function() {
 		$("#edit-button1").click(function() {
-			$("#input1").removeAttr("readonly");
-			$("#textarea1").removeAttr("readonly");
+			$("#input2").removeAttr("readonly");
+			$("#input3").removeAttr("readonly");
+			$("#input4").removeAttr("readonly");
 			$("#modify-submit1").removeClass("d-none");
 			$("#delete-submit1").removeClass("d-none");
+			$("#addFileInputContainer1").removeClass("d-none");
+			$(".removeFileCheckbox").removeClass("d-none");
 		});
 
 		$("#delete-submit1").click(function(e) {
@@ -35,7 +38,7 @@
 
 			if (confirm("삭제하시겠습니까?")) {
 				let form1 = $("#form1");
-				let actionAttr = "${appRoot}/tourPackage/Review/remove";
+				let actionAttr = "${appRoot}/tourPackage/remove";
 				form1.attr("action", actionAttr);
 				form1.submit();
 			}
@@ -80,15 +83,36 @@
 									<div class="alert alert-primary">${message }</div>
 								</c:if>
 
-								<form id="form1" action="${appRoot }/tourPackage/tourInfo"
+								<form id="form1" action="${appRoot }/tourPackage/modify"
 									method="post" enctype="multipart/form-data">
 
+									<div>
+										<label for="input1" class="form-label">패키지명</label> <input
+											id="input1" class="form-control" type="text"
+											name="packageName" value="${tourPackage.packageName}"
+											readonly />
+									</div>
+
+									<div>
+
+										<label class="form-label" for="input2">가격</label> <input
+											class="form-control" type="text" name="price" required
+											id="input2" value="${tourPackage.price }" readonly />
+									</div>
 
 
 									<div>
-										<label for="input3" class="form-label">패키지명</label> <input
-											id="input 3" class="form-control" type="text"
-											name="packageName" value="${tourPackage.packageName}" readonly />
+
+										<label class="form-label" for="input3">국가</label> <input
+											class="form-control" type="text" name="country" required
+											id="input3" value="${tourPackage.country }" readonly />
+									</div>
+
+									<div>
+
+										<label class="form-label" for="input4">도시</label> <input
+											class="form-control" type="text" name="city" required
+											id="input4" value="${tourPackage.city }" readonly />
 									</div>
 
 									<c:forEach items="${tourPackage.fileName }" var="file">
@@ -118,48 +142,19 @@
 											name="addFileList" />
 									</div>
 
-
-
-									<div>
-										<label for="input3" class="form-label">가격</label> <input
-											id="input 3" class="form-control" type="text" name="price"
-											value="${tourPackage.price}" readonly />
-									</div>
-
-
-									<div>
-										<label for="input3" class="form-label">나라</label> <input
-											id="input 3" class="form-control" type="text" name="country"
-											value="${tourPackage.country}" readonly />
-									</div>
-
-									<div>
-										<label for="input3" class="form-label">도시</label> <input
-											id="input 3" class="form-control" type="text" name="city"
-											value="${tourPackage.city}" readonly />
-									</div>
-
 									<button id="modify-submit1" class="btn btn-primary d-none">수정</button>
 									<button id="delete-submit1" class="btn btn-danger d-none">삭제</button>
 								</form>
-
-
-
-
-
 							</div>
 						</div>
 					</div>
 				</div>
-
-
 			</div>
-		</div>
-		<!-- Footer -->
-		<div class="row">
-			<div class="col-12"></div>
-		</div>
+			<!-- Footer -->
+			<div class="row">
+				<div class="col-12"></div>
+			</div>
 
-	</div>
+		</div>
 </body>
 </html>

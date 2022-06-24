@@ -50,7 +50,7 @@
 		VALUES (#{tourPackageName},#{fileName})
 	</insert>
 	
-	<select id="selectFileNameByBoard" resultType="string">
+	<select id="selectFileNameByPackage" resultType="string">
 	SELECT fileName
 	FROM TourPackageFile
 	WHERE tourPackageName = #{tourPackageName}
@@ -60,26 +60,26 @@
 	<update id="updateTourPackage">
 		UPDATE TourPackage
 		SET price = #{price},
-			country = #{country}
-			city=#{city}
+			country = #{country},
+			city = #{city}
 		WHERE 
 		    packageName = #{packageName}
 	</update>
 	
-	<delete id="deleteFileByBoardIdAndFileName">
-		DELETE FROM tourPackageFile
-		WHERE tourPackageName = #{tourPackageName}
+	<delete id="deleteFileByPackageIdAndFileName">
+		DELETE FROM TourPackageFile
+		WHERE tourPackageName = #{packageName}
 	 	AND fileName = #{fileName}
 	</delete>
 	
-	<delete id="deleteBoard">
+	<delete id="deleteTourPackage">
 		DELETE FROM TourPackage
 		WHERE packageName = #{packageName }
 	</delete>
 	
-	<delete id="deleteFileByBoardId">
-	DELETE FROM tourPackageFile
-	WHERE packageName = #{packageName}
+	<delete id="deleteFileByTourPackageName">
+	DELETE FROM TourPackageFile
+	WHERE tourPackageName = #{tourPackageName}
 	</delete>
 	
 </mapper>

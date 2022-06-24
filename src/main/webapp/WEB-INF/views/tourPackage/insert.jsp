@@ -94,6 +94,7 @@
 						</c:forEach>
 					</select>
 				</div>
+				
 				<div>
 					파일 
 					<input multiple="multiple" type="file" name="file"	accept="image/*" />

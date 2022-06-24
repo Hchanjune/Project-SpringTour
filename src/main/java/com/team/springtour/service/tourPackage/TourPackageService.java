@@ -30,14 +30,13 @@ public class TourPackageService {
 
 	@Autowired
 	private TourPackageMapper mapper;
-	
-	
+
 	@PostConstruct
 	public void init() {
 		Region region = Region.AP_NORTHEAST_2;
 		this.s3 = S3Client.builder().region(region).build();
 	}
-	
+
 	@PreDestroy
 	public void destroy() {
 		this.s3.close();
@@ -52,7 +51,7 @@ public class TourPackageService {
 		// TODO Auto-generated method stub
 		return mapper.selectTourPackageAll();
 	}
-	
+
 	@Transactional
 	public boolean insertTourPackage(TourPackageDto tourPackage, MultipartFile[] files) {
 
@@ -79,7 +78,7 @@ public class TourPackageService {
 	}
 
 	private void saveFileAwsS3(String packageName, MultipartFile file) {
-		String key = "board/" + packageName + "/" + file.getOriginalFilename();
+		String key = "tourPackage/" + packageName + "/" + file.getOriginalFilename();
 
 		PutObjectRequest putObjectRequest = PutObjectRequest.builder().acl(ObjectCannedACL.PUBLIC_READ)
 				.bucket(bucketName).key(key).build();
@@ -95,10 +94,10 @@ public class TourPackageService {
 
 	}
 
-	private void saveFile(int id, MultipartFile file) {
+	private void saveFile(String packageName, MultipartFile file) {
 
 		//디렉토리 만들기
-		String pathStr = "C:/imgtmp/board/" + id + "/";
+		String pathStr = "C:/imgtmp/tourPackage/" + packageName + "/";
 		File path = new File(pathStr);
 		path.mkdirs();
 
@@ -118,72 +117,64 @@ public class TourPackageService {
 	public TourPackageDto getTourPackageByPackageName(String packageName) {
 
 		TourPackageDto tourPackage = mapper.getTourPackageByPackageName(packageName);
-		List<String> fileNames = mapper.selectFileNameByBoard(packageName);
+		List<String> fileNames = mapper.selectFileNameByPackage(packageName);
 		tourPackage.setFileName(fileNames);
 
 		return tourPackage;
 	}
 
-	public boolean updateTourPackage(TourPackageDto dto, ArrayList<String> removeFileList,
-			MultipartFile[] addFileList) {
-		if(removeFileList != null) {
-			
-			for(String fileName : removeFileList) {
+	@Transactional
+	public boolean updateTourPackage(TourPackageDto dto, MultipartFile[] addFileList, List<String> removeFileList) {
+
+		if (removeFileList != null) {
+
+			for (String fileName : removeFileList) {
 				deleteFromAwsS3(dto.getPackageName(), fileName);
-				mapper.deleteFileByBoardIdAndFileName(dto.getPackageName(),fileName);
+				mapper.deleteFileByPackageIdAndFileName(dto.getPackageName(), fileName);
 			}
-			
+
 		}
-		
-		
+
 		if (addFileList != null) {
 			// File 테이블에 추가된 파일 insert
-			
+
 			// s3에 upload
 			addFiles(dto.getPackageName(), addFileList);
 		}
-		
+
 		// Board 테이블 update
 		int cnt = mapper.updateTourPackage(dto);
-		
+
 		return cnt == 1;
 	}
 	//패키지 업데이트하기
-	
 
 	private void deleteFromAwsS3(String packageName, String fileName) {
-		String key = "board/" + packageName + "/" + fileName;
-		DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
-				.bucket(bucketName)
-				.key(key)
-				.build();
-		
-		
-		s3.deleteObject(deleteObjectRequest);
-		
-	}
-		
-	
+		String key = "tourPackage/" + packageName + "/" + fileName;
+		DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key).build();
 
+		s3.deleteObject(deleteObjectRequest);
+
+	}
+
+	@Transactional
 	public boolean deleteTourPackage(String packageName) {
-List<String> fileList = mapper.selectFileNameByBoard(packageName);
-		
+		List<String> fileList = mapper.selectFileNameByPackage(packageName);
+
 		// s3에서 지우기
 		removeFiles(packageName, fileList);
-		
 
-		
 		return mapper.deleteTourPackage(packageName) == 1;
 	}
 
 	private void removeFiles(String packageName, List<String> fileList) {
 		for (String fileName : fileList) {
 			deleteFromAwsS3(packageName, fileName);
-		}	
-		
+		}
+
 		// 파일 테이블 삭제
-		mapper.deleteFileByBoardId(packageName);
-		
+		mapper.deleteFileByTourPackageName(packageName);
+
 	}
 
 	public boolean getAuthByUserId(String userId) {
@@ -195,6 +186,5 @@ List<String> fileList = mapper.selectFileNameByBoard(packageName);
 		// TODO Auto-generated method stub
 		return mapper.selectFlightAll();
 	}
-
 
 }
