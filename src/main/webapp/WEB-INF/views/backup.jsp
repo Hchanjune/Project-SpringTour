@@ -12,13 +12,13 @@
 		<div class="row">
 			
 			<!-- Left -->
-			<div class="col-1">
+			<div class="col-2">
 
 			</div>
 			
 			
 			<!-- Main -->
-			<div class="col-11">
+			<div class="col-10">
 
 			</div>
 		</div>
