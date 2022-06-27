@@ -15,7 +15,6 @@
 	
 	
 	<select id="selectFlightListFromTo" resultType="com.team.springtour.domain.flight.FlightDto">
-	
 	SELECT planeNumber,
 		   departureDate,
 		   returnDate,
@@ -25,7 +24,15 @@
 	WHERE departurePort = #{depart} and returnPort = #{arrive};	
 	</select>
 	
+	<insert id="insertFlight" parameterType="com.team.springtour.domain.flight.FlightDto">
+		INSERT INTO Flight (planeNumber,departureDate,returnDate,departurePort,returnPort)
+		VALUES (#{planeNumber},#{departureDate},#{returnDate},#{departurePort},#{returnPort})
+	</insert>
 	
-	
-	
+	<delete id="delete">
+        delete from Flight
+        where planeNumber=#{planeNumber}
+    </delete>
+    
+    
 </mapper>	

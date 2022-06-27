@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.team.springtour.domain.tourPackage.ReviewDto;
+import com.team.springtour.domain.tourPackage.ReviewReplyDto;
 import com.team.springtour.domain.tourPackage.TourPackageDto;
 import com.team.springtour.domain.user.UserDto;
+import com.team.springtour.service.tourPackage.ReviewReplyService;
 import com.team.springtour.service.tourPackage.ReviewService;
 
 @Controller
@@ -23,6 +26,9 @@ public class ReviewController {
 	
 	@Autowired
 	private ReviewService service;
+	@Autowired
+	private ReviewReplyService reviewService;
+	
 	
 	@GetMapping("/Review/reviewList")
 	public void insertReview(Model model) {
@@ -65,6 +71,7 @@ public class ReviewController {
 	public void get(Model model,int indexId) {
 	
 		ReviewDto dto= service.getReviewByIndexId(indexId);
+		List<ReviewReplyDto> replyList = reviewService.getReplyByBoardId(indexId);
 		model.addAttribute("review",dto);
 		
 	}

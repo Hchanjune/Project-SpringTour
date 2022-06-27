@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team.springtour.domain.flight.FlightDto;
+import com.team.springtour.domain.tourPackage.TourPackageDto;
 import com.team.springtour.mapper.flight.FlightMapper;
 
 
@@ -23,6 +24,17 @@ public class FlightService {
 		return mapper.selectFlightListFromTo(depart, arrive);
 	}
 
-	
+	public boolean insertFlight(FlightDto Flight) {	
+		int cnt=mapper.insertFlight(Flight);
+		return cnt==1;
+	}
+
+	public void delete(String[] valueArr) {
+		
+		for (String planeNumber : valueArr) {
+			mapper.delete(planeNumber);
+		}
+		
+	}
 	
 }

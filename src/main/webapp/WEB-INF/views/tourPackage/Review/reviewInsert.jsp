@@ -60,19 +60,7 @@
 						</c:forEach>
     				</select>
   		    </div>
-  		    	
-			<div class="col-auto">
-    			<label class="form-label" for="autoSizingSelect">아이디</label>
-    			<select class="form-select" id="autoSizingSelect" name="writer">
-     				<option selected>선택</option>
-						<c:forEach items="${userList}" var="user">
-							<option><c:out value="${user.id }"></c:out></option>				
-						</c:forEach>
-    				</select>
-  		    </div>
-					
-					
-									
+  		    									
 					<button class="btn btn-primary">작성</button>
 				</form>
 			</div>

@@ -16,59 +16,89 @@ public class QnAreplyService {
 	@Autowired
 	private QnAreplyMapper mapper;
 
-	/*	public boolean addQnaReply(QnAreplyDto reply) {
-			reply.setInserted(LocalDateTime.now());
-			
-			int cnt = mapper.insertQnaReply(reply);
-			return cnt == 1;
-		}
-		*/
-	
-	
-	
-	
+
+
+	public List<QnAreplyDto> listQnaPost() {
+
+		return mapper.listQnaPost();
+	}
+
+
+
 	public boolean insertQnaReply(QnAreplyDto dto) {
-//		dto.setInserted(LocalDateTime.now());
+		//		dto.setInserted(LocalDateTime.now());
 		return mapper.insertQnaReply(dto) == 1;
 	}
-	
 
-	public List<QnAreplyDto> getReplyByqQnaIndexId(int writerId) {
-		
-		return mapper.selectAllQnaIndexId(writerId, null);
+	public List<QnAreplyDto> getReplyByqQnaIndexId(int replyIndexId) {
+
+		return mapper.selectAllQnaIndexId(replyIndexId, null);
 	}
-	
 
-	public boolean updateQnaReply(QnAreplyDto dto, Principal principal) {
-		
-		QnAreplyDto old = mapper.selectQnaReplyByIndexId(dto.getQnaIndexId());
-		
-		if(old.getQnaContent().equals(principal.getName())) {
+	public boolean updateQnaReply(QnAreplyDto reply, Principal principal) {
+
+		QnAreplyDto old = mapper.selectQnaReplyByIndexId(reply.getReplyIndexId());
+
+		if (old.getQnaContent().equals(principal.getName())) {
 			// 댓글 작성자와 로그인한 유저가 같을때만 수정
-			return mapper.updateQnaReply(dto) == 1;
-			
-		}else {
+			return mapper.updateQnaReply(reply) == 1;
+
+		} else {
 			// 그렇지 않으면 return false;
 			return false;
 		}
 	}
 
-	public boolean deleteQnaReply(int qnaIndexId, Principal principal) {
-		
-		QnAreplyDto old = mapper.selectQnaReplyByIndexId(qnaIndexId);
-		
+	public boolean deleteQnaReply(int replyIndexId, Principal principal) {
+
+		QnAreplyDto old = mapper.selectQnaReplyByIndexId(replyIndexId);
+
 		if (old.getQnaContent().equals(principal.getName())) {
 			// 댓글 작성자와 로그인한 유저가 같을때만 삭제
-			return mapper.deleteQnaReply(qnaIndexId) == 1;			
+			return mapper.deleteQnaReply(replyIndexId) == 1;
 		} else {
-			
+
 			return false;
 		}
 	}
 
-	public List<QnAreplyDto> getReplyWithOwnByQnaIndexId(int writerId, String qnaContent) {
-		
-		return mapper.selectAllQnaIndexId(writerId, qnaContent);
+	public List<QnAreplyDto> getReplyWithOwnByQnaIndexId(int replyIndexId, String qnaContent) {
+
+		return mapper.selectAllQnaIndexId(replyIndexId, qnaContent);
 	}
 
-}
+	public List<QnAreplyDto> listQnaPage(int qnaPage, int rowPerPage) {
+		
+		int from = (qnaPage-1) * rowPerPage;
+		
+		return mapper.listQnaPage(from, rowPerPage);
+	}
+
+	public int countQnaPage() {
+		return mapper.countQnaPage();
+	}
+	
+	
+}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+

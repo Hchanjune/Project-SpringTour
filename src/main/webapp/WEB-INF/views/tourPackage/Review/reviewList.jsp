@@ -75,7 +75,7 @@
 											<a href="${reviewGetUrl }"> <c:out
 														value="${review.title }" />
 											</a></td>
-											<td>${review.writer }</td>
+											<td><c:out value="${review.writer}"></c:out></td>
 											<td>${review.packageName}</td>
 											<td>${review.prettyInserted}</td>
 										</tr>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.springtour.mapper.tourPackage.ReviewReplyMapper">
+
+	<insert id="insertReply">
+		INSERT INTO ReviewReply (reviewId, content,memberId)
+		VALUES (#{reviewId}, #{content},#{memberId})
+	</insert>
+
+	<select id="selectAllBoardId"
+		resultType="com.team.springtour.domain.tourPackage.ReviewReplyDto">
+		SELECT r.replyId,
+		r.reviewId, 
+		r.content,
+		r.inserted,
+		IF (u.id = #{memberId}, 1, 0) own
+		FROM ReviewReply r JOIN User u ON r.memberId = u.id
+		WHERE r.reviewId= #{reviewId}
+		ORDER BY r.replyId
+	</select>
+
+	<update id="updateReply">
+		UPDATE ReviewReply
+		SET content = #{content}
+		WHERE replyId = #{replyId}
+
+	</update>
+
+	<delete id="deleteReply">
+		DELETE FROM ReviewReply
+		WHERE replyId = #{replyId}
+	</delete>
+
+	<delete id="deleteByBoardId">
+		DELETE FROM ReviewReply
+		WHERE reviewId = #{reviewId}
+	</delete>
+	
+	<select id="selectReplyById"
+		resultType="com.team.springtour.domain.tourPackage.ReviewReplyDto">
+		SELECT replyId,
+		reviewId,
+		content,
+		memberId,
+		inserted
+		FROM ReviewReply
+		WHERE replyId = #{replyId}
+	</select>
+	
+	<delete id="deleteByMemberId">
+		DELETE FROM ReviewReply
+		WHERE memberId = #{memberId}
+	</delete>
+	
+</mapper>
