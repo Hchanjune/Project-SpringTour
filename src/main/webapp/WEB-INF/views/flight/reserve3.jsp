@@ -50,46 +50,11 @@
 			<!-- Main -->
 			<div class="col-11">
 
-				<h1>항공권예매</h1>
+				<h1>스케줄 수정</h1>
 
-				<form action="${appRoot }/flight/reserve" method="post">
-
-					<label>출발지 선택 </label> <select class="selectOptions" name="depart" id="Depart">
-						<option>출발지 선택</option>
-						<optgroup label="국내">
-							<option value="인천 국제공항">인천 국제공항</option>
-						</optgroup>
-						<optgroup label="해외">
-							<option value="노이바이 국제공항">노이바이 국제공항</option>
-							<option value="호놀룰루 국제공항">호놀룰루 국제공항</option>
-							<option value="도쿄 국제공항">도쿄 국제공항</option>
-						</optgroup>
-
-					</select> 
-					
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-					
-					<label align="center">도착지 선택 </label> 
-					
-					<select class="selectOptions" name="arrive" id="Arrive">
-						<option>도착지 선택</option>
-						<optgroup label="국내">
-							<option value="인천 국제공항">인천 국제공항</option>
-						</optgroup>
-						<optgroup label="해외">
-							<option value="노이바이 국제공항">노이바이 국제공항</option>
-							<option value="호놀룰루 국제공항">호놀룰루 국제공항</option>
-							<option value="도쿄 국제공항">도쿄 국제공항</option>
-						</optgroup>
-					</select>
-
-					<button type="submit" class="button-1" id=btn1>비행기 스케줄조회</button>
-
-				</form>
-
-				<h2>운항 정보</h2>
-
-				<table >
+				<form action="${appRoot }/flight/reserve3" method="post">
+				
+				<table>
 					<thead>
 						<tr>
 							<th>비행기 번호</th>
@@ -97,6 +62,7 @@
 							<th>도착날짜</th>
 							<th>출발공항</th>
 							<th>도착공항</th>
+							<th>삭제</th>
 						</tr>
 					</thead>
 
@@ -107,14 +73,21 @@
 							<td>${Flight.returnDate }</td>
 							<td>${Flight.departurePort }</td>
 							<td>${Flight.returnPort }</td>
+							<td><a href="flightList">삭제</td>
 						</tr>
 					</c:forEach>
 				</table>
-
+				
 				<br> <br> <br> <br>
-				<button class="button-1" onclick="location.href='reserve2'"> 스케줄 추가하기</button>
-				&nbsp;&nbsp;&nbsp;
-				<button class="button-1" onclick="location.href='reserve3'"> 스케줄 수정하기</button>
+				
+				<button type="submit">수정완료</button>
+					
+
+				</form>
+
+			
+
+				
 
 			</div>
 

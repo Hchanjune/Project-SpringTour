@@ -1,7 +1,5 @@
 package com.team.springtour.controller.flight;
 
-import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.springtour.domain.flight.FlightDto;
 import com.team.springtour.service.flight.FlightService;
@@ -43,7 +39,7 @@ public class FlightController {
 	
 	
 	@GetMapping("reserve2")
-	public void reserve2() {
+	public void flight() {
 		
 	}
 
@@ -51,10 +47,25 @@ public class FlightController {
 	public String flight(FlightDto dto, Model model) {
 		System.out.println(dto);
 		flightService.insertFlight(dto);
-		
-
-		return "redirect:/flight/reserve";
+		return "/flight/reserve";
 	}
 	
-}
+	
+	@GetMapping("reserve3")
+	public String modifiy(Model model) {
+		List<FlightDto> flightList = flightService.getFlightAll(); 
+		model.addAttribute("flightList", flightList);
+		return "/flight/reserve3";
+	}
+	
+	@PostMapping("reserve3")
+	public String modifiy(FlightDto dto, Model model) {
+		
+		return "/flight/reserve";
+		
+	}
+	
+	
+}	
+
 
