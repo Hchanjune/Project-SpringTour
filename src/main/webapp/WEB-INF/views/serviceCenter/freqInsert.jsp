@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>   
+
 
 <!DOCTYPE html>
 <html>
@@ -15,6 +18,31 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
+	<tag:login/>
+	<tag:navBar/>
+
+	<div class="container">
+		<div class="row">
+			<div class="col">
+
+				<c:url value="/serviceCenter/freqInsert" var="freqUrl" ></c:url>
+				<h1>글 작성</h1>
+				
+				<form action="${freqUrl }" method="post" enctype="multipart/form-data">
+
+					<div>
+						<label class="form-label" for="textarea1">내용</label>
+						<textarea class="form-control" name="body" id="textarea1" cols="30" rows="10"></textarea>
+					</div>
+					
+					<button class="btn btn-primary">작성</button>
+				
+				</form>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

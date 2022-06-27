@@ -5,26 +5,101 @@
 <mapper namespace="com.team.springtour.mapper.serviceCenter.QnAMapper">
 
 	<select id="selectQnAList" resultType="com.team.springtour.domain.serviceCenter.QnADto">
-		SELECT indexId, country, title, body, userId, inserted, answer
+		SELECT indexId, packageName, title, body, writer, inserted, answer
 		FROM QnA
 		ORDER BY indexId DESC
 	</select>
 
 	<insert id="insertQnA" useGeneratedKeys="true" keyColumn="indexId" keyProperty="indexId">
-		INSERT INTO QnA (country, title, body, userId, inserted, answer )
-		VALUES (#{country}, #{title}, #{body}, #{userId}, #{inserted}, #{answer})
+		INSERT INTO QnA (packageName, title, body, writer, answer )
+		VALUES (#{packageName}, #{title}, #{body}, #{writer}, #{answer})
 	</insert>
 
-
-
-	<select id="selectQnAByIndexId" resultType="com.team.springtour.domain.serviceCenter.QnADto">
-		SELECT indexId, country, title, body, userId, inserted, answer
+	<select id="selectQnaByIndexId" resultType="com.team.springtour.domain.serviceCenter.QnADto">
+		SELECT indexId, packageName, title, body, writer, inserted, answer
 		FROM QnA
 		WHERE indexId = #{indexId}
 	</select>
 
+	<select id="listQnaPage" resultType="com.team.springtour.domain.serviceCenter.QnADto">
+		SELECT indexId, packageName, title, body, writer, inserted, answer
+		FROM QnA
+		GROUP BY indexId
+		ORDER BY indexId DESC
+		LIMIT #{from}, #{row}
+	</select>
 
+	<select id="countQnaPage" resultType="int">
+		SELECT Count(indexId)
+		FROM QnA
+	</select>
+	
+	<select id="selectSearchQnaAll" resultType="com.team.springtour.domain.serviceCenter.QnADto">
+		SELECT indexId, packageName, title, body, writer, inserted, answer
+		FROM QnA
+		
+		<if test="keyword != '%%'">
+			<choose>
+				<when test="type == 'all'">
+					WHERE title LIKE #{keyword } OR
+					      body LIKE #{keyword }
+				</when>
+				<when test="type == 'title'">
+					WHERE title LIKE #{keyword }
+				</when>
+				<when test="type == 'body'">
+					WHERE body LIKE #{keyword }
+				</when>
+			</choose>
+		</if>
+		
+		ORDER BY indexId DESC
+		LIMIT #{from}, #{row}
+	</select>
+	
+	
+	
+	
+	<select id="countSearchQnaPage" resultType="int">
+		SELECT Count(indexId)
+		FROM QnA
+		
+		<if test="keyword != '%%'">
+			<choose>
+				<when test="type == 'all'">
+					WHERE title LIKE #{keyword } OR
+					body LIKE #{keyword }
+				</when>
+				<when test="type == 'title'">
+					WHERE title LIKE #{keyword }
+				</when>
+				<when test="type == 'body'">
+					WHERE body LIKE #{keyword }
+				</when>
+			</choose>
+		</if>
 
+	</select>
+	
+	<update id="updateQnaPost">
+		UPDATE QnA
+		SET title = #{title},
+		    body = #{body}
+		WHERE indexId = #{indexId}
+	</update>
+	
+	<delete id="deleteQnaPost">
+		DELETE FROM QnA
+		WHERE indexId = #{indexId }
+	</delete>
+	
+	
+	<select id="selectQnaPostByIndexId" resultType="com.team.springtour.domain.serviceCenter.QnADto">
+		SELECT indexId, packageName, title, body, writer, inserted, answer
+		FROM QnA
+		WHERE indexId = #{indexId}
+	</select>
+	
 
-
+	
 </mapper>

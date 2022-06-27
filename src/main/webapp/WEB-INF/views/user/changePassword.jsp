@@ -70,7 +70,7 @@
 		<div class="row">
 			<!-- Left -->
 			<div class="col-1">
-
+				<tag:userSideMenu/>
 			</div>
 			<!-- Main -->
 			<div class="col-11">

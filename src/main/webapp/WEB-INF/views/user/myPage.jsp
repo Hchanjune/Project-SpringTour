@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
@@ -55,10 +55,10 @@
 		</div>
 		
 		<div class="row">
-			<div class="col-1">
-
+			<div class="col-2">
+				<tag:userSideMenu/>
 			</div>
-			<div class="col-11">
+			<div class="col-10">
 						<form id="userInfoForm" class="row g-3" action="${appRoot }/user/modifyInfo" method="post">
 						<div class="row g-3">
 							<div class="col-md-3">
@@ -132,8 +132,8 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="d-none" >
-					<form action="${appRoot }/user/myPage" id="userInfoModifyResetForm" method="post">
-						<input type="hidden" name="userId" value="${user.id }" />
+					<form action="${appRoot }/user/myPage" id="userInfoModifyResetForm">
+						<input type="hidden" name="userId" value="${user.id }" /> 
 					</form>
 				</div>	
 				<div class="d-none" >
