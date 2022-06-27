@@ -216,7 +216,7 @@ public class ServiceCenterService {
 	
 	
 	
-	// freq - 자주묻는 질문 
+	// freq - 자주묻는 질문 -----------------------------------------------------------------------------------------------
 
 	public ServiceCenterDto getFreqPost() {
 		ServiceCenterDto freq = mapper.selectFreqPost();
@@ -233,11 +233,11 @@ public class ServiceCenterService {
 
 
 	public List<ServiceCenterDto> freqSearchPost(String type, String keyword, int page, int rowPerPage) {
-		String searchKeyword = "%" + keyword + "%";
-		
+			String Keyword = "%" + keyword + "%";
+			
 		int from = (page-1) * rowPerPage;
-		
-		return mapper.selectFreqSearchAll(type, searchKeyword, from, rowPerPage);
+			
+		return mapper.selectFreqSearchAll(type, Keyword, from, rowPerPage);
 	}
 
 
@@ -249,14 +249,12 @@ public class ServiceCenterService {
 
 	public boolean insertFreq(ServiceCenterDto freq) {
 		
-		int cnt = mapper.insertFreqList(freq);
+//		int cnt = mapper.insertFreqList(freq);
+		int cnt = mapper.insertBoard(freq);
 		
 		return cnt == 1;
 	}
 
-
-
-	
 }
 
 
