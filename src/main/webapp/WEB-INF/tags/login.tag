@@ -3,6 +3,7 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 
+
 <div class=" bg-dark col jusfify-content-center" align="center">
 	<i style="color:white;" class="fa-solid fa-leaf"> Spring Tour</i>
 </div>
@@ -22,7 +23,7 @@
 </sec:authorize>
 
 <sec:authorize  access="hasRole('GUEST')">
-	<sec:authentication property="principal" var="principal" />
+	<sec:authentication property="principal" var="principal" />	
 	<div class="col justify-content-right" align="right">
 		<a href="" class="nav-link disabled">${principal.username }님 이메일 인증이 필요합니다.</a>
 		<input form="resendRegisterMailForm" type="submit" value="인증메일 재전송" />
@@ -31,16 +32,37 @@
 </sec:authorize>
 
 <sec:authorize  access="hasRole('USER')">
-	<sec:authentication property="principal" var="principal" />
+	<sec:authentication property="principal" var="principal" />	
 	<div class="col justify-content-right" align="right">
 		<a href="" class="nav-link disabled">${principal.username }님 반갑습니다.</a>
+		<input type="hidden" id="principalName" value="${principal.username }" />
 		<input form="loginTagMyPageForm" type="submit" value="마이페이지" />
 		<input form="loginTagLogoutForm" type="submit" value="로그아웃" />
 		<br />
+		<p id="loginTagMessageAlertParagraph">새로운 메시지가 <a id="loginTagMessageAlert" href="${appRoot }/user/dmReceiveList"></a>개 있습니다</p>
 		<sec:authorize  access="hasRole('ADMIN')">
 			<a href="${appRoot }/user/userList">회원관리</a>
 		</sec:authorize>
 	</div>
+	<script>
+		$(document).ready(function(){
+			const userId = $("#principalName").val()
+			$.ajax({
+				url : "${appRoot}/user/messageCount",
+				method : "get",
+				data : {"userId" : userId},
+				success : function(data){
+					$("#loginTagMessageAlert").text(data);
+				},
+				error : function(){
+					$("#loginTagMessageAlert").hide();
+					$("#loginTagMessageAlertParagraph").text("메시지 정보를 불러오는데 실패하였습니다.");
+				},
+				complete : function(){
+				}
+			});
+		});
+	</script>
 </sec:authorize>
 
 <div class="d-none">
@@ -58,7 +80,7 @@
 </div>
 
 <div class="d-none">
-	<form action="${appRoot }/user/myPage" id="loginTagMyPageForm" method="post">
+	<form action="${appRoot }/user/myPage" id="loginTagMyPageForm">
 		<input type="hidden" name="userId" value="${principal.username }" />
 	</form>
 </div>

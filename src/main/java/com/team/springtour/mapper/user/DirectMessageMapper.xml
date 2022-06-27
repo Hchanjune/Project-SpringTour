@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team.springtour.mapper.user.DirectMessageMapper">
+	
+	<select id="selectDirectMessageBySender" resultType="com.team.springtour.domain.user.DirectMessageDto">
+		SELECT indexId, title, body, inserted, sender, receiver, readInfo
+		FROM DirectMessage
+		WHERE sender = #{userId}
+		ORDER BY indexId DESC
+	</select>
+	
+	<select id="selectDirectMessageByReceiver" resultType="com.team.springtour.domain.user.DirectMessageDto">
+		SELECT indexId, title, body, inserted, sender, receiver, readInfo
+		FROM DirectMessage
+		WHERE receiver = #{userId}
+		ORDER BY indexId DESC
+	</select>
+	
+	<insert id="insertDirectMessage" useGeneratedKeys="true" keyColumn="indexId" keyProperty="indexId">
+		INSERT INTO DirectMessage (title, body, sender, receiver)
+		VALUES(#{title}, #{body}, #{sender}, #{receiver})
+	</insert>
+	
+	<select id="countMessageByUserId" resultType="int">
+		SELECT COUNT(indexId) FROM DirectMessage
+		WHERE receiver = #{userId} AND readInfo = 0
+	</select>
+	
+	<select id="selectMessageByIndexId" resultType="com.team.springtour.domain.user.DirectMessageDto">
+		SELECT indexId, title, body, inserted, sender, receiver, readInfo
+		FROM DirectMessage
+		WHERE indexId = #{messageId}
+	</select>
+	
+	<update id="updateMessageReadInfoByIndexId">
+		UPDATE DirectMessage
+		SET readInfo = 1
+		WHERE indexId = #{messageId}
+	</update>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

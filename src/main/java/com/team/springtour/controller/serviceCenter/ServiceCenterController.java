@@ -35,7 +35,6 @@ public class ServiceCenterController {
 	// pagination
 	@GetMapping("notice")
 	public String postPage(@RequestParam(name = "page", defaultValue = "1")int page, 
-			               
 							Model model) {
 		
 		int rowPerPage = 5;
@@ -58,13 +57,31 @@ public class ServiceCenterController {
 		return "/serviceCenter/notice";
 	}
 	
-	 @RequestMapping("search")
-	 public String postSearch(@RequestParam(name ="keyword")String keyword, @RequestParam("type")String type,
-			                 Model model) {
-		 List<ServiceCenterDto> searchPost = service.searchPost(type, keyword);
-		 model.addAttribute("post", searchPost);
+	 @PostMapping("notice")
+	 public void postSearch(@RequestParam(name ="keyword")String keyword, @RequestParam("type")String type,
+			 					@RequestParam(name = "page", defaultValue = "1")int page,
+			 					Model model) {
+	
+			int rowPerPage = 3;
+
+			List<ServiceCenterDto> searchPost = service.searchPost(type, keyword, page, rowPerPage);
+			System.out.println(page);
+			
+			
+
+			int totalRecords = service.countSearchedPostPage(type,keyword);
+			int end = (totalRecords - 1) / rowPerPage + 1;
+
+			PostPageDto postPage = new PostPageDto();
+			postPage.setCurrent(page);
+			postPage.setEnd(end);
+
+			System.out.println(postPage);
+
+			model.addAttribute("page", searchPost);
+			model.addAttribute("pageInfo", postPage);
+
 		 
-		 return "/serviceCenter/notice";
 	 }
 
 
@@ -90,7 +107,7 @@ public class ServiceCenterController {
 		}
 		
 		dto.setWriter(principal.getName());
-		boolean success = service.insertBoard(dto);
+		boolean success = service.insertBoard(dto, file);
 		
 		if (success) {
 			rttr.addFlashAttribute("message", "새글이 등록되었습니다.");
@@ -106,7 +123,7 @@ public class ServiceCenterController {
 	@GetMapping("notice/get")
 	public void getPost(int indexId, Principal principal,  Model model) {
 		ServiceCenterDto serviceCenter = service.getPostByIndexId(indexId);
-		System.out.println(serviceCenter);
+		//System.out.println(serviceCenter);
 		model.addAttribute("post", serviceCenter);
 		
 	}
@@ -115,14 +132,17 @@ public class ServiceCenterController {
 	// ADMIN만 수정가능
 	@PostMapping("modify")
 	public String modifyService (ServiceCenterDto post,
+								 @RequestParam(name= "removeFileList", required = false) ArrayList<String> removeFileList,
+								 MultipartFile[] addFileList,
 						         Principal principal,
 						         RedirectAttributes rttr) {
 		ServiceCenterDto oldPost = service.getPostByIndexId(post.getIndexId());
-		System.out.println(oldPost);
-		
+		//System.out.println(oldPost);
+		System.out.println(addFileList);
+		System.out.println(removeFileList);
 		if (oldPost.getWriter().equals(principal.getName())) {
 			
-			boolean success = service.updatePost(post);
+			boolean success = service.updatePost(post, removeFileList, addFileList);
 			
 			if (success) {
 				rttr.addFlashAttribute("message", "글이 수정되었습니다.");
@@ -136,7 +156,7 @@ public class ServiceCenterController {
 		rttr.addAttribute("indexId", post.getIndexId());
 		
 
-		return "redirect:serviceCenter/notice/insert"; 
+		return "redirect:/serviceCenter/notice"; 
 	}
 
 	@PostMapping("remove")
@@ -163,7 +183,93 @@ public class ServiceCenterController {
 	}
 	
 	
+	
+	
+	
+	// freq - 자주묻는질문 
+	
+	@PostMapping("freqPost")
+	public String getFreqPost(Principal principal,  Model model) {
+		ServiceCenterDto freq = service.getFreqPost();
+		//System.out.println(serviceCenter);
+		model.addAttribute("freqPost", freq);
+		
+		return "/serviceCenter/freq";
+	}
+	
+	
+	@GetMapping("freq")
+	public String freqPostPage(@RequestParam(name = "page", defaultValue = "1")int page, 
+							Model model) {
+		
+		int rowPerPage = 5;
+		
+		List<ServiceCenterDto> freqPost = service.listFreqPage(page, rowPerPage);
+		
+		int totalRecords = service.countFreqPostPage();
+		int end = (totalRecords - 1) / rowPerPage + 1;
+		
+		
+		PostPageDto freqPostPage = new PostPageDto();
+		freqPostPage.setCurrent(page);
+		freqPostPage.setEnd(end);
+		
+		System.out.println(freqPostPage);
+		
+		model.addAttribute("Page", freqPost);
+		model.addAttribute("pageInfo", freqPostPage);
+		
+		return "/serviceCenter/freq";
+	}
+	
+	 @PostMapping("freq")
+	 public void freqPostSearch(@RequestParam(name ="keyword")String keyword, @RequestParam("type")String type,
+			 					@RequestParam(name = "page", defaultValue = "1")int page,
+			 					Model model) {
+	
+			int rowPerPage = 3;
 
+			List<ServiceCenterDto> freqSearchPost = service.freqSearchPost(type, keyword, page, rowPerPage);
+			System.out.println(page);
+
+
+			int totalRecords = service.countSearchedPostPage(type,keyword);
+			int end = (totalRecords - 1) / rowPerPage + 1;
+
+			PostPageDto freqPostPage = new PostPageDto();
+			freqPostPage.setCurrent(page);
+			freqPostPage.setEnd(end);
+
+			System.out.println(freqPostPage);
+
+			model.addAttribute("Page", freqSearchPost);
+			model.addAttribute("pageInfo", freqPostPage);
+
+		 
+	 }
+	 
+	 
+		// 자주묻는질문 글쓰기 등록(ONLY ADMIN)
+		@GetMapping("freqInsert")
+		public void freqInsert() {
+		
+		}
+		
+		@PostMapping("freqInsert")
+		public String freqInsert(ServiceCenterDto freq, 
+								Principal principal, 
+								Model model) { 
+			
+			freq.setWriter(principal.getName());
+		
+			boolean list = service.insertFreq(freq);
+			
+			model.addAttribute("freqList", list);
+			return "redirect:/serviceCenter/freq";
+		
+
+		}
+	
 }
  
 

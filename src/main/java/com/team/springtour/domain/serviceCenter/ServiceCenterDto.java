@@ -13,7 +13,7 @@ public class ServiceCenterDto {
 	private String body;
 	private LocalDateTime inserted;
 	private List<String> fileName;
-	
-	
+	private int noticeIndexId;
+	private boolean hasFile;
 	
 }
