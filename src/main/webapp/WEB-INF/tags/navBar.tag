@@ -9,7 +9,7 @@
 <c:url value="/user/register" var="registerLink" />
 <c:url value="/serviceCenter/notice" var="noticeLink" />
 <c:url value="/tourPackage/tourChoice" var="tourPackageLink" />
-<c:url value="/flight/reserve" var="flightReserveLink" />
+<c:url value="/flight/info" var="flightInfoLink" />
 <c:url value="/tourPackage/Review/reviewList" var="packageReviewLink" />
 
 <!-- NoticePages -->
@@ -26,6 +26,7 @@
 <!-- ManagementLinks -->
 <c:url value="/user/userList" var="userListPageLink" />
 <c:url value="/tourPackage/insert" var="tourPackageInsertLink"/>
+<c:url value="/flight/info2" var="flightInfoInsertLink"/>
 <c:url value="/user/adminPrivateEnquiryList" var="adminPrivateEnquiryListLink"/>
 
 
@@ -80,7 +81,7 @@
 					</li>
 
 					<li class="nav-item">
-						<a class="nav-link" href="${flightReserveLink }">FlightInfo</a>
+						<a class="nav-link" href="${flightInfoLink }">FlightInfo</a>
 					</li>
 
 					<li class="nav-item">
@@ -157,7 +158,7 @@
 									<hr class="dropdown-divider">
 								</li>
 								<li>
-									<a class="dropdown-item" href="#">항공편 추가</a>
+									<a class="dropdown-item" href="${flightInfoInsertLink }">항공편 추가</a>
 								</li>
 								<li>
 									<hr class="dropdown-divider">
