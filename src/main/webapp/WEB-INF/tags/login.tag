@@ -40,9 +40,6 @@
 		<input form="loginTagLogoutForm" type="submit" value="로그아웃" />
 		<br />
 		<p id="loginTagMessageAlertParagraph">새로운 메시지가 <a id="loginTagMessageAlert" href="${appRoot }/user/dmReceiveList"></a>개 있습니다</p>
-		<sec:authorize  access="hasRole('ADMIN')">
-			<a href="${appRoot }/user/userList">회원관리</a>
-		</sec:authorize>
 	</div>
 	<script>
 		$(document).ready(function(){
