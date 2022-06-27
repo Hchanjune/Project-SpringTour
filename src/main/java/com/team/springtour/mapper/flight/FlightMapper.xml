@@ -29,5 +29,10 @@
 		VALUES (#{planeNumber},#{departureDate},#{returnDate},#{departurePort},#{returnPort})
 	</insert>
 	
-	
+	<delete id="delete">
+        delete from Flight
+        where planeNumber=#{planeNumber}
+    </delete>
+    
+    
 </mapper>	
