@@ -4,19 +4,16 @@
 <mapper namespace="com.team.springtour.mapper.tourPackage.TourPackageMapper">
 
 	<select id="selectTourPackageAll" resultType="com.team.springtour.domain.tourPackage.TourPackageDto">
-	
 	SELECT packageName,
 		   price,
-		   bookable,
 		   country,
 		   city,
 		   flightDepartTicket,
 		   flightReturnTicket
 	FROM TourPackage;	
 	</select>
-
-	<select id = "selectFlightAll" resultType="com.team.springtour.domain.flight.FlightDto">
 	
+	<select id = "selectFlightAll" resultType="com.team.springtour.domain.flight.FlightDto">	
 	SELECT planeNumber,
 		   departureDate,
 		   returnDate,
@@ -24,22 +21,21 @@
 		   returnPort
 	FROM Flight;
 	</select>
-	<insert id="insertBoard">
-		INSERT INTO TourPackage (packageName,price,bookable,country,city,flightDepartTicket,flightReturnTicket)
-		VALUES (#{packageName},#{price},#{bookable},#{country},#{city},#{flightDepartTicket},#{flightReturnTicket})
+	
+	<insert id="insertTourPackage">
+		INSERT INTO TourPackage (packageName,price,country,city,flightDepartTicket,flightReturnTicket)
+		VALUES (#{packageName},#{price},#{country},#{city},#{flightDepartTicket},#{flightReturnTicket})
 	</insert>
 	
-	<select id="getTourPackageByPackageName" resultType="com.team.springtour.domain.tourPackage.TourPackageDto">
+	<select id="getTourPackageByPackageName" resultType="com.team.springtour.domain.tourPackage.TourPackageDto">		
 		SELECT packageName,
 		   price,
-		   bookable,
 		   country,
 		   city,
 		   flightDepartTicket,
 		   flightReturnTicket
 		FROM TourPackage
 		WHERE packageName = #{packageName};	
-	
 	</select>
 	
 	<select id="selectAuthByUserId" resultType="string">
@@ -47,6 +43,41 @@
 		WHERE userId = #{userId}
 	</select>
 	
-
-
+	<insert id="insertFile">
+		INSERT INTO TourPackageFile (tourPackageName, fileName)
+		VALUES (#{tourPackageName},#{fileName})
+	</insert>
+	
+	<select id="selectFileNameByPackage" resultType="string">
+	SELECT fileName
+	FROM TourPackageFile
+	WHERE tourPackageName = #{tourPackageName}
+	
+	</select>
+	
+	<update id="updateTourPackage">
+		UPDATE TourPackage
+		SET price = #{price},
+			country = #{country},
+			city = #{city}
+		WHERE 
+		    packageName = #{packageName}
+	</update>
+	
+	<delete id="deleteFileByPackageIdAndFileName">
+		DELETE FROM TourPackageFile
+		WHERE tourPackageName = #{packageName}
+	 	AND fileName = #{fileName}
+	</delete>
+	
+	<delete id="deleteTourPackage">
+		DELETE FROM TourPackage
+		WHERE packageName = #{packageName }
+	</delete>
+	
+	<delete id="deleteFileByTourPackageName">
+	DELETE FROM TourPackageFile
+	WHERE tourPackageName = #{tourPackageName}
+	</delete>
+	
 </mapper>

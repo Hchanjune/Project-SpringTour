@@ -3,7 +3,6 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -28,6 +27,7 @@
 </head>
 <body>
 	<div class="container-fluid">
+
 		<!-- Header -->
 		<div class="row">
 			<div class="col-12">
@@ -35,10 +35,14 @@
 				<tag:navBar />
 			</div>
 		</div>
+
 		<!-- Body -->
 		<div class="row">
+
 			<!-- Left -->
 			<div class="col-1"></div>
+
+
 			<!-- Main -->
 			<div class="col-11">
 				<div class="container">
@@ -53,53 +57,48 @@
 							<table class="table">
 								<thead>
 									<tr>
+										<th>ID</th>
+										<th>제목</th>
+										<th>작성자</th>
 										<th>패키지명</th>
-										<th>가격</th>
-										<th>국가</th>
-										<th>도시</th>
 										<th><i class="fa-solid fa-calendar"></i></th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${tourList }" var="tour">
+									<c:forEach items="${reviewList }" var="review">
 										<tr>
-
-											<td><c:url value="/tourPackage/tourInfo" var="tourInfoUrl">
-													<c:param name="packageName" value="${tour.packageName }">
+											<td>${review.indexId }</td>
+											<td><c:url value="/tourPackage/Review/reviewGet" var="reviewGetUrl">
+													<c:param name="indexId" value="${review.indexId }">
 													</c:param>
-
 												</c:url> 
-													<a href="${tourInfoUrl }"> 
-														<c:out value="${tour.packageName }" />
-													</a>
-											</td>
-												<td>${tour.price }</td>
-												<td>${tour.country}</td>
-												<td>${tour.city}</td>
+											<a href="${reviewGetUrl }"> <c:out
+														value="${review.title }" />
+											</a></td>
+											<td><c:out value="${review.writer}"></c:out></td>
+											<td>${review.packageName}</td>
+											<td>${review.prettyInserted}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-							<sec:authorize access="hasRole('ADMIN')">
-								<div class="col justify-content-right" align="right">
-									<button>
-										<a href="${appRoot}/tourPackage/insert">글쓰기</a>
-									</button>
-								</div>
-							</sec:authorize>
+							<div class="col justify-content-right" align="right">
+								<button>
+									<a href="${appRoot}/tourPackage/Review/reviewInsert">글쓰기</a>
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
+
 		<!-- Footer -->
 		<div class="row">
 			<div class="col-12"></div>
 		</div>
 
 	</div>
-
-
-
 </body>
 </html>

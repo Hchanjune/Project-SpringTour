@@ -12,26 +12,25 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<title>메시지 보내기</title>
+<title>${message.sender }님의 메시지</title>
 </head>
 <body>
 	<div class="container">
-		<h3>메시지 보내기</h3>
+		<h3>${message.sender }님이 보낸 메시지</h3>
 		<br />
-		<c:if test="${not empty resultMessage }">
-			<p>${resultMessage }</p>
-		</c:if>
-		<form action="${appRoot }/user/sendMessage" id="sendMessageForm" method="post">
-			<input type="hidden" name="sender" value="${principal.username }" />
-			<label for="inputSendMessageReceiver">받는이</label>
-			<input class="form-control" type="text" name="receiver" id="inputSendMessageReceiver" value="${receiver }" placeholder="받으시는 분 아이디를 입력하여 주세요."/>
-			<label for="inputSendMessageTitle">제목</label>
-			<input class="form-control" type="text" name="title" id="inputSendMessageTitle" placeholder="제목을 입력하세요."/>
-			<label for="inputSendMessageBody">내용</label>
-			<textarea class="form-control" name="body" id="inputSendMessageBody" cols="30" rows="10" placeholder="내용을 입력하세요."></textarea>
-		</form>
-		<div>
-			<button form="sendMessageForm" type="submit">보내기</button>
+			<label for="receivedMessageTitle">제목</label>
+			<input class="form-control" type="text" name="title" value="${message.title }" id="receivedMessageTitle" readonly/>
+			<label for="receivedMessageBody">내용</label>
+			<textarea class="form-control" name="body" cols="30" rows="10" id="receivedMessageBody" readonly>${message.body }</textarea>
+		<div style="text-align:right;">
+			<form action="${appRoot }/user/replyMessage" id="replyMessageForm" method="post">
+				<input type="hidden" name="sender" value="${message.sender }" />
+				<button form="replyMessageForm" type="submit">답장쓰기</button>
+			</form>
+		</div>
+		<div style="text-align:center;">
+				<br />
+				<button onclick="self.close();"> 닫기 </button>
 		</div>
 	</div>
 </body>

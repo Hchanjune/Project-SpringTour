@@ -7,14 +7,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>SpringTour : 보낸 메시지 목록</title>
 <script>
-
+$(document).ready(function(){
+	$(".messageInfoTitle").click(function(e){
+		e.preventDefault();
+		let index = $(this).attr("data-index");
+		let url = '${appRoot}/user/messageInfo';
+	    let form = $("#form"+index); 
+	    let title = '보낸메시지';
+	    window.open(url, title, 'width=800, height=550, left=200, top=100, menubar=no, status=no, toolbar=no');
+	
+	    form.attr('action', url);
+	    form.attr('target', title);
+	    form.attr('method', 'post');
+	
+	    form.append('<input type="hidden" name="messageId" value="'+index+'">');
+	    form.submit();
+	});	
+});
 </script>
 </head>
 <body>
@@ -30,11 +46,11 @@
 		<!-- Body -->
 		<div class="row">
 			<!-- Left -->
-			<div class="col-1">
+			<div class="col-2">
 				<tag:userSideMenu/>
 			</div>
 			<!-- Main -->
-			<div class="col-11">
+			<div class="col-10">
 				<div>
 					<table class="table">
 					 	<thead>
@@ -49,7 +65,10 @@
 					 		<c:forEach items="${messageList }" var="messageList">
 					 			<tr>
 					 				<td>${messageList.receiver }</td>
-					 				<td>${messageList.title }</td>
+					 				<td>
+					 					<form id="form${messageList.indexId }"></form>
+					 					<a href="#" class="messageInfoTitle" data-index="${messageList.indexId }">${messageList.title }</a>
+					 				</td>
 					 				<td>${messageList.inserted }</td>
 					 				<c:choose>
 					 					<c:when test="${messageList.readInfo == 0}">

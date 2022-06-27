@@ -9,7 +9,7 @@
 <c:url value="/serviceCenter/notice" var="noticeLink"/>
 <c:url value="/tourPackage/tourChoice" var="tourPackageLink"/>
 <c:url value="/flight/reserve" var="flightReserveLink"/>
-
+<c:url value="/tourPackage/Review/reviewList" var="packageReviewLink"/>
 
 
 <nav class="navbar navbar-expand-sm bg-light">
@@ -35,7 +35,10 @@
             <a class="nav-link" href="${tourPackageLink }">TourPackage</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${flightReserveLink }">FlightReserve</a>
+            <a class="nav-link" href="${flightReserveLink }">FlightInfo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="${packageReviewLink }">PackageReviews</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="${homeLink }" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

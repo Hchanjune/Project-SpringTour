@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team.springtour.mapper.tourPackage.ReviewMapper">
+
+	<select id="selectReviewAll" resultType="com.team.springtour.domain.tourPackage.ReviewDto">
+	SELECT indexId,
+		   title,
+		   writer,
+		   inserted,
+		   packageName,
+		   body
+	FROM Review;
+	</select>
+
+	<insert id="insertReview">
+		INSERT INTO Review (title,writer,packageName,body)
+		VALUES (#{title},#{writer},#{packageName},#{body})
+	</insert>
+
+	<select id="selectTourListAll" resultType="com.team.springtour.domain.tourPackage.TourPackageDto">
+	SELECT packageName,
+		   price,
+		   bookable,
+		   country,
+		   city,
+		   flightDepartTicket,
+		   flightReturnTicket
+	FROM TourPackage
+	</select>
+
+	<select id="getReviewByIndexId" resultType="com.team.springtour.domain.tourPackage.ReviewDto">
+	SELECT indexId,
+		   title,
+		   writer,
+		   inserted,
+		   packageName,
+		   body
+	FROM Review
+	WHERE indexId = #{indexId};	
+	
+	</select>
+
+	<select id="selectServiceListAll" resultType="com.team.springtour.domain.serviceCenter.ServiceCenterDto">
+		SELECT indexId, 
+			   writer,
+			   title,
+			   body,
+			   inserted
+		FROM ServiceCenter;
+	</select>
+
+	<select id="selectUserListAll" resultType="com.team.springtour.domain.user.UserDto">
+		SELECT id,
+		 	   password,
+		 	   name,
+		 	   birthDate,
+		 	   address,
+		 	   email,
+		 	   grade,
+		 	   inserted,
+		 	   authKey,
+		 	   passwordChangeKey
+		FROM User;
+	</select>
+
+	<select id="selectReviewById" resultType="com.team.springtour.domain.tourPackage.ReviewDto">
+	SELECT indexId,
+		   title,
+		   writer,
+		   inserted,
+		   packageName,
+		   body
+	FROM Review
+	WHERE indexId = #{indexId};	
+	</select>
+
+
+	<update id="updateReview">
+		UPDATE Review
+		SET title = #{title},
+			body = #{body}
+		WHERE 
+		    indexId = #{indexId}
+	</update>
+	
+	<delete id="deleteReview">
+		DELETE FROM Review
+		WHERE indexId = #{indexId }
+	</delete>
+
+	<select id="selectAuthByUserId" resultType="string">
+		SELECT role FROM Authority
+		WHERE userId = #{userId}
+	</select>
+
+
+</mapper>
