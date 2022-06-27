@@ -17,6 +17,8 @@ public interface FlightMapper {
 	List<FlightDto> selectFlightListFromTo(@Param("depart")String depart, @Param("arrive")String arrive);
 	
 	int insertFlight(FlightDto dto);
+
+	void delete(String planeNumber);
 	
 	
 	
