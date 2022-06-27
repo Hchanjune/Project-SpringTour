@@ -6,55 +6,76 @@
 
 
 	<insert id="insertQnaReply">
-		INSERT INTO QnAreply (qnaIndexId, qnaContent, inserted, writerId)
-		VALUES (#{qnaIndexId}, #{qnaContent}, #{inserted}, #{writerId})
+		INSERT INTO QnAreply (replyIndexId, qnaContent, inserted)
+		VALUES (#{replyIndexId}, #{qnaContent}, #{inserted})
 	</insert> 
 
 
 	<select id="selectAllQnaIndexId" resultType="com.team.springtour.mapper.serviceCenter.QnAreplyDto">
-		SELECT r.qnaIndexId, 
+		SELECT r.replyIndexId, 
 		       r.qnacontent,
 		       r.inserted,
-		       r.writerId,
-		       IF(q.qnaIndexId = #{qnaContent}, 1, 0) own
-		FROM QnAreply r JOIN QnA q ON r.qnaContent = q.qnaIndexId 
-		WHERE r.writerId = #{writerId}
-		ORDER BY r.qnaIndexId
+		       IF(q.replyIndexId = #{qnaContent}, 1, 0) own
+		FROM QnAreply r JOIN QnA q ON r.qnaContent = q.replyIndexId 
+		WHERE r.replyIndexId = #{replyIndexId}
+		ORDER BY r.replyIndexId
 	</select>
 	
+	<select id="selectQnaReplyByIndexId" resultType="com.team.springtour.mapper.serviceCenter.QnAreplyDto">
+		SELECT replyIndexId,
+		       qnaContent,
+		       inserted,
+		FROM QnAreply
+		WHERE replyIndexId = #{replyIndexId}       
+	</select>
+ 	
 	<update id="updateQnaReply">
 		UPDATE QnAreply
 		SET qnaContent = #{qnaContent}
-		WHERE qnaIndexId = #{qnaIndexId}
+		WHERE replyIndexId = #{replyIndexId}
 	
 	</update>
 	
+	
 	<delete id="deleteQnaReply">
 		DELETE FROM QnAreply
-		WHERE qnaIndexId = #{qnaIndexId}
+		WHERE replyIndexId = #{replyIndexId}
 	</delete>
 	
 	<delete id="deleteByBoardId">
 		DELETE FROM QnAreply
-		WHERE writerId = #{writerId}
+		WHERE replyIndexId = #{replyIndexId}
 	</delete>
 
 
-	<select id="selectQnaReplyByIndexId" resultType="com.team.springtour.mapper.serviceCenter.QnAreplyDto">
-		SELECT qnaIndexId,
-		       qnaContent,
-		       inserted,
-		       writerId
-		FROM QnAreply
-		WHERE qnaIndexId = #{qnaIndexId}       
-	</select>
 	
 	<delete id="deleteByMemberId">
 		DELETE FROM QnAreply
 		WHERE qnaContent = #{qnaContent}
-	</delete>
+	</delete> 
 	
 	
 
+	<select id="listQnaPost" resultType="com.team.springtour.domain.serviceCenter.QnAreplyDto">
+		SELECT replyIndexId, qnaContent, inserted
+		FROM QnAreply
+		ORDER BY replyIndexId DESC
+	</select>
+
+
+	<select id="listQnaPage" resultType="com.team.springtour.domain.serviceCenter.QnAreplyDto">
+		SELECT replyIndexId, qnaContent
+		FROM QnAreply
+		GROUP BY replyIndexId 
+		ORDER BY replyIndexId DESC
+		LIMIT #{from},#{row}
+	</select>
+
+	<select  id="countQnaPage" resultType="int">
+		SELECT Count(replyIndexId)
+		FROM QnAreply
+	</select>
+
+		
 
 </mapper>
