@@ -48,19 +48,7 @@
 			}
 			
 		});
-		
-	/* 	 $("#modify-submit1").click(function(e) {
-			e.preventDefault();
-			
-			if (confirm("수정하시겠습니까?")) {
-				let noticeModifyForm = $("#noticeModifyForm");
-				/* let actionAttr = "${appRoot}/serviceCenter/modify";
-				noticeModifyForm.attr("action", actionAttr);
-				
-				noticeModifyForm.submit();
-			}
-			
-		});  */
+
 	});
 
 </script>
