@@ -84,7 +84,6 @@ public class QnAController {
 	
 	@GetMapping("qna/insert")
 	public void insert(Model model) {
-		
 		List<TourPackageDto> tourList = tourPackageService.TourList("","");
 		model.addAttribute("tourList", tourList);
 		

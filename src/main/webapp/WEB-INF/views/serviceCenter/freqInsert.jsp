@@ -37,16 +37,17 @@
 						<input class="form-control" type="text" name="title" required id="input1" />
 					</div>
 
-					<div>
+					<%-- <div>
 						<label for="insertFreqList">카테고리</label>
-						<select class="form-select" name="title"
-							id="insertFreqList">
+						<select class="form-select" name="title" id="insertFreqList">
+							
 							<!-- <option selected>카테고리 선택</option> -->
 							<c:forEach items="${freqList }" var="fre">
 								<option><c:out value="${fre.title }"></c:out></option>
 							</c:forEach>
+							
 						</select>
-					</div>
+					</div> --%>
 
 					<div>
 						<label class="form-label" for="textarea1">내용</label>

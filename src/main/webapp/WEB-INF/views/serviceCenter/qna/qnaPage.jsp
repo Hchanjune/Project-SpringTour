@@ -49,7 +49,7 @@
 		
 			const data = {replyIndexId : ${qnaPost.indexId }};
 			$.ajax({
-				url : "${appRoot}/serviceCenter/qnaPage",
+				url : "${appRoot}/serviceCenter/qnaList",
 				type : "get",
 				data : data,
 				success : function(list){
@@ -104,6 +104,8 @@
 								`);
 						replyListElement.append(replyElement);
 						$("#replyContent" + list[i].indexId).text(list[i].qnaContent);
+						
+						
 						
 						// own이 true 일 때만 수정, 삭제 버튼 보이기
 						if (list[i].own){
@@ -229,7 +231,7 @@
 			const data = $("#insertReplyForm1").serialize();
 			
 			$.ajax({
-				url :"${appRoot }/serviceCenter/qna/insert",
+				url :"${appRoot }/serviceCenter/qna/qnaPage",
 				type :"post",
 				data : data,
 				success : function(data){
@@ -341,7 +343,7 @@
 		<div class="row">
 			<div class="col">
 				<h3 style="color:blue;">답변</h3>
-				<form action="${appRoot }/serviceCenter/qna/qnaPage" id="insertReplyForm1">
+			<%-- 	<form action="${appRoot }/serviceCenter/qna/insert" id="insertReplyForm1"> --%>
 					<div class="input-group">
 						<input type="hidden" name="indexId" value="${qnaPost.indexId }" />
 						<input id="insertReplyContentInput1" class="form-control" type="text" name="qnaContent" required /> 
@@ -349,14 +351,16 @@
 						
 						<sec:authorize access="hasRole('ADMIN')">
 							<sec:authentication property="principal" var="principal" />
-							<button id="addReplySubmitButton1" class="btn btn-outline-secondary">
-								<i class="fa-solid fa-comment-dots"></i>
-							</button>
+							<c:if test="${principal.username == qnaPost.writer }">
+								<button id="addReplySubmitButton1" class="btn btn-outline-secondary">
+									<i class="fa-solid fa-comment-dots"></i>
+								</button>
+							</c:if>
 						</sec:authorize>
 
 						
 					</div>
-				</form>
+			<!-- 	</form> -->
 			</div>
 		</div>
 		<div class="row">
@@ -388,22 +392,6 @@
 			<input type="text" name="qnaIndexId" value="${qnaPost.indexId }" />
 		</form>
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

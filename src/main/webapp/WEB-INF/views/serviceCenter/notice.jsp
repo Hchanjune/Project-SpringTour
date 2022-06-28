@@ -104,7 +104,7 @@
 								<a href="${link }"> ${post.title } </a>
 
 							</td>
-							<td>${post.inserted }</td>
+							<td>${post.prettyInserted }</td>
 						</tr>
 					</c:forEach>
 
@@ -127,12 +127,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
 
 
 </body>

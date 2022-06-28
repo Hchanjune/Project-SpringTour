@@ -17,7 +17,47 @@
 
 <script>
 
-/* 	// addReplySubmitButton1 버튼 클릭시 ajax 댓글 추가 요청
+	
+	
+		$("#freqSubmit").click(function(e){
+			e.preventDefault();
+			
+			const data = $("form1").serialize();
+			
+			$.ajax({
+				url :"${appRoot }/serviceCenter/freq",
+				type :"post",
+				data : data,
+				success : function(data){
+			
+					// 새 댓글 등록되었다는 메세지 출력
+					$("#replyMessage1").show().text(data);		
+					
+				/* 	// text input 초기화
+					$("#insertReplyContentInput1").val("");
+					
+					// 모든 댓글 가져오는 ajax 요청
+					//댓글 가져오는 함수 발생
+						listReply();
+					// console.log(data); */
+				},
+				error : function(){
+					$("#replyMessage1").show().text("작성할  수 없습니다.").fadeout(3000);
+					console.log("문제 발생");
+				},
+				complete : function(){
+					console.log("요청완료");
+				}
+			});
+		});
+	});
+	
+
+
+
+
+
+/*  	// addReplySubmitButton1 버튼 클릭시 ajax 댓글 추가 요청
 	$("#addReplySubmitButton1").click(function(e){
 		e.preventDefault();
 		
@@ -50,7 +90,7 @@
 		});
 	});
 });
-	 */
+	 */ 
 </script>
 
 
@@ -147,16 +187,18 @@
 
 									<c:forEach items="${Page }" var="serviceCenter">
 										<ul class="list-group">
-											<li class="list-group-item">
-												<div class="input-group">
-													<input type="hidden" name=freqList value="${freqList.indexId }" id="insertReplyContentInput1" class="form-control" />
-													
-													
-													Q ${serviceCenter.body }
+											<!-- <li class="list-group-item"> -->
+												<form id="form1">
+													<div class="input-group">
+														<input type="submit" name=freqList
+															value="${freqList.indexId } Q ${serviceCenter.title }"
+															id="freqSubmit" class="form-control" style="text-align:left;"/>
 
-													
 
-													<%-- <div class="input-group">
+														<%-- Q ${serviceCenter.title } --%>
+
+
+														<%-- <div class="input-group">
 														<input type="hidden" name="boardId" value="${board.id }" />
 														<input id="insertReplyContentInput1" class="form-control"
 															type="text" name="content" required />
@@ -168,9 +210,14 @@
 
 
 
-
-												</div>
-											</li>
+													</div>
+														<div class="row">
+															<div id="replyMessage1" style="display: none;">
+																<p>${serviceCenter.body }</p>
+															</div>
+														</div>
+												</form>
+											<!-- </li> -->
 										</ul>
 									</c:forEach>
 								</div>
@@ -205,15 +252,6 @@
 		</div>
 	</div>
 	
-
-
-
-
-
-
-
-
-
 
 
 
