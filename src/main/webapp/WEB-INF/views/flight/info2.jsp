@@ -42,7 +42,7 @@
 					
 					<h1>스케줄 추가하기</h1>
 					
-					<form action="${appRoot }/flight/reserve2" method="post" id="insertReserve">
+					<form action="${appRoot }/flight/info2" method="post" id="insertReserve">
 						비행기 번호 : <input type="text" name="planeNumber" ><br />
 						출발날짜 : <input type="text" name="departureDate" ><br />
 						도착날짜 : <input type="text" name="returnDate" ><br />

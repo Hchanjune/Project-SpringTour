@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.team.springtour.domain.user.EnquiryCategoryDto;
+import com.team.springtour.domain.user.PrivateEnquiryDto;
 import com.team.springtour.domain.user.UserDto;
 
 public interface UserMapper {
@@ -35,5 +37,17 @@ public interface UserMapper {
 	int updateUserPasswordChangeKey(String userId);
 
 	int updateUserPasswordByUserId(@Param("userId")String userId, @Param("newPassword")String updatedPassword);
+
+	List<EnquiryCategoryDto> selectEnquiryCategoryAll();
+
+	List<PrivateEnquiryDto> selectPrivateEnquiryByUserId(String userId);
+
+	int insertPrivateEnquiry(PrivateEnquiryDto privateEnquiry);
+
+	PrivateEnquiryDto selectPrivateEnquiryByIndexId(int indexId);
+
+	List<PrivateEnquiryDto> selectPrivateEnquiryAll();
+
+	int updatePrivateEnquiryByReply(PrivateEnquiryDto privateEnquiry);
 
 }

@@ -28,5 +28,13 @@ public class FlightService {
 		int cnt=mapper.insertFlight(Flight);
 		return cnt==1;
 	}
+
+	public void delete(String[] valueArr) {
+		
+		for (String planeNumber : valueArr) {
+			mapper.delete(planeNumber);
+		}
+		
+	}
 	
 }
