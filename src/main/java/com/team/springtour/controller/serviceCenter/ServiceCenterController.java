@@ -63,7 +63,7 @@ public class ServiceCenterController {
 			 					@RequestParam(name = "page", defaultValue = "1")int page,
 			 					Model model) {
 	
-			int rowPerPage = 3;
+			int rowPerPage = 5;
 
 			List<ServiceCenterDto> searchPost = service.searchPost(type, keyword, page, rowPerPage);
 			System.out.println(page);
@@ -223,7 +223,7 @@ public class ServiceCenterController {
 				 					@RequestParam(name = "page", defaultValue = "1")int page,
 				 					Model model) {
 		
-				int rowPerPage = 3;
+				int rowPerPage = 5;
 	
 				List<ServiceCenterDto> freqSearchPost = service.freqSearchPost(type, keyword, page, rowPerPage);
 				System.out.println(page);

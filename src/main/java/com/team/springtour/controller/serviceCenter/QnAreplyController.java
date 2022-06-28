@@ -34,7 +34,7 @@ public class QnAreplyController {
 	@Autowired
 	private QnAreplyService service;
 
-	@PostMapping(path = "qnaInsert", produces = "text/plain;charset=UTF-8")
+	@PostMapping(path = "/qna/insert", produces = "text/plain;charset=UTF-8")
 	public ResponseEntity<String> insert(QnAreplyDto dto, Principal principal) {
 
 		if (principal == null) {
@@ -86,8 +86,8 @@ public class QnAreplyController {
 		}
 	}
 
-	@ResponseBody
-	@GetMapping("qnalist")
+	/*	@ResponseBody*/
+	@GetMapping("qnaList")
 
 	public List<QnAreplyDto> list(int replyIndexId, Principal principal) {
 
@@ -99,26 +99,26 @@ public class QnAreplyController {
 		}
 	}
 
-	@GetMapping("qnaReplyList")
-	public String qnaReplyPost(@RequestParam(name = "page", defaultValue = "1") int qnaPage,
-			Model model) {
-
-		int rowPerPage = 5;
-
-		List<QnAreplyDto> list = service.listQnaPage(qnaPage, rowPerPage);
-
-		int totalRecords = service.countQnaPage();
-		int end = (totalRecords - 1) / rowPerPage + 1;
-
-		PostPageDto qnaPostPage = new PostPageDto();
-		qnaPostPage.setCurrent(qnaPage);
-		qnaPostPage.setEnd(end);
-
-		model.addAttribute("qnaPost", list);
-		model.addAttribute("pageInfo", qnaPostPage);
-
-		return "/serviceCenter/qnaList";
-	}
+	/*	@GetMapping("qnaReplyList")
+		public String qnaReplyPost(@RequestParam(name = "page", defaultValue = "1") int qnaPage,
+				Model model) {
+	
+			int rowPerPage = 5;
+	
+			List<QnAreplyDto> list = service.listQnaPage(qnaPage, rowPerPage);
+	
+			int totalRecords = service.countQnaPage();
+			int end = (totalRecords - 1) / rowPerPage + 1;
+	
+			PostPageDto qnaPostPage = new PostPageDto();
+			qnaPostPage.setCurrent(qnaPage);
+			qnaPostPage.setEnd(end);
+	
+			model.addAttribute("qnaPost", list);
+			model.addAttribute("pageInfo", qnaPostPage);
+	
+			return "/serviceCenter/qnaList";
+		}*/
 
 	/*	@PostMapping("qnaInsert")
 		public String insertQna(QnAreplyDto dto,
