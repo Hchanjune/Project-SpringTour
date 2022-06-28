@@ -83,11 +83,10 @@ public class QnAController {
 	
 	
 	@GetMapping("qna/insert")
-	public void insert(Model model, @RequestParam(name="keyword" , defaultValue="")String keyword, 
-			 @RequestParam(name = "type", defaultValue = "") String type) {
+	public void insert(Model model) {
 		
 	
-		List<TourPackageDto> tourList = tourPackageService.TourList(type, keyword);
+		List<TourPackageDto> tourList = tourPackageService.TourList("","");
 		model.addAttribute("tourList", tourList);
 		
 	}
