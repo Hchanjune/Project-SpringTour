@@ -61,12 +61,12 @@
 			<div class="col-10">
 						<form id="userInfoForm" class="row g-3" action="${appRoot }/user/modifyInfo" method="post">
 						<div class="row g-3">
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<label for="userInfoUserId" class="form-label">아이디</label><br />
 								<input type="text" name="id" readonly class="form-control" value="${user.id }" id="userInfoUserId" >
 							</div>
 							
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<label for="userInfoUserGrade" class="form-label">회원 등급</label><br />
 								<%-- <input type="text" name="grade" readonly class="form-control" value="${user.grade }" id="userInfoUserGrade" > --%>
 								<select disabled id="userInfoUserGrade" name="grade" id="userInfoUserGrade" class="form-control" size="1">

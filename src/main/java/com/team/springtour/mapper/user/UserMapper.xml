@@ -97,10 +97,61 @@
 		WHERE id = #{userId}
 	</update>
 	
+	<select id="selectEnquiryCategoryAll" resultType="com.team.springtour.domain.user.EnquiryCategoryDto">
+		SELECT categoryName FROM EnquiryCategory
+	</select>
+	
+	<select id="selectPrivateEnquiryByUserId" resultType="com.team.springtour.domain.user.PrivateEnquiryDto">
+		SELECT indexId,
+				clientName,
+				title,
+				category,
+				body,
+				inserted,
+				replyInfo,
+				reply
+		FROM PrivateEnquiry
+		WHERE clientName = #{userId}
+	</select>
+	
+	<insert id="insertPrivateEnquiry">
+		INSERT INTO PrivateEnquiry (clientName, title, category, body)
+		VALUES (#{clientName}, #{title}, #{category}, #{body})
+	</insert>
+	
+	<select id="selectPrivateEnquiryByIndexId" resultType="com.team.springtour.domain.user.PrivateEnquiryDto">
+		SELECT indexId,
+				clientName,
+				title,
+				category,
+				body,
+				inserted,
+				replyInfo,
+				reply
+		FROM PrivateEnquiry
+		WHERE indexId = #{indexId}
+	</select>
+	
+	<select id="selectPrivateEnquiryAll" resultType="com.team.springtour.domain.user.PrivateEnquiryDto">
+		SELECT indexId,
+				clientName,
+				title,
+				category,
+				body,
+				inserted,
+				replyInfo,
+				reply
+		FROM PrivateEnquiry
+	</select>
+	
+	<update id="updatePrivateEnquiryByReply">
+		UPDATE PrivateEnquiry
+		SET reply = #{reply},
+			replyInfo = 1
+		WHERE indexId = #{indexId}
+	</update>
+	
 </mapper>
-
-
-
 
 
 

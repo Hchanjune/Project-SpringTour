@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.springtour.domain.serviceCenter.PostPageDto;
 import com.team.springtour.domain.serviceCenter.ServiceCenterDto;
+import com.team.springtour.domain.tourPackage.TourPackageDto;
 import com.team.springtour.service.serviceCenter.ServiceCenterService;
 
 @Controller
@@ -57,12 +58,12 @@ public class ServiceCenterController {
 		return "/serviceCenter/notice";
 	}
 	
-	 @PostMapping("notice")
+	 @GetMapping(value = "notice", params = {"keyword", "type"})
 	 public void postSearch(@RequestParam(name ="keyword")String keyword, @RequestParam("type")String type,
 			 					@RequestParam(name = "page", defaultValue = "1")int page,
 			 					Model model) {
 	
-			int rowPerPage = 3;
+			int rowPerPage = 5;
 
 			List<ServiceCenterDto> searchPost = service.searchPost(type, keyword, page, rowPerPage);
 			System.out.println(page);
@@ -186,16 +187,9 @@ public class ServiceCenterController {
 	
 	
 	
-	// freq - 자주묻는질문 
 	
-	@PostMapping("freqPost")
-	public String getFreqPost(Principal principal,  Model model) {
-		ServiceCenterDto freq = service.getFreqPost();
-		//System.out.println(serviceCenter);
-		model.addAttribute("freqPost", freq);
-		
-		return "/serviceCenter/freq";
-	}
+	
+	// freq - 자주묻는질문 ----------------------------------------------------------------------------------
 	
 	
 	@GetMapping("freq")
@@ -222,44 +216,55 @@ public class ServiceCenterController {
 		return "/serviceCenter/freq";
 	}
 	
-	 @PostMapping("freq")
-	 public void freqPostSearch(@RequestParam(name ="keyword")String keyword, @RequestParam("type")String type,
-			 					@RequestParam(name = "page", defaultValue = "1")int page,
-			 					Model model) {
 	
-			int rowPerPage = 3;
-
-			List<ServiceCenterDto> freqSearchPost = service.freqSearchPost(type, keyword, page, rowPerPage);
-			System.out.println(page);
-
-
-			int totalRecords = service.countSearchedPostPage(type,keyword);
-			int end = (totalRecords - 1) / rowPerPage + 1;
-
-			PostPageDto freqPostPage = new PostPageDto();
-			freqPostPage.setCurrent(page);
-			freqPostPage.setEnd(end);
-
-			System.out.println(freqPostPage);
-
-			model.addAttribute("Page", freqSearchPost);
-			model.addAttribute("pageInfo", freqPostPage);
-
-		 
-	 }
+	
+	 @PostMapping("freq")
+		 public void freqPostSearch(@RequestParam(name ="keyword")String keyword, @RequestParam("type")String type,
+				 					@RequestParam(name = "page", defaultValue = "1")int page,
+				 					Model model) {
+		
+				int rowPerPage = 5;
+	
+				List<ServiceCenterDto> freqSearchPost = service.freqSearchPost(type, keyword, page, rowPerPage);
+				System.out.println(page);
+	
+	
+				int totalRecords = service.countSearchedPostPage(type,keyword);
+				int end = (totalRecords - 1) / rowPerPage + 1;
+	
+				PostPageDto freqPostPage = new PostPageDto();
+				freqPostPage.setCurrent(page);
+				freqPostPage.setEnd(end);
+	
+				System.out.println(freqPostPage);
+	
+				model.addAttribute("Page", freqSearchPost);
+				model.addAttribute("pageInfo", freqPostPage);
+			 
+		 }
 	 
+	
+		@PostMapping("freqPost")
+		public String getFreqPost(Principal principal,  Model model) {
+			ServiceCenterDto freq = service.getFreqPost();
+			//System.out.println(serviceCenter);
+			model.addAttribute("freqPost", freq);
+			
+			return "/serviceCenter/freq";
+		}
+		
+		
 	 
 		// 자주묻는질문 글쓰기 등록(ONLY ADMIN)
 		@GetMapping("freqInsert")
-		public void freqInsert() {
-		
+		public void freqInsert(Model model) {
+
 		}
 		
 		@PostMapping("freqInsert")
-		public String freqInsert(ServiceCenterDto freq, 
+		public String freqInsert(ServiceCenterDto freq, String title,
 								Principal principal, 
 								Model model) { 
-			
 			freq.setWriter(principal.getName());
 		
 			boolean list = service.insertFreq(freq);
@@ -267,7 +272,6 @@ public class ServiceCenterController {
 			model.addAttribute("freqList", list);
 			return "redirect:/serviceCenter/freq";
 		
-
 		}
 	
 }

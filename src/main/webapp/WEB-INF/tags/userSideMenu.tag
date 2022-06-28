@@ -6,6 +6,9 @@
 <c:url value="/user/dmReceiveList" var="receivedMessagesSideLink"/>
 <c:url value="/user/dmSendList" var="sendMessagesSideLink"/>
 
+<c:url value="/user/writePrivateEnquiry" var="writePrivateEnquirySideLink"/>
+<c:url value="/user/userPrivateEnquiryList" var="userPrivateEnquiryListSideLink"/>
+
 
 <div class="container">
 	<div class="row">
@@ -15,7 +18,8 @@
 				<a class="nav-link" href="${receivedMessagesSideLink }">받은 메시지함</a>
 				<a class="nav-link" href="${sendMessagesSideLink }">보낸 메시지함</a>
 				<a class="nav-link" href="${appRoot }">예약 목록 조회</a>
-				<a class="nav-link" href="${appRoot }">내가 쓴 글</a>
+				<a class="nav-link" href="${writePrivateEnquirySideLink }">1:1 문의</a>
+				<a class="nav-link" href="${userPrivateEnquiryListSideLink }">나의 문의 목록</a>
 			</nav>
 		</div>
 	</div>
