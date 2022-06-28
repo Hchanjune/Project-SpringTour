@@ -112,6 +112,9 @@ public class TourPackageService {
 			throw new RuntimeException(e);
 		}
 	}
+	
+
+
 
 	//패키지명추가하기
 	public TourPackageDto getTourPackageByPackageName(String packageName) {
@@ -122,6 +125,8 @@ public class TourPackageService {
 
 		return tourPackage;
 	}
+	
+	
 
 	@Transactional
 	public boolean updateTourPackage(TourPackageDto dto, MultipartFile[] addFileList, List<String> removeFileList) {
@@ -186,5 +191,6 @@ public class TourPackageService {
 		// TODO Auto-generated method stub
 		return mapper.selectFlightAll();
 	}
+
 
 }

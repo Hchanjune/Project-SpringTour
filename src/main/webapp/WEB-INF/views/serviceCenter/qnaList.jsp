@@ -98,7 +98,7 @@
 
 							</td>
 							<td>${list.writer }</td>
-							<td>${list.inserted }</td>
+							<td>${list.prettyInserted }</td>
 							<c:choose>
 								<c:when test="${not empty list.answer }"><td>답변 완료</td></c:when>
 								<c:otherwise><td>확인중</td></c:otherwise>

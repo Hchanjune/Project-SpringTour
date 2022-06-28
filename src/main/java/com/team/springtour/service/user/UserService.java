@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.team.springtour.domain.user.DirectMessageDto;
+import com.team.springtour.domain.user.EnquiryCategoryDto;
+import com.team.springtour.domain.user.PrivateEnquiryDto;
 import com.team.springtour.domain.user.UserDto;
 import com.team.springtour.mapper.user.AuthorityMapper;
 import com.team.springtour.mapper.user.UserMapper;
@@ -25,6 +27,8 @@ public class UserService {
 	private BCryptPasswordEncoder passwordEncoder;
 	@Autowired
 	private MailService mailService;
+	@Autowired
+	private DirectMessageService messageService;
 
 	@Transactional
 	public boolean registerUser(UserDto user, HttpServletRequest request) {
@@ -121,6 +125,47 @@ public class UserService {
 	public boolean modifyUserPasswordByUserId(String userId, String newPassword) {
 		String updatedPassword = encodePassword(newPassword);	
 		return userMapper.updateUserPasswordByUserId(userId, updatedPassword) == 1;
+	}
+
+	public List<EnquiryCategoryDto> getCategoryList() {
+		return userMapper.selectEnquiryCategoryAll();
+	}
+
+	public List<PrivateEnquiryDto> getPrivateEnquiryByUserId(String userId) {
+		return userMapper.selectPrivateEnquiryByUserId(userId);
+	}
+
+	public boolean insertPrivateEnquiry(PrivateEnquiryDto privateEnquiry) {
+		return userMapper.insertPrivateEnquiry(privateEnquiry) == 1;
+	}
+
+	public PrivateEnquiryDto getPrivateEnquiryByIndexId(int indexId) {
+		return userMapper.selectPrivateEnquiryByIndexId(indexId);
+	}
+
+	public List<PrivateEnquiryDto> getPrivateEnquiryAll() {
+		return userMapper.selectPrivateEnquiryAll();
+	}
+
+	public boolean replyPrivateEnquiry(PrivateEnquiryDto privateEnquiry) {
+		UserDto user = userMapper.selectUserById(privateEnquiry.getClientName());
+		boolean success = userMapper.updatePrivateEnquiryByReply(privateEnquiry) == 1;
+		if (success) {
+			//Email
+			String title = "[SpringTour] 1:1문의 답변이 등록되었습니다.";
+			String body = "등록하신 1:1문의 글에 답변이 등록되었습니다.";
+			mailService.sendMail(user.getEmail(), title, body);
+			// DM
+			DirectMessageDto message = new DirectMessageDto();
+			message.setSender("관리자");
+			message.setReceiver(user.getId());
+			message.setTitle("1:1문의 답변이 등록되었습니다.");
+			message.setBody("등록하신 답변은 MyPage -> 나의 문의 목록에서 확인 가능합니다.");
+			messageService.sendMessage(message);
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 }

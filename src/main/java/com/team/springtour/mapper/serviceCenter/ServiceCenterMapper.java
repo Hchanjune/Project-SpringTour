@@ -43,7 +43,7 @@ public interface ServiceCenterMapper {
 	
 	
 	
-	
+	// freq-자주묻는질문 -----------------------------------------------------------------------------------------------
 	
 	ServiceCenterDto selectFreqPost();
 
@@ -57,6 +57,8 @@ public interface ServiceCenterMapper {
 												@Param("row")int row);
 
 	int insertFreqList(ServiceCenterDto freq);
+
+
 
 
 	

@@ -12,73 +12,64 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<title>Insert title here</title>
-<script>
-	$(document).ready(function(){
-
-	});
-</script>
+<title>SpringTour - 1:1문의 작성</title>
 </head>
 <body>
-
-
 	<div class="container-fluid">
+		
 		<!-- Header -->
 		<div class="row">
 			<div class="col-12">
 				<tag:login/>
 				<tag:navBar/>
+				<br />
 			</div>
 		</div>
+		
 		<!-- Body -->
 		<div class="row">
+			
 			<!-- Left -->
 			<div class="col-2">
-				<tag:managementSideMenu/>
+				<tag:userSideMenu/>
 			</div>
+			
+			
 			<!-- Main -->
 			<div class="col-10">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>아이디</th>
-							<th>이름</th>
-							<th>생년월일</th>
-							<th>이메일</th>
-							<th>회원 등급</th>
-							<th>인증상태</th>
-						</tr>
-					</thead>
+				<h3>1:1 문의 등록</h3>
+				<p>문의해 주신 내용은 빠르게 확인하여 답변드리겠습니다!</p>
+				<br />
+				<form action="${appRoot }/user/insertPrivateEnquiry" class="form-control" method="post">
+					<input type="hidden" name="clientName" value="${principal.username }" />
+					<label for="">제목</label>
+					<input type="text" class="form-control" name="title" placeholder="제목을 입력해주세요." required/>
 					
-					<tbody>
-						<c:forEach items="${userList }" var="user">
-							<tr>
-								<td>${user.id }</td>
-								<td>
-									<form action="${appRoot }/user/myPage" id="userListLinkForm" method="post">
-										<input type="hidden" name="userId" value="${user.id }" />
-										<input type="submit" value="${user.name }" />
-									</form>
-								</td>
-								<td>${user.birthDate }</td>
-								<td>${user.email }</td>
-								<td>${user.grade }</td>
-								<td>${user.authKey }</td>
-							</tr>
+					<label for="">질문 종류</label>
+					<select id="userInfoUserGrade" name="category" class="form-control" size="1">
+						<c:forEach items="${categoryList }" var="category">
+							<option <c:if test="${category.categoryName eq '질문을 선택하여 주세요'}">selected</c:if> value="${category.categoryName }">${category.categoryName }</option>
 						</c:forEach>
-					</tbody>
+					</select>
+					
+					<label for="">본문</label>
+					<textarea class="form-control" name="body" cols="30" rows="10" placeholder="이곳에 질문을 입력해 주세요" required></textarea>
+					<input type="submit" class="form-control" value="1:1 질문 등록하기" />
+				</form>
 				
-				</table>
+				
+				
 			</div>
 		</div>
+		
+		
 		<!-- Footer -->
 		<div class="row">
 			<div class="col-12">
 			
 			</div>
 		</div>
+		
 	</div>
-	
-
 </body>
 </html>

@@ -6,7 +6,6 @@
 	<select id="selectTourPackageAll" resultType="com.team.springtour.domain.tourPackage.TourPackageDto">
 	SELECT packageName,
 		   price,
-		   bookable,
 		   country,
 		   city,
 		   flightDepartTicket,
@@ -24,14 +23,13 @@
 	</select>
 	
 	<insert id="insertTourPackage">
-		INSERT INTO TourPackage (packageName,price,bookable,country,city,flightDepartTicket,flightReturnTicket)
-		VALUES (#{packageName},#{price},#{bookable},#{country},#{city},#{flightDepartTicket},#{flightReturnTicket})
+		INSERT INTO TourPackage (packageName,price,country,city,flightDepartTicket,flightReturnTicket)
+		VALUES (#{packageName},#{price},#{country},#{city},#{flightDepartTicket},#{flightReturnTicket})
 	</insert>
 	
 	<select id="getTourPackageByPackageName" resultType="com.team.springtour.domain.tourPackage.TourPackageDto">		
 		SELECT packageName,
 		   price,
-		   bookable,
 		   country,
 		   city,
 		   flightDepartTicket,

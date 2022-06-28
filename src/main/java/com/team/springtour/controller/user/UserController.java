@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.team.springtour.domain.user.EnquiryCategoryDto;
+import com.team.springtour.domain.user.PrivateEnquiryDto;
 import com.team.springtour.domain.user.UserDto;
 import com.team.springtour.service.user.UserService;
 
@@ -212,4 +214,88 @@ public class UserController {
 		rttr.addFlashAttribute("resultMessage", resultMessage);
 		return "redirect:/main/home";
 	}
+	
+	@GetMapping("writePrivateEnquiry")
+	public String writePrivateEnquiryPage(Model model) {
+		List<EnquiryCategoryDto> enquiryCategoryList = userService.getCategoryList();
+		model.addAttribute("categoryList", enquiryCategoryList);
+		return "user/writePrivateEnquiry";
+	}
+	
+	@PostMapping("insertPrivateEnquiry")
+	public String insertPrivateEnquiry(PrivateEnquiryDto privateEnquiry, RedirectAttributes rttr) {
+		boolean success = userService.insertPrivateEnquiry(privateEnquiry);
+		String resultMessage;
+		if (success) {
+			resultMessage = "1:1문의가 성공적으로 등록 되었습니다.";
+		}else {
+			resultMessage = "1:1문의가 등록중 오류가 발생하였습니다.";
+		}
+		rttr.addFlashAttribute("resultMessage", resultMessage);
+		return "redirect:/user/userPrivateEnquiryList";
+	}
+	
+	@GetMapping("userPrivateEnquiryList")
+	public void userPrivateEnquiryList(Model model, Principal principal) {
+		List<PrivateEnquiryDto> enquiryList = userService.getPrivateEnquiryByUserId(principal.getName());
+		model.addAttribute("enquiryList", enquiryList);
+	}
+	
+	@GetMapping("userReadPrivateEnquiry")
+	public String userReadPrivateEnquiry(int indexId, Principal principal, Model model, RedirectAttributes rttr , HttpServletRequest request) {
+		PrivateEnquiryDto privateEnquiry = userService.getPrivateEnquiryByIndexId(indexId);
+		if (authorityCheck(privateEnquiry.getClientName(), principal, request)) {
+			model.addAttribute("privateEnquiry", privateEnquiry);
+			return "user/userReadPrivateEnquiry";
+		} else {
+			String resultMessage = "비정상적인 접근입니다.";
+			rttr.addFlashAttribute("resultMessage", resultMessage);
+			return "redirect:/main/home";
+		}
+	}
+	
+	@GetMapping("adminPrivateEnquiryList")
+	public String adminPrivateEnquiryList(Model model) {
+		List<PrivateEnquiryDto> enquiryList = userService.getPrivateEnquiryAll();
+		model.addAttribute("enquiryList",enquiryList);
+		return "user/adminPrivateEnquiryList";
+	}
+	
+	@GetMapping("adminReadPrivateEnquiry")
+	public String adminReadPrivateEnquiry(int indexId, Principal principal, Model model, RedirectAttributes rttr , HttpServletRequest request) {
+		PrivateEnquiryDto privateEnquiry = userService.getPrivateEnquiryByIndexId(indexId);
+		System.out.println(privateEnquiry);
+		if (authorityCheck(privateEnquiry.getClientName(), principal, request)) {
+			model.addAttribute("privateEnquiry", privateEnquiry);
+			return "user/adminReadPrivateEnquiry";
+		} else {
+			String resultMessage = "비정상적인 접근입니다.";
+			rttr.addFlashAttribute("resultMessage", resultMessage);
+			return "redirect:/main/home";
+		}
+	}
+	
+	@PostMapping("replyPrivateEnquiry")
+	public String replyPrivateEnquiry(PrivateEnquiryDto privateEnquiry, RedirectAttributes rttr) {
+		boolean success = userService.replyPrivateEnquiry(privateEnquiry);
+		String resultMessage;
+		if (success) {
+			resultMessage = "성공적으로 답변을 등록하였습니다.";
+		}else {
+			resultMessage = "답변 등록중 오류가 발생하였습니다.";
+		}
+		rttr.addFlashAttribute("resultMessage", resultMessage);
+		return "redirect:/user/adminPrivateEnquiryList";
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+

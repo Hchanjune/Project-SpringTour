@@ -24,14 +24,10 @@
 		</div>
 		
 		<div class="row">
-			<div class="col-1">
-				<p>메뉴123123123123123123</p><br />
-				<p>메뉴</p><br />
-				<p>메뉴</p><br />
-				<p>메뉴</p><br />
-				<p>메뉴</p><br />
+			<div class="col-2">
+
 			</div>
-			<div class="col-11">
+			<div class="col-10">
 					<c:if test="${not empty resultMessage}">
 						<div class="alert alert-primary">
 							${resultMessage }
