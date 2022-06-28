@@ -31,11 +31,30 @@
 				<h1>글 작성</h1>
 				
 				<form action="${freqUrl }" method="post" enctype="multipart/form-data">
+					
+					<div>
+						<label class="form-label" for="input1">제목</label>
+						<input class="form-control" type="text" name="title" required id="input1" />
+					</div>
+
+					<%-- <div>
+						<label for="insertFreqList">카테고리</label>
+						<select class="form-select" name="title" id="insertFreqList">
+							
+							<!-- <option selected>카테고리 선택</option> -->
+							<c:forEach items="${freqList }" var="fre">
+								<option><c:out value="${fre.title }"></c:out></option>
+							</c:forEach>
+							
+						</select>
+					</div> --%>
 
 					<div>
 						<label class="form-label" for="textarea1">내용</label>
 						<textarea class="form-control" name="body" id="textarea1" cols="30" rows="10"></textarea>
 					</div>
+					
+					
 					
 					<button class="btn btn-primary">작성</button>
 				

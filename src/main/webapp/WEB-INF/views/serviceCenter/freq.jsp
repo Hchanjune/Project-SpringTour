@@ -15,6 +15,85 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+<script>
+
+	
+	
+		$("#freqSubmit").click(function(e){
+			e.preventDefault();
+			
+			const data = $("form1").serialize();
+			
+			$.ajax({
+				url :"${appRoot }/serviceCenter/freq",
+				type :"post",
+				data : data,
+				success : function(data){
+			
+					// 새 댓글 등록되었다는 메세지 출력
+					$("#replyMessage1").show().text(data);		
+					
+				/* 	// text input 초기화
+					$("#insertReplyContentInput1").val("");
+					
+					// 모든 댓글 가져오는 ajax 요청
+					//댓글 가져오는 함수 발생
+						listReply();
+					// console.log(data); */
+				},
+				error : function(){
+					$("#replyMessage1").show().text("작성할  수 없습니다.").fadeout(3000);
+					console.log("문제 발생");
+				},
+				complete : function(){
+					console.log("요청완료");
+				}
+			});
+		});
+	});
+	
+
+
+
+
+
+/*  	// addReplySubmitButton1 버튼 클릭시 ajax 댓글 추가 요청
+	$("#addReplySubmitButton1").click(function(e){
+		e.preventDefault();
+		
+		const data = $("#insertReplyForm1").serialize();
+		
+		$.ajax({
+			url :"${appRoot }/serviceCenter/freq",
+			type :"post",
+			data : data,
+			success : function(data){
+		
+				// 새 댓글 등록되었다는 메세지 출력
+				$("#replyMessage1").show().text(data).fadeOut(3000);		
+				
+				// text input 초기화
+				$("#insertReplyContentInput1").val("");
+				
+				// 모든 댓글 가져오는 ajax 요청
+				//댓글 가져오는 함수 발생
+					listReply();
+				// console.log(data);
+			},
+			error : function(){
+				$("#replyMessage1").show().text("댓글을 작성할  수 없습니다.").fadeout(3000);
+				console.log("문제 발생");
+			},
+			complete : function(){
+				console.log("요청완료");
+			}
+		});
+	});
+});
+	 */ 
+</script>
+
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -68,43 +147,96 @@
 					</div>
 				</div>
 				
-				
 				<br />
-				<table class="table">
-					
-					<form action="${appRoot }/serviceCenter/freq" class="d-flex" method="post">
+				
+				<table class="table mt-3">
+					<thead>
+						<form action="${appRoot }/serviceCenter/freq" class="d-flex" method="post">
 
-						<ul class="nav nav-tabs">
-							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="#">전체</a>	
-							</li>
-							<li class="nav-item">
-								<a class="nav-link active" href="#">항공</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link active" href="#">예약</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link active" href="#">투어상품</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link active" href="#">결제</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link active" href="#">기타문의</a>
-							</li>
 
-						</ul>
-					</form>
-					
-					<br />
+							<ul class="nav nav-tabs" id="myTab" role="tablist">
+								<li class="nav-item" role="presentation">
+									<button class="nav-link active" id="home-tab"
+										data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+										type="button" role="tab" aria-controls="home-tab-pane"
+										aria-selected="true">전체</button>
+								</li>
+								<li class="nav-item" role="presentation">
+									<button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+										data-bs-target="#profile-tab-pane" type="button" role="tab"
+										aria-controls="profile-tab-pane" aria-selected="false">예약/결제</button>
+								</li>
+								<li class="nav-item" role="presentation">
+									<button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+										data-bs-target="#contact-tab-pane" type="button" role="tab"
+										aria-controls="contact-tab-pane" aria-selected="false">상품문의</button>
+								</li>
+								<li class="nav-item" role="presentation">
+									<button class="nav-link" id="disabled-tab" data-bs-toggle="tab"
+										data-bs-target="#disabled-tab-pane" type="button" role="tab"
+										aria-controls="disabled-tab-pane" aria-selected="false">기타</button>
+								</li>
+							</ul>
+
+
+							<div class="tab-content" id="myTabContent">
+								<div class="tab-pane fade show active" id="home-tab-pane"
+									role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+									<br />
+									${freqList.title }
+
+									<c:forEach items="${Page }" var="serviceCenter">
+										<ul class="list-group">
+											<!-- <li class="list-group-item"> -->
+												<form id="form1">
+													<div class="input-group">
+														<input type="submit" name=freqList
+															value="${freqList.indexId } Q ${serviceCenter.title }"
+															id="freqSubmit" class="form-control" style="text-align:left;"/>
+
+
+														<%-- Q ${serviceCenter.title } --%>
+
+
+														<%-- <div class="input-group">
+														<input type="hidden" name="boardId" value="${board.id }" />
+														<input id="insertReplyContentInput1" class="form-control"
+															type="text" name="content" required />
+														<button id="addReplySubmitButton1"
+															class="btn btn-outline-secondary">
+															<i class="fa-solid fa-comment-dots"></i>
+														</button>
+													</div> --%>
+
+
+
+													</div>
+														<div class="row">
+															<div id="replyMessage1" style="display: none;">
+																<p>${serviceCenter.body }</p>
+															</div>
+														</div>
+												</form>
+											<!-- </li> -->
+										</ul>
+									</c:forEach>
+								</div>
+							</div>
+							
+							
+						</form>
+					</thead>
+
+
+					<%-- <br />
 					<tbody>
-						
-						 <tr>
-      						<td scope="row">Q ${freqList.body }</td>
+						<tr>
+							<td scope="row">Q ${freqList.body }</td>
+						</tr>
 
-					</tbody>
+					</tbody> --%>
 				</table>
+				
 
 
 
@@ -120,15 +252,6 @@
 		</div>
 	</div>
 	
-
-
-
-
-
-
-
-
-
 
 
 

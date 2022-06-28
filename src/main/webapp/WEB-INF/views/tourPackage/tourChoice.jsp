@@ -55,7 +55,6 @@
 									<tr>
 										<th>패키지명</th>
 										<th>가격</th>
-										<th>가능/불가능</th>
 										<th>국가</th>
 										<th>도시</th>
 										<th><i class="fa-solid fa-calendar"></i></th>
@@ -75,7 +74,6 @@
 													</a>
 											</td>
 												<td>${tour.price }</td>
-												<td>${tour.bookable }</td>
 												<td>${tour.country}</td>
 												<td>${tour.city}</td>
 										</tr>

@@ -42,14 +42,14 @@
 		});
 		
 		
-		
+// qnaPage reply ------------------------------------------------------------------------------------------
 		
 		// 페이지 로딩 후 reply List 가져오는 ajax 요청
 		const listReply = function(){
 		
-			const data = {qnaIndexId : ${qnaReply.qnaIndexId}};
+			const data = {replyIndexId : ${qnaPost.indexId }};
 			$.ajax({
-				url : "${appRoot}/qnaReply/qnaList",
+				url : "${appRoot}/serviceCenter/qnaList",
 				type : "get",
 				data : data,
 				success : function(list){
@@ -68,31 +68,31 @@
 						const replyElement = $("<li class='list-group-item' />");
 						replyElement.html(`
 								
-									<div id="replyDisplayContainer\${list[i].qnaIndexId }" >
+									<div id="replyDisplayContainer\${list[i].replyIndexId }" >
 										<div class="fw-bold">
 												<i class="fa-solid fa-comment"></i> 
 												\${list[i].prettyInserted}
 												
-												<span id="modifyButtonWrapper\${list[i].qnaIndexId }">
+												<span id="modifyButtonWrapper\${list[i].replyIndexId }">
 												</span>
 												
 											
 											</div>
 								
-									 		<span id="replyContent\${list[i].qnaIndexId}"></span>
+									 		<span id="replyContent\${list[i].replyIndexId}"></span>
 										 	
 								
 										</div>
 										
-										<div id="replyEditFormContainer\${list[i].qnaIndexId }" style="display: none;">
+										<div id="replyEditFormContainer\${list[i].replyIndexId }" style="display: none;">
 											<form action="${appRoot }/qnaReply/modify" method="post">
 												<div class="input-group">
-													작성자 : ${board.writerNickName }
-													<input type="hidden" name="writerId" value="${qnaReply.writerId }" />
-													<input type="hidden" name="qnaIndexId" value="\${list[i].qnaIndexId }" />
+													/* 작성자 : ${board.writerNickName }
+													<input type="hidden" name="writerId" value="${qnaReply.writerId }" /> */
+													<input type="hidden" name="replyIndexId" value="\${list[i].replyIndexId }" />
 													<input class="form-control" value="\${list[i].qnaContent }" 
 													       type="text" name="qnaContent" required /> 
-													<button data-reply-id="\${list[i].qnaIndexId}" 
+													<button data-reply-id="\${list[i].replyIndexId}" 
 													        class="reply-modify-submit btn btn-outline-secondary">
 														<i class="fa-solid fa-comment-dots"></i>
 													</button>
@@ -103,19 +103,21 @@
 								
 								`);
 						replyListElement.append(replyElement);
-						$("#replyContent" + list[i].id).text(list[i].content);
+						$("#replyContent" + list[i].indexId).text(list[i].qnaContent);
+						
+						
 						
 						// own이 true 일 때만 수정, 삭제 버튼 보이기
 						if (list[i].own){
-							$("#modifyButtonWrapper" + list[i].qnaIndexId).html(`
+							$("#modifyButtonWrapper" + list[i].replyIndexId).html(`
 										
 								<span class="reply-edit-toggle-button badge bg-info text-dark" 
-								             id="replyEditToggleButton\${list[i].qnaIndexId }" 
-								             data-reply-id="\${list[i].qnaIndexId }" >
+								             id="replyEditToggleButton\${list[i].replyIndexId }" 
+								             data-reply-id="\${list[i].replyIndexId }" >
 							 			<i class="fa-solid fa-pen-to-square"></i>
 						 		</span>
 							 	<span class="reply-delete-button badge bg-danger" 
-							 	            data-reply-id="\${list[i].qnaIndexId }">
+							 	            data-reply-id="\${list[i].replyIndexId }">
 							 		<i class="fa-solid fa-trash-can"></i>
 							 	</span>
 									
@@ -128,12 +130,12 @@
 					  $(".reply-modify-submit").click(function(e){
 						 e.preventDefault();
 						 
-						 const qnaIndexId = $(this).attr("data-reply-qnaIndexId");
-						 const formElem = $("#replyEditFormContainer" + qnaIndexId).find("form");
+						 const replyIndexId = $(this).attr("data-reply-replyIndexId");
+						 const formElem = $("#replyEditFormContainer" + replyIndexId).find("form");
 						 // const data = formElem.serialize(); put방식은 controller에서 못 받음.
 						 const data = {
-								writerId : formElem.find("[name=writerId]").val(),
-								qnaIndexId : formElem.find("[name=qnaIndexId]").val(),
+								/* writerId : formElem.find("[name=writerId]").val(), */
+								replyIndexId : formElem.find("[name=replyIndexId]").val(),
 								qnaContent : formElem.find("[name=qnaContent]").val()
 						 };
 						 
@@ -165,7 +167,7 @@
 						// 수정 form 보여주기
 						$(".reply-edit-toggle-button").click(function() {
 							console.log("버튼클릭");
-							const replyId = $(this).attr("data-reply-qnaIndexId");
+							const replyId = $(this).attr("data-reply-replyIndexId");
 							const displayDivId = "#replyDisplayContainer" + replyId;
 							const editFormId = "#replyEditFormContainer" + replyId;
 							
@@ -182,7 +184,7 @@
 						// 삭제 버튼 클릭 이벤트 메소드 등록
 						// reply-delete-button 클릭시
 						$(".reply-delete-button").click(function() {
-							const replyId = $(this).attr("data-reply-qnaIndexId");
+							const replyId = $(this).attr("data-reply-replyIndexId");
 							const message = "댓글을 삭제하시겠습니까?";
 							
 							if (confirm(message)) {
@@ -220,6 +222,8 @@
 		//댓글 가져오는 함수 발생
 		listReply();
 		
+		// ---------------------------------------------------------------------------------------------
+		
 		// addReplySubmitButton1 버튼 클릭시 ajax 댓글 추가 요청
 		$("#addReplySubmitButton1").click(function(e){
 			e.preventDefault();
@@ -227,7 +231,7 @@
 			const data = $("#insertReplyForm1").serialize();
 			
 			$.ajax({
-				url :"${appRoot }/qnaReply/insert",
+				url :"${appRoot }/serviceCenter/qna/qnaPage",
 				type :"post",
 				data : data,
 				success : function(data){
@@ -254,7 +258,6 @@
 		});
 	});
 
-	});
 </script>
 
 
@@ -340,22 +343,24 @@
 		<div class="row">
 			<div class="col">
 				<h3 style="color:blue;">답변</h3>
-				<form action="${appRoot }/serviceCenter/qna/qnaPage" id="insertReplyForm1">
+			<%-- 	<form action="${appRoot }/serviceCenter/qna/insert" id="insertReplyForm1"> --%>
 					<div class="input-group">
-						<input type="hidden" name="qnaIndexId" value="${qnaReply.qnaIndexId }" />
+						<input type="hidden" name="indexId" value="${qnaPost.indexId }" />
 						<input id="insertReplyContentInput1" class="form-control" type="text" name="qnaContent" required /> 
 						
 						
 						<sec:authorize access="hasRole('ADMIN')">
 							<sec:authentication property="principal" var="principal" />
-							<button id="addReplySubmitButton1" class="btn btn-outline-secondary">
-								<i class="fa-solid fa-comment-dots"></i>
-							</button>
+							<c:if test="${principal.username == qnaPost.writer }">
+								<button id="addReplySubmitButton1" class="btn btn-outline-secondary">
+									<i class="fa-solid fa-comment-dots"></i>
+								</button>
+							</c:if>
 						</sec:authorize>
 
 						
 					</div>
-				</form>
+			<!-- 	</form> -->
 			</div>
 		</div>
 		<div class="row">
@@ -374,38 +379,7 @@
 				
 				<ul id="replyList1" class="list-group">
 					
-					<%--
-					<c:forEach items="${replyList }" var="reply">
-						<li class="list-group-item">
-							<div id="replyDisplayContainer${reply.id }">
-								<div class="fw-bold">
-									<i class="fa-solid fa-comment"></i> 
-									${reply.prettyInserted}
-								 	<span class="reply-edit-toggle-button badge bg-info text-dark" id="replyEditToggleButton${reply.id }" data-reply-id="${reply.id }" >
-								 		<i class="fa-solid fa-pen-to-square"></i>
-							 		</span>
-								 	<span class="reply-delete-button badge bg-danger" data-reply-id="${reply.id }">
-								 		<i class="fa-solid fa-trash-can"></i>
-								 	</span>
-								</div>
-						 		<c:out value="${reply.content }" />
-							 	
-							 	
-							</div>
-							
-							<div id="replyEditFormContainer${reply.id }" style="display: none;">
-								<form action="${appRoot }/reply/modify" method="post">
-									<div class="input-group">
-										<input type="hidden" name="boardId" value="${board.id }" />
-										<input type="hidden" name="id" value="${reply.id }" />
-										<input class="form-control" value="${reply.content }" type="text" name="content" required /> 
-										<button class="btn btn-outline-secondary"><i class="fa-solid fa-comment-dots"></i></button>
-									</div>
-								</form>
-							</div>						 	
-						</li>
-					</c:forEach>
-					 --%>
+			
 				</ul>
 			</div>
 		</div>
@@ -415,25 +389,9 @@
 	<div class="d-none">
 		<form id="replyDeleteForm1" action="${appRoot }/qnaReply/delete" method="post">
 			<input id="replyDeleteInput1" type="text" name="id" />
-			<input type="text" name="qnaIndexId" value="${qnaReply.qnaIndexId }" />
+			<input type="text" name="qnaIndexId" value="${qnaPost.indexId }" />
 		</form>
 	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

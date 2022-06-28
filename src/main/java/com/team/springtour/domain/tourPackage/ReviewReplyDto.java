@@ -1,16 +1,16 @@
-package com.team.springtour.domain.serviceCenter;
+package com.team.springtour.domain.tourPackage;
 
 import java.time.LocalDateTime;
 
 import lombok.Data;
-
 @Data
-
-public class QnAreplyDto {
-
-	private int replyIndexId;
-	private String qnaContent;
+public class ReviewReplyDto {
+	private int replyId;
+	private int reviewId;
 	private LocalDateTime inserted;
+	private String content;
+	private String memberId;
+	
 	
 	public String getPrettyInserted() {
 		// 24시간 이내면 시간만
@@ -22,5 +22,6 @@ public class QnAreplyDto {
 			return inserted.toLocalDate().toString();
 		}
 	}
+	
 	
 }

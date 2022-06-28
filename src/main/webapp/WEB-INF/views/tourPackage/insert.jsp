@@ -55,11 +55,6 @@
 						name="price" placeholder="Another input placeholder">
 				</div>
 
-				<div class="mb-3">
-					<label for="formGroupExampleInput2" class="form-label">가능/불가능</label>
-					<input type="text" class="form-control" id="formGroupExampleInput2"
-						name="bookable" placeholder="Another input placeholder">
-				</div>
 
 				<div class="mb-3">
 					<label for="formGroupExampleInput2" class="form-label">나라</label> <input
