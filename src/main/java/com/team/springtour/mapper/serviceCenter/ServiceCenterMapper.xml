@@ -136,7 +136,7 @@
 
 	
 	<select id="selectFreqPost" resultType="com.team.springtour.domain.serviceCenter.ServiceCenterDto">
-		SELECT indexId, body, inserted
+		SELECT indexId, title, body, inserted
 		FROM ServiceCenter
 	</select>
 
@@ -156,7 +156,7 @@
 	
 	
 	<select id="selectFreqSearchAll" resultType="com.team.springtour.domain.serviceCenter.ServiceCenterDto">
-		SELECT indexId, body
+		SELECT indexId, title, body
 		FROM ServiceCenter
 		
 		<if test="keyword != '%%'">
@@ -164,6 +164,10 @@
 				<when test="type == 'all'">
 					WHERE title LIKE #{keyword } OR
 					      body LIKE #{keyword }
+				</when>
+				
+				<when test="type == 'title'">
+					WHERE title LIKE #{keyword }
 				</when>
 				
 				<when test="type == 'body'">

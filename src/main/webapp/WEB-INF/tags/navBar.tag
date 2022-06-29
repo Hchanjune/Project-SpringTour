@@ -21,12 +21,13 @@
 <c:url value="/user/dmReceiveList" var="dmReceiveListLink" />
 <c:url value="/user/dmSendList" var="dmSendListLink" />
 
-<c:url value="/user/writePrivateEnquiry" var="writePrivateEnquiryLink"/>
-<c:url value="/user/userPrivateEnquiryList" var="userPrivateEnquiryListLink"/>
+<c:url value="/user/writePrivateEnquiry" var="writePrivateEnquiryLink" />
+<c:url value="/user/userPrivateEnquiryList"
+	var="userPrivateEnquiryListLink" />
 <!-- ManagementLinks -->
 <c:url value="/user/userList" var="userListPageLink" />
-<c:url value="/tourPackage/insert" var="tourPackageInsertLink"/>
-<c:url value="/flight/info2" var="flightInfoInsertLink"/>
+<c:url value="/tourPackage/insert" var="tourPackageInsertLink" />
+<c:url value="/flight/info2" var="flightInfoInsertLink" />
 <c:url value="/user/adminPrivateEnquiryList" var="adminPrivateEnquiryListLink"/>
 
 
@@ -174,7 +175,7 @@
 				<form class="d-flex" role="search">
 					<input class="form-control me-2" type="search" placeholder="Search"
 						aria-label="Search">
-					<button class="btn btn-outline-success" type="submit">Search</button>
+					<button class="btn btn-outline" type="submit">Search</button>
 				</form>
 			</div>
 		</div>
