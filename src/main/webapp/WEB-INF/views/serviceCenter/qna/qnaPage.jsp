@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+<link rel="stylesheet" type="text/css" href="../../resources/css/style.css">
 <script>
 
 	$(document).ready(function() {
@@ -271,20 +271,10 @@
 	<tag:navBar/>
 
 	<c:url value="/serviceCenter/qna/modify" var="qnaModifyLink" />
-	<div class="container">
+	<div class="container board_view">
 		<div class="row">
 			<div class="col">
-
-				<div class="mt-3">
-					<sec:authorize access="hasRole('ADMIN')">
-						<sec:authentication property="principal" var="principal" />
-						<c:if test="${principal.username == qnaPost.writer }">
-							<button id="edit-buttonQna" class="btn btn-secondary">
-								<i class="fa-solid fa-user-pen"></i>
-							</button>
-						</c:if>
-					</sec:authorize>
-				</div>
+				
 				<c:if test="${not empty message }">
 					<div class="alert alert-primary">${message }</div>
 				</c:if>
@@ -292,23 +282,24 @@
 					enctype="multipart/form-data">
 					<input type="hidden" name="indexId" value="${qnaPost.indexId }" />
 
-					<div>
-						<label class="form-label" for="input1">제목</label>
+					<div class="board_view_title">
+						<!-- <label class="form-label" for="input1">제목</label> -->
 						<input class="form-control" type="text" name="title"
 							value="${qnaPost.title }" id="input1" readonly />
 					</div>
 
-					<div>
-						<label class="form-label" for="textarea1">본문</label>
+					<div class="board_view_date">
+						<!-- <label for="input2" class="form-label">작성일시</label> -->
+						<input class="form-control mb-3" type="datetime-local"
+							value="${qnaPost.inserted }" readonly />
+					</div>
+					
+					<div class="board_view_content">
+						<!-- <label class="form-label" for="textarea1">본문</label> -->
 						<textarea class="form-control" name="body" id="textarea1"
 							cols="30" rows="10" readonly>${qnaPost.body }</textarea>
 					</div>
 
-					<div>
-						<label for="input2" class="form-label">작성일시</label>
-						<input class="form-control mb-3" type="datetime-local"
-							value="${qnaPost.inserted }" readonly />
-					</div>
 
 					<button form="qnaModifyForm" id="modify-submit2"
 						class="btn btn-secondary d-none">수정</button>
@@ -316,21 +307,34 @@
 					<button id="delete-submit2" class="btn btn-danger d-none">삭제</button>
 
 				</form>
-
-				<div class="mt-3">
-					<form action="${appRoot }/serviceCenter/qnaList" method="get">
-						<button class="btn btn-primary">목록보기</button>
-					</form>
+				<div class="container_fluid board_view_bottom">
+					<div class="row">
+						<div class="col">
+							<div class="mt-3">
+								<form action="${appRoot }/serviceCenter/qnaList" method="get">
+									<button class="btn btn-primary">목록보기</button>
+								</form>
+							</div>
+						</div>
+						<div class="col">
+							<div class="mt-3 txt-right">
+								<sec:authorize access="hasRole('ADMIN')">
+									<sec:authentication property="principal" var="principal" />
+									<c:if test="${principal.username == qnaPost.writer }">
+										<button id="edit-buttonQna" class="btn btn-secondary">
+											<i class="fa-solid fa-user-pen"></i>
+										</button>
+									</c:if>
+								</sec:authorize>
+							</div>
+						</div>
+					</div>	
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<br />
-
-
-
-
+	
 
 
 
