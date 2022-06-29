@@ -4,7 +4,6 @@
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags" %>  
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-
+<link rel="stylesheet" type="text/css" href="../resources/css/style.css">
 
 <title>Insert title here</title>
 </head>
@@ -25,40 +24,26 @@
 	<tag:navBar/>
 	
 
-	<br />
-	<div class="containder-fluid" style="margin: 25px;">
+	<div class="containder-fluid">
 		<div class="row">
 			<div class="col-2 navbar-left">
 
-				<div class="navbar_menu"
-					style="background: #C2E2E8; text-align: center;">
+				<div class="navbar_menu">
 
-					<h3
-						style="background: #E6FFFF; text-align: center; padding-top: 10px;">
+					<h3>
 						고객센터
 						<a class="nav-link disabled"></a>
 					</h3>
-					<a class="nav-link" href="${appRoot }/serviceCenter/notice">공지사항</a>
+					<a class="nav-link left_nav_active" href="${appRoot }/serviceCenter/notice">공지사항</a>
 					<a class="nav-link" href="${appRoot }/serviceCenter/qnaList">묻고답하기</a>
 					<a class="nav-link" href="${appRoot }/serviceCenter/freq">자주묻는질문</a>
-					<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-					
-					
-					
-					
-					
-					
-
-					
-					
 				</div>
 			</div>
 
 			<div class="col-10">
-				<div class="">
+				<div class="contents">
 
 					<h1>공지사항</h1>
-					<br />
 					<div class="nav justify-content-end">
 
 						<form action="${appRoot }/serviceCenter/notice" class="d-flex"
@@ -80,49 +65,47 @@
 							</div>
 						</form>
 					</div>
+			
+
+					<table class="table board_list" >
+	
+						<thead class="col justify-content-center">
+							<tr>
+								<th>번호</th>
+								<th>제목</th>
+								<th>등록일</th>
+							</tr>
+						</thead>
+						<c:forEach items="${page }" var="post">
+							<tr class="col justify-content-center" >
+								<td>${post.indexId }</td>
+								<td class="title">
+	
+									<c:url value="/serviceCenter/notice/get" var="link">
+										<c:param name="indexId" value="${post.indexId }"></c:param>
+									</c:url>
+									<a href="${link }"> ${post.title } </a>
+	
+								</td>
+								<td>${post.prettyInserted }</td>
+							</tr>
+						</c:forEach>
+	
+					</table>
+
+
+
+					<sec:authorize access="hasRole('ADMIN')">
+						<sec:authentication property="principal" var="principal" />
+						<div class="col justify-content-right" align="right">
+							<button class="btn btn-primary" style="background: #E6FFFF;">
+								<a href="${appRoot}/serviceCenter/notice/insert">글쓰기</a>
+							</button>
+						</div>
+					</sec:authorize>
+
+					<tag:noticepagination path="notice" />
 				</div>
-				<br />
-
-
-				<table class="table" >
-
-					<thead class="col justify-content-center" align="center">
-						<tr>
-							<th>번호</th>
-							<th>제목</th>
-							<th>등록일</th>
-						</tr>
-					</thead>
-					<c:forEach items="${page }" var="post">
-						<tr class="col justify-content-center" align="center">
-							<td>${post.indexId }</td>
-							<td>
-
-								<c:url value="/serviceCenter/notice/get" var="link">
-									<c:param name="indexId" value="${post.indexId }"></c:param>
-								</c:url>
-								<a href="${link }"> ${post.title } </a>
-
-							</td>
-							<td>${post.prettyInserted }</td>
-						</tr>
-					</c:forEach>
-
-				</table>
-
-
-
-				<sec:authorize access="hasRole('ADMIN')">
-					<sec:authentication property="principal" var="principal" />
-					<div class="col justify-content-right" align="right">
-						<button class="btn btn-primary" style="background: #E6FFFF;">
-							<a href="${appRoot}/serviceCenter/notice/insert">글쓰기</a>
-						</button>
-					</div>
-				</sec:authorize>
-
-				<br />
-				<tag:noticepagination path="notice" />
 
 			</div>
 		</div>

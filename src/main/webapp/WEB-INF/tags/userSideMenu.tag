@@ -12,7 +12,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col">
+		<div class="col navbar-left">
 			<nav class="nav flex-column" style="posotion: relative; left: 0px; margin-top: 0px; bottom: inherit;">
 				<a class="nav-link" href="${userInfoSideLink }">회원 정보</a>
 				<a class="nav-link" href="${receivedMessagesSideLink }">받은 메시지함</a>
