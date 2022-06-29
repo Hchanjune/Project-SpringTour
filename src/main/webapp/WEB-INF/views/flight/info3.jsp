@@ -91,7 +91,7 @@
 
 		<div class="row">
 			<!-- Left -->
-			<div class="col-1">
+			<div class="col-2">
 				<p>메뉴123123123123123123</p>
 				<br />
 				<p>메뉴</p>
@@ -105,7 +105,7 @@
 			</div>
 
 			<!-- Main -->
-			<div class="col-11">
+			<div class="col-10">
 
 				<h1>스케줄 수정</h1>
 
