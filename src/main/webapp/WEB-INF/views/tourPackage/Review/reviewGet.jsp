@@ -58,19 +58,16 @@ $(document).ready(function() {
 				$("#numOfReply1").text(list.length);
 				for(let i = 0; i < list.length; i++) {
 					const replyElement = $("<li class='list-group-item' />");
-					replyElement.html(`
-				
+					replyElement.html(`				
 							<div id="replyDisplayContainer\${list[i].indexId }">
 								<div class="fw-bold">
 									<i class="fa-solid fa-comment"></i> 
 									\${list[i].prettyInserted}
 									
 									<span id="modifyButtonWrapper\${list[i].indexId }">
-									</span>
+									</span>							 	
+								
 									
-
-								 	
-								 	
 								</div>
 							 	<span id="replyContent\${list[i].indexId}"</span>							 	
 							</div>
@@ -90,21 +87,20 @@ $(document).ready(function() {
 								</form>
 							</div>
 					`);
-					
+										
 					replyListElement.append(replyElement);	
-					$("#replyContent"+list[i].id).text(list[i].content);
-					
-					
+					$("#replyContent"+list[i].indexId).text(list[i].content);
+										
 					//own이 true일 때만 수정,삭제 버튼 보이기
 					if(list[i].own){
-						$("#modifyButtonWrapper" + list[i].id).html(`
+						$("#modifyButtonWrapper" + list[i].indexId).html(`
 							 	<span class="reply-edit-toggle-button badge bg-info text-dark" 
-							 		id="replyEditToggleButton\${list[i].id }" 
-							 		data-reply-id="\${list[i].id }" >
+							 		id="replyEditToggleButton\${list[i].indexId }" 
+							 		data-reply-id="\${list[i].indexId }" >
 							 		<i class="fa-solid fa-pen-to-square"></i>
 						 		</span>
 							 	<span class="reply-delete-button badge bg-danger" 
-							 		data-reply-id="\${list[i].id }">
+							 		data-reply-id="\${list[i].indexId }">
 							 		<i class="fa-solid fa-trash-can"></i>
 							 	</span>					
 						`);
@@ -270,7 +266,6 @@ $(document).ready(function() {
 								</sec:authorize>
 
 							</h1>
-
 							<c:if test="${not empty message }">
 								<div class="alert alert-primary">${message }</div>
 							</c:if>
@@ -290,8 +285,6 @@ $(document).ready(function() {
 									<textarea class="form-control" name="body" id="textarea1"
 										cols="30" rows="10" readonly>${review.body }</textarea>
 								</div>
-
-
 
 								<div>
 									<label for="input3" class="form-label">작성자</label> <input
@@ -314,7 +307,6 @@ $(document).ready(function() {
 								<button id="modify-submit1" class="btn btn-primary d-none">수정</button>
 								<button id="delete-submit1" class="btn btn-danger d-none">삭제</button>
 							</form>
-
 						</div>
 					</div>
 				</div>
@@ -352,6 +344,7 @@ $(document).ready(function() {
 							<h3>
 								댓글 <span id="numOfReply1"></span> 개
 							</h3>
+							<ul id="replyList1" class="list-group">
 							</ul>
 						</div>
 					</div>
