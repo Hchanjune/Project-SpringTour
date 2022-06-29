@@ -59,7 +59,7 @@ public class QnAController {
 			 					@RequestParam(name = "page", defaultValue = "1")int qnaPage,
 			 					Model model) {
 	
-			int rowPerPage = 3;
+			int rowPerPage = 5;
 
 			List<QnADto> searchQnaPost = service.searchQnaPost(type, keyword, qnaPage, rowPerPage);
 			System.out.println(qnaPage);
@@ -84,7 +84,6 @@ public class QnAController {
 	
 	@GetMapping("qna/insert")
 	public void insert(Model model) {
-		
 		List<TourPackageDto> tourList = tourPackageService.TourList("","");
 		model.addAttribute("tourList", tourList);
 		
@@ -113,7 +112,7 @@ public class QnAController {
 	
 	
 	
-	@GetMapping("qna/qnaPage")
+	@GetMapping("/qna/qnaPage")
 	public void qnaPage(int indexId, Principal principal, Model model) {
 		QnADto qna = service.getQnaPostByIndexId(indexId);
 		
@@ -123,7 +122,7 @@ public class QnAController {
 	
 	
 	
-	@PostMapping("qna/modify")
+	@PostMapping("/qna/modify")
 	public String qnaModify (QnADto qnaPost,
 						         Principal principal,
 						         RedirectAttributes rttr) {
@@ -149,7 +148,7 @@ public class QnAController {
 		return "redirect:/serviceCenter/qnaList"; 
 	}
 	
-	@PostMapping("qna/remove")
+	@PostMapping("/qna/remove")
 	public String qnaRemove(QnADto qnaPost, Principal principal, RedirectAttributes rttr ) {
 		
 		QnADto oldQnaPost = service.getQnaPostByIndexId(qnaPost.getIndexId());

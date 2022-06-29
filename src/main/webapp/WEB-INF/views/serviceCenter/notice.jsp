@@ -23,6 +23,7 @@
 
 	<tag:login/>
 	<tag:navBar/>
+	
 
 	<br />
 	<div class="containder-fluid" style="margin: 25px;">
@@ -40,19 +41,18 @@
 					<a class="nav-link" href="${appRoot }/serviceCenter/notice">공지사항</a>
 					<a class="nav-link" href="${appRoot }/serviceCenter/qnaList">묻고답하기</a>
 					<a class="nav-link" href="${appRoot }/serviceCenter/freq">자주묻는질문</a>
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
-					<br />
+					<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+					
+					
+					
+					
+					
+					
+
+					
+					
 				</div>
 			</div>
-
 
 			<div class="col-10">
 				<div class="">
@@ -104,7 +104,7 @@
 								<a href="${link }"> ${post.title } </a>
 
 							</td>
-							<td>${post.inserted }</td>
+							<td>${post.prettyInserted }</td>
 						</tr>
 					</c:forEach>
 
@@ -127,12 +127,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
 
 
 </body>

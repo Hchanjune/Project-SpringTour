@@ -40,7 +40,7 @@
 					<a class="nav-link" href="${appRoot }/serviceCenter/notice">공지사항</a>
 					<a class="nav-link" href="${appRoot }/serviceCenter/qnaList">묻고답하기</a>
 					<a class="nav-link" href="${appRoot }/serviceCenter/freq">자주묻는질문</a>
-					<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+					<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 				</div>
 			</div>
 
@@ -98,7 +98,7 @@
 
 							</td>
 							<td>${list.writer }</td>
-							<td>${list.inserted }</td>
+							<td>${list.prettyInserted }</td>
 							<c:choose>
 								<c:when test="${not empty list.answer }"><td>답변 완료</td></c:when>
 								<c:otherwise><td>확인중</td></c:otherwise>

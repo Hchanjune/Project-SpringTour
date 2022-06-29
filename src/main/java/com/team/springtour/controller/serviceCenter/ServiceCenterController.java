@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -63,7 +64,7 @@ public class ServiceCenterController {
 			 					@RequestParam(name = "page", defaultValue = "1")int page,
 			 					Model model) {
 	
-			int rowPerPage = 3;
+			int rowPerPage = 5;
 
 			List<ServiceCenterDto> searchPost = service.searchPost(type, keyword, page, rowPerPage);
 			System.out.println(page);
@@ -195,7 +196,7 @@ public class ServiceCenterController {
 	@GetMapping("freq")
 	public String freqPostPage(@RequestParam(name = "page", defaultValue = "1")int page, 
 							Model model) {
-		
+		System.out.println("확인");
 		int rowPerPage = 5;
 		
 		List<ServiceCenterDto> freqPost = service.listFreqPage(page, rowPerPage);
@@ -223,7 +224,7 @@ public class ServiceCenterController {
 				 					@RequestParam(name = "page", defaultValue = "1")int page,
 				 					Model model) {
 		
-				int rowPerPage = 3;
+				int rowPerPage = 5;
 	
 				List<ServiceCenterDto> freqSearchPost = service.freqSearchPost(type, keyword, page, rowPerPage);
 				System.out.println(page);
@@ -254,11 +255,11 @@ public class ServiceCenterController {
 		}
 		
 		
-	 
+		
 		// 자주묻는질문 글쓰기 등록(ONLY ADMIN)
 		@GetMapping("freqInsert")
 		public void freqInsert(Model model) {
-
+			
 		}
 		
 		@PostMapping("freqInsert")
