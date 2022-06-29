@@ -15,6 +15,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+<link rel="stylesheet" type="text/css" href="../resources/css/style.css">
+
 <script>
 
 	
@@ -102,27 +104,27 @@
 	<tag:login/>
 	<tag:navBar/>
 
-	<br />
-	<div class="containder-fluid" style="margin: 25px;">
+	
+	<div class="containder-fluid" >
 		<div class="row">
 			<div class="col-2 navbar-left">
-				<div class="navbar_menu"
-					style="background: #C2E2E8; text-align: center;">
-					<h3
-						style="background: #E6FFFF; text-align: center; padding-top: 10px;">
+				<div class="navbar_menu">
+					
+					<h3>
 						고객센터
 						<a class="nav-link disabled"></a>
 					</h3>
 					<a class="nav-link" href="${appRoot }/serviceCenter/notice">공지사항</a>
 					<a class="nav-link" href="${appRoot }/serviceCenter/qnaList">묻고답하기</a>
-					<a class="nav-link" href="${appRoot }/serviceCenter/freq">자주묻는질문</a>
-					<br /><br /><br /><br><br /><br /><br /><br /><br /><br /><br /><br /><br />
+					<a class="nav-link left_nav_active" href="${appRoot }/serviceCenter/freq">자주묻는질문</a>
+					
 				</div>
 			</div>
 
 
 			<div class="col-10">
-				<div class="">
+				<div class="contents">
+					
 					<h1>자주묻는질문</h1>
 					
 					<div class="nav justify-content-end">
@@ -148,9 +150,9 @@
 					</div>
 				</div>
 				
-				<br />
+			
 
-				<table class="table mt-3">
+				<table class="table board_list mt-3">
 					<thead>
 						<form action="${appRoot }/serviceCenter/freq" class="d-flex" method="post">
 
@@ -199,7 +201,6 @@
 
 												</div>
 
-
 												<div id="answer1">${sc.body }</div>
 
 											</form>
@@ -222,7 +223,6 @@
 
 
 
-
 				<sec:authorize access="hasRole('ADMIN')">
 					<sec:authentication property="principal" var="principal" />
 					<div class="col justify-content-right" align="right">
@@ -232,8 +232,6 @@
 					</div>
 				</sec:authorize>
 				
-				
-				<br />
 				<tag:noticepagination path="freq" />
 		
 			</div>

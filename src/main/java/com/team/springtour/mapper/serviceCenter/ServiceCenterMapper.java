@@ -21,7 +21,7 @@ public interface ServiceCenterMapper {
 
 	ServiceCenterDto selectPostByIndexId(int indexId);
 
-	int updatePost(ServiceCenterDto dto);
+	int updatePost(ServiceCenterDto post);
 
 	int deletePost(int indexId);
 
