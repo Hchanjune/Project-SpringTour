@@ -18,20 +18,21 @@
 <script>
 
 	
-	
+	$(document).ready(function() {
 		$("#freqSubmit").click(function(e){
 			e.preventDefault();
 			
-			const data = $("form1").serialize();
+			/* const data = $("form1").serialize(); */
 			
 			$.ajax({
-				url :"${appRoot }/serviceCenter/freq",
+				url :"${appRoot }/serviceCenter/freqPost",
 				type :"post",
-				data : data,
+				data : $('form1').serialize(),
 				success : function(data){
 			
 					// 새 댓글 등록되었다는 메세지 출력
-					$("#replyMessage1").show().text(data);		
+					$("#answer1").show().text(data);
+					console.log(data);
 					
 				/* 	// text input 초기화
 					$("#insertReplyContentInput1").val("");
@@ -42,7 +43,7 @@
 					// console.log(data); */
 				},
 				error : function(){
-					$("#replyMessage1").show().text("작성할  수 없습니다.").fadeout(3000);
+					$("#answer1").show().text("작성할  수 없습니다.");
 					console.log("문제 발생");
 				},
 				complete : function(){
@@ -115,7 +116,7 @@
 					<a class="nav-link" href="${appRoot }/serviceCenter/notice">공지사항</a>
 					<a class="nav-link" href="${appRoot }/serviceCenter/qnaList">묻고답하기</a>
 					<a class="nav-link" href="${appRoot }/serviceCenter/freq">자주묻는질문</a>
-					<br /><br /><br /><br><br /><br /><br /><br /><br /><br />
+					<br /><br /><br /><br><br /><br /><br /><br /><br /><br /><br /><br /><br />
 				</div>
 			</div>
 
@@ -123,7 +124,7 @@
 			<div class="col-10">
 				<div class="">
 					<h1>자주묻는질문</h1>
-					<br />
+					
 					<div class="nav justify-content-end">
 
 						<form action="${appRoot }/serviceCenter/freq" class="d-flex"
@@ -148,11 +149,10 @@
 				</div>
 				
 				<br />
-				
+
 				<table class="table mt-3">
 					<thead>
 						<form action="${appRoot }/serviceCenter/freq" class="d-flex" method="post">
-
 
 							<ul class="nav nav-tabs" id="myTab" role="tablist">
 								<li class="nav-item" role="presentation">
@@ -183,47 +183,30 @@
 								<div class="tab-pane fade show active" id="home-tab-pane"
 									role="tabpanel" aria-labelledby="home-tab" tabindex="0">
 									<br />
-									${freqList.title }
+									${freqPost.title }
 
-									<c:forEach items="${Page }" var="serviceCenter">
+									<c:forEach items="${Page }" var="sc">
 										<ul class="list-group">
-											<!-- <li class="list-group-item"> -->
-												<form id="form1">
-													<div class="input-group">
-														<input type="submit" name=freqList
-															value="${freqList.indexId } Q ${serviceCenter.title }"
-															id="freqSubmit" class="form-control" style="text-align:left;"/>
+											<form id="form1">
+												<div class="input-group">
+													<input type="button" name=freqPost
+														value="${freqPost.indexId } Q ${sc.title }"
+														id="freqSubmit" class="form-control"
+														style="text-align: left;" />
 
 
-														<%-- Q ${serviceCenter.title } --%>
+													<%-- Q ${sc.title } --%>
+
+												</div>
 
 
-														<%-- <div class="input-group">
-														<input type="hidden" name="boardId" value="${board.id }" />
-														<input id="insertReplyContentInput1" class="form-control"
-															type="text" name="content" required />
-														<button id="addReplySubmitButton1"
-															class="btn btn-outline-secondary">
-															<i class="fa-solid fa-comment-dots"></i>
-														</button>
-													</div> --%>
+												<div id="answer1">${sc.body }</div>
 
-
-
-													</div>
-														<div class="row">
-															<div id="replyMessage1" style="display: none;">
-																<p>${serviceCenter.body }</p>
-															</div>
-														</div>
-												</form>
-											<!-- </li> -->
+											</form>
 										</ul>
 									</c:forEach>
 								</div>
 							</div>
-							
-							
 						</form>
 					</thead>
 
@@ -236,7 +219,7 @@
 
 					</tbody> --%>
 				</table>
-				
+
 
 
 
@@ -248,13 +231,15 @@
 						</button>
 					</div>
 				</sec:authorize>
+				
+				
+				<br />
+				<tag:noticepagination path="freq" />
+		
 			</div>
 		</div>
 	</div>
 	
-
-
-
 
 </body>
 </html>
