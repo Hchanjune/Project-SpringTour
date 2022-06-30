@@ -7,9 +7,11 @@ import lombok.Data;
 @Data
 
 public class QnAreplyDto {
-
+	
+	
 	private int replyIndexId;
 	private String qnaContent;
+	private boolean own;
 	private LocalDateTime inserted;
 	
 	public String getPrettyInserted() {

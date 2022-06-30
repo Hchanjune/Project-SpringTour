@@ -24,8 +24,6 @@
 		$("#freqSubmit").click(function(e){
 			e.preventDefault();
 			
-			/* const data = $("form1").serialize(); */
-			
 			$.ajax({
 				url :"${appRoot }/serviceCenter/freqPost",
 				type :"post",
@@ -56,44 +54,6 @@
 	});
 	
 
-
-
-
-
-/*  	// addReplySubmitButton1 버튼 클릭시 ajax 댓글 추가 요청
-	$("#addReplySubmitButton1").click(function(e){
-		e.preventDefault();
-		
-		const data = $("#insertReplyForm1").serialize();
-		
-		$.ajax({
-			url :"${appRoot }/serviceCenter/freq",
-			type :"post",
-			data : data,
-			success : function(data){
-		
-				// 새 댓글 등록되었다는 메세지 출력
-				$("#replyMessage1").show().text(data).fadeOut(3000);		
-				
-				// text input 초기화
-				$("#insertReplyContentInput1").val("");
-				
-				// 모든 댓글 가져오는 ajax 요청
-				//댓글 가져오는 함수 발생
-					listReply();
-				// console.log(data);
-			},
-			error : function(){
-				$("#replyMessage1").show().text("댓글을 작성할  수 없습니다.").fadeout(3000);
-				console.log("문제 발생");
-			},
-			complete : function(){
-				console.log("요청완료");
-			}
-		});
-	});
-});
-	 */ 
 </script>
 
 
@@ -152,7 +112,7 @@
 				
 			
 
-				<table class="table board_list mt-3">
+				<table class="table board_list" style="width: 1625px;">
 					<thead>
 						<form action="${appRoot }/serviceCenter/freq" class="d-flex" method="post">
 
@@ -225,7 +185,7 @@
 
 				<sec:authorize access="hasRole('ADMIN')">
 					<sec:authentication property="principal" var="principal" />
-					<div class="col justify-content-right" align="right">
+					<div class="col justify-content-right" align="right" style="padding-right:40px;">
 						<button class="btn btn-primary" style="background: #E6FFFF;">
 							<a href="${appRoot}/serviceCenter/freqInsert">글쓰기</a>
 						</button>
@@ -237,7 +197,7 @@
 			</div>
 		</div>
 	</div>
-	
+	<footer style="height: 25px; background-color:black;"></footer> 
 
 </body>
 </html>
