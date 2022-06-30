@@ -59,27 +59,26 @@ $(document).ready(function() {
 				for(let i = 0; i < list.length; i++) {
 					const replyElement = $("<li class='list-group-item' />");
 					replyElement.html(`				
-							<div id="replyDisplayContainer\${list[i].indexId }">
+							<div id="replyDisplayContainer\${list[i].replyId }">
 								<div class="fw-bold">
 									<i class="fa-solid fa-comment"></i> 
 									\${list[i].prettyInserted}
 									
-									<span id="modifyButtonWrapper\${list[i].indexId }">
+									<span id="modifyButtonWrapper\${list[i].replyId }">
 									</span>							 	
-								
-									
+																	
 								</div>
-							 	<span id="replyContent\${list[i].indexId}"</span>							 	
+							 	<span id="replyContent\${list[i].replyId}"</span>							 	
 							</div>
 							
-							<div id="replyEditFormContainer\${list[i].indexId }" 
+							<div id="replyEditFormContainer\${list[i].replyId }" 
 								style="display: none;">
 								<form action="${appRoot }/reviewReply/modify" method="post">
 									<div class="input-group">
 										<input type="hidden" name="reviewId" value="${review.indexId }" />
-										<input type="hidden" name="id" value="\${list[i].indexId }" />
+										<input type="hidden" name="replyId" value="\${list[i].replyId }" />
 										<input class="form-control" value="\${list[i].content }" type="text" name="content" required /> 
-										<button data-reply-id="\${list[i].id}" 
+										<button data-reply-id="\${list[i].replyId}" 
 											class="reply-modify-submit btn btn-outline-secondary">
 											<i class="fa-solid fa-comment-dots"></i>
 										</button>
@@ -89,24 +88,25 @@ $(document).ready(function() {
 					`);
 										
 					replyListElement.append(replyElement);	
-					$("#replyContent"+list[i].indexId).text(list[i].content);
+					$("#replyContent"+list[i].replyId).text(list[i].content);
 										
 					//own이 true일 때만 수정,삭제 버튼 보이기
 					if(list[i].own){
-						$("#modifyButtonWrapper" + list[i].indexId).html(`
+						
+						$("#modifyButtonWrapper" + list[i].replyId).html(`
 							 	<span class="reply-edit-toggle-button badge bg-info text-dark" 
-							 		id="replyEditToggleButton\${list[i].indexId }" 
-							 		data-reply-id="\${list[i].indexId }" >
+							 		id="replyEditToggleButton\${list[i].replyId }" 
+							 		data-reply-id="\${list[i].replyId }">
 							 		<i class="fa-solid fa-pen-to-square"></i>
 						 		</span>
 							 	<span class="reply-delete-button badge bg-danger" 
-							 		data-reply-id="\${list[i].indexId }">
+							 		data-reply-id="\${list[i].replyId }">
 							 		<i class="fa-solid fa-trash-can"></i>
 							 	</span>					
 						`);
 					}
 					
-				} // end of for
+				} //end of for
 					
 				$(".reply-modify-submit").click(function (e){
 					e.preventDefault();
@@ -169,7 +169,7 @@ $(document).ready(function() {
 					//	$("#replyDeleteForm1").submit();
 					
 						$.ajax({
-							url : "${appRoot}/Review/reviewReply/delete/"+replyId,
+							url : "${appRoot}/reviewReply/delete/"+replyId,
 							type : "delete",
 							success : function(data){
 								console.log(replyId + "댓글 삭제됨");

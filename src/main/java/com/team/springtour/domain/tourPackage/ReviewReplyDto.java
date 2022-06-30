@@ -8,6 +8,7 @@ public class ReviewReplyDto {
 	private int replyId;
 	private int reviewId;
 	private LocalDateTime inserted;
+	private boolean own;
 	private String content;
 	private String memberId;
 	
