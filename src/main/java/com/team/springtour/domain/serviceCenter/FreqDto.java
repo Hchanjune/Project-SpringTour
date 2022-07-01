@@ -5,13 +5,12 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
+public class FreqDto {
 
-public class QnAreplyDto {
-	
-	
-	private int replyIndexId;
-	private String qnaContent;
-	
+	private int freqIndexId;
+	private String writer;
+	private String title;
+	private String body;
 	private LocalDateTime inserted;
 	
 	public String getPrettyInserted() {
@@ -24,5 +23,4 @@ public class QnAreplyDto {
 			return inserted.toLocalDate().toString();
 		}
 	}
-	
 }

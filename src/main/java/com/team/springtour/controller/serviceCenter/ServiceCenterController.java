@@ -193,88 +193,91 @@ public class ServiceCenterController {
 	// freq - 자주묻는질문 ----------------------------------------------------------------------------------
 	
 	
-	@GetMapping("freq")
-	public String freqPostPage(@RequestParam(name = "page", defaultValue = "1")int page, 
-							Model model) {
-		System.out.println("확인");
-		int rowPerPage = 5;
-		
-		List<ServiceCenterDto> freqPost = service.listFreqPage(page, rowPerPage);
-		
-		int totalRecords = service.countFreqPostPage();
-		int end = (totalRecords - 1) / rowPerPage + 1;
-		
-		
-		PostPageDto freqPostPage = new PostPageDto();
-		freqPostPage.setCurrent(page);
-		freqPostPage.setEnd(end);
-		
-		System.out.println(freqPostPage);
-		
-		model.addAttribute("Page", freqPost);
-		model.addAttribute("pageInfo", freqPostPage);
-		
-		return "/serviceCenter/freq";
-	}
-	
-	
-	
-	 @PostMapping("freq")
-		 public void freqPostSearch(@RequestParam(name ="keyword")String keyword, @RequestParam("type")String type,
-				 					@RequestParam(name = "page", defaultValue = "1")int page,
-				 					Model model) {
-		
-				int rowPerPage = 5;
-	
-				List<ServiceCenterDto> freqSearchPost = service.freqSearchPost(type, keyword, page, rowPerPage);
-				System.out.println(page);
-	
-	
-				int totalRecords = service.countSearchedPostPage(type,keyword);
-				int end = (totalRecords - 1) / rowPerPage + 1;
-	
-				PostPageDto freqPostPage = new PostPageDto();
-				freqPostPage.setCurrent(page);
-				freqPostPage.setEnd(end);
-	
-				System.out.println(freqPostPage);
-	
-				model.addAttribute("Page", freqSearchPost);
-				model.addAttribute("pageInfo", freqPostPage);
-			 
-		 }
-	 
-	
-		@PostMapping("freqPost")
-		public String getFreqPost(Principal principal,  Model model) {
-			ServiceCenterDto freq = service.getFreqPost();
-			//System.out.println(serviceCenter);
-			model.addAttribute("freqPost", freq);
+	/*	@GetMapping("freq")
+		public String freqPostPage(@RequestParam(name = "page", defaultValue = "1")int page, 
+								Model model) {
+			System.out.println("확인");
+			int rowPerPage = 5;
+			
+			List<ServiceCenterDto> freqPost = service.listFreqPage(page, rowPerPage);
+			
+			int totalRecords = service.countFreqPostPage();
+			int end = (totalRecords - 1) / rowPerPage + 1;
+			
+			
+			PostPageDto freqPostPage = new PostPageDto();
+			freqPostPage.setCurrent(page);
+			freqPostPage.setEnd(end);
+			
+			System.out.println(freqPostPage);
+			
+			model.addAttribute("Page", freqPost);
+			model.addAttribute("pageInfo", freqPostPage);
 			
 			return "/serviceCenter/freq";
 		}
 		
 		
 		
-		// 자주묻는질문 글쓰기 등록(ONLY ADMIN)
-		@GetMapping("freqInsert")
-		public void freqInsert(Model model) {
+		 @PostMapping("freq")
+			 public void freqPostSearch(@RequestParam(name ="keyword")String keyword, @RequestParam("type")String type,
+					 					@RequestParam(name = "page", defaultValue = "1")int page,
+					 					Model model) {
 			
-		}
+					int rowPerPage = 5;
 		
-		@PostMapping("freqInsert")
-		public String freqInsert(ServiceCenterDto freq, String title,
-								Principal principal, 
-								Model model) { 
-			freq.setWriter(principal.getName());
+					List<ServiceCenterDto> freqSearchPost = service.freqSearchPost(type, keyword, page, rowPerPage);
+					System.out.println(page);
 		
-			boolean list = service.insertFreq(freq);
+		
+					int totalRecords = service.countSearchedPostPage(type,keyword);
+					int end = (totalRecords - 1) / rowPerPage + 1;
+		
+					PostPageDto freqPostPage = new PostPageDto();
+					freqPostPage.setCurrent(page);
+					freqPostPage.setEnd(end);
+		
+					System.out.println(freqPostPage);
+		
+					model.addAttribute("Page", freqSearchPost);
+					model.addAttribute("pageInfo", freqPostPage);
+				 
+			 }
+		 
+		
+			@PostMapping("freqPost")
+			public String getFreqPost(Principal principal,  Model model) {
+				ServiceCenterDto freq = service.getFreqPost();
+				model.addAttribute("freqPost", freq);
+				
+				return "/serviceCenter/freq";
+			}
 			
-			model.addAttribute("freqList", list);
-			return "redirect:/serviceCenter/freq";
-		
-		}
-	
+			
+			
+			// 자주묻는질문 글쓰기 등록(ONLY ADMIN)
+			@GetMapping("freqInsert")
+			public void freqInsert(Model model) {
+				
+			}
+			
+			@PostMapping("freqInsert")
+			public String freqInsert(ServiceCenterDto freq,
+									Principal principal,
+									RedirectAttributes rttr) { 
+				freq.setWriter(principal.getName());
+			
+				boolean success = service.insertFreq(freq);
+				if (success) {
+					rttr.addFlashAttribute("message", "새글이 등록되었습니다.");
+				} else {
+					rttr.addFlashAttribute("message", "새글이 등록되지 않았습니다.");
+				}
+				
+				return "redirect:/serviceCenter/freq";
+			
+			}
+		*/
 }
  
 
