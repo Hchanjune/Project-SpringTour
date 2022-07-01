@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team.springtour.domain.tourPackage.ReviewReplyDto;
 import com.team.springtour.service.tourPackage.ReviewReplyService;
@@ -93,6 +94,7 @@ public class ReviewReplyController {
 	}
 
 	@GetMapping("list")
+	@ResponseBody
 
 	public List<ReviewReplyDto> list(int reviewId, Principal principal) {
 		System.out.println("reveiw reply list@!@!@");

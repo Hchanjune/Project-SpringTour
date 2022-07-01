@@ -17,6 +17,9 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css"
 	integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" type="text/css" href="../../resources/css/style.css">
+	
+	
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	referrerpolicy="no-referrer"></script>
@@ -60,43 +63,39 @@
 
 	<tag:login/>
 	<tag:navBar/>
-	
-	<c:url value="/serviceCenter/modify" var="noticeModifyLink"/>
-	<div class="container">
+
+	<c:url value="/serviceCenter/modify" var="noticeModifyLink" />
+	<div class="container board_view">
 		<div class="row">
 			<div class="col">
-				
-				<div class="mt-3">	
-					<sec:authorize access="hasRole('ADMIN')">
-						<sec:authentication property="principal" var="principal" />
-						<c:if test="${principal.username == post.writer }">
-							<button id="edit-buttonNotice" class="btn btn-secondary">
-								<i class="fa-solid fa-user-pen"></i>
-							</button>
-						</c:if>
-					</sec:authorize>
-				</div>
-				
 
 				<c:if test="${not empty message }">
 					<div class="alert alert-primary">${message }</div>
 				</c:if>
 
-				<form id="noticeModifyForm" action="${noticeModifyLink }" method="post" enctype="multipart/form-data">
+				<form id="noticeModifyForm" action="${noticeModifyLink }"
+					method="post" enctype="multipart/form-data">
 					<input type="hidden" name="indexId" value="${post.indexId }" />
-					
-					<div>
-						<label class="form-label" for="input1">제목</label>
-						<input class="form-control" type="text" name="title" value="${post.title }" id="input1"
-							readonly />
+
+					<div class="board_view_title">
+						<!-- <label class="form-label" for="input1">제목</label> -->
+						<input class="form-control" type="text" name="title"
+							value="${post.title }" id="input1" readonly />
 					</div>
 
-					<div>
-						<label class="form-label" for="textarea1">본문</label>
-						<textarea class="form-control" name="body" id="textarea1"
+					<div class="board_view_date">
+						<!-- <label for="input2" class="form-label">작성일시</label>-->
+						<input class="form-control mb-3" type="datetime-local"
+							value="${post.inserted }" readonly />
+					</div>
+
+					<div class="board_view_content">
+						<!-- <label class="form-label" for="textarea1">본문</label>-->
+
+						 <textarea class="form-control" name="body" id="textarea1"
 							cols="30" rows="10" readonly>${post.body }</textarea>
 					</div>
-					
+
 					<c:forEach items="${post.fileName }" var="file">
 
 						<%
@@ -105,7 +104,7 @@
 						String encodedFileName = URLEncoder.encode(file, "utf-8");
 						pageContext.setAttribute("encodeFileName", encodedFileName);
 						%>
-						<div class="row">
+						<div class="row board_view_file">
 							<div class="col-1 col-12 d-flex align-items-center">
 								<div class="d-none removeFileCheckbox">
 									<div class="form-check form-switch">
@@ -119,7 +118,8 @@
 								<div class="col-lg-11 col-12">
 									<div>
 										<img class="img-fluid img-thumbnail"
-											src="${imageUrl }/ServiceCenter/${post.indexId}/${encodeFileName}" alt="" />
+											src="${imageUrl }/ServiceCenter/${post.indexId}/${encodeFileName}"
+											alt="" />
 									</div>
 								</div>
 							</div>
@@ -128,33 +128,46 @@
 
 					<div id="addFileInputContainer1" class="d-none">
 						<label for="fileInput1" class="form-label"></label>
-							파일추가 
-						<input id="fileInput1" class="form-control mb-3" type="file" accept="image/*" multiple="multiple" name="addFileList" />
+						파일추가
+						<input id="fileInput1" class="form-control mb-3" type="file"
+							accept="image/*" multiple="multiple" name="addFileList" />
 					</div>
 
-					<div>
-						<label for="input2" class="form-label">작성일시</label>
-						<input class="form-control mb-3" type="datetime-local"
-							value="${post.inserted }" readonly />
-					</div>
-
-					<button form="noticeModifyForm" id="modify-submit1" class="btn btn-secondary d-none">수정</button>
+					<button form="noticeModifyForm" id="modify-submit1"
+						class="btn btn-secondary d-none">수정</button>
 
 					<button id="delete-submit1" class="btn btn-danger d-none">삭제</button>
 
 
 				</form>
 
-
-				<div class="mt-3">
-					<form action="${appRoot }/serviceCenter/notice" method="get">
-						<button class="btn btn-primary">목록보기</button>
-					</form>
+				<div class="container_fluid board_view_bottom">
+					<div class="row">
+						<div class="col">
+							<div class="mt-3">
+								<form action="${appRoot }/serviceCenter/notice" method="get">
+									<button class="btn btn-primary">목록보기</button>
+								</form>
+							</div>
+						</div>
+						<div class="col">
+							<div class="mt-3 txt-right">
+								<sec:authorize access="hasRole('ADMIN')">
+									<sec:authentication property="principal" var="principal" />
+									<c:if test="${principal.username == post.writer }">
+										<button id="edit-buttonNotice" class="btn btn-secondary">
+											<i class="fa-solid fa-user-pen"></i>
+										</button>
+									</c:if>
+								</sec:authorize>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 </body>
 </html>
