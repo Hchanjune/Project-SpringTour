@@ -353,35 +353,34 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<!-- <form id="insertReplyQnaForm"> -->
+				<form id="insertReplyQnaForm">
 					<h3 style="color: blue;">답변</h3>
-					
-					
+
+					<%-- <form action="${appRoot }/serviceCenter/qna/insert" id="insertReplyForm1">  --%>
+
+					<input type="hidden" name="replyIndexId"
+						value="${qnaPost.indexId }" />
+					<input id="insertReplyContentInput" class="form-control"
+						type="text" name="qnaContent" required />
 
 
-				<%-- <form action="${appRoot }/serviceCenter/qna/insert" id="insertReplyForm1">  --%>
-				
-					<input type="hidden" name="replyIndexId" value="${qnaPost.indexId }" />
-						<input id="insertReplyContentInput" class="form-control"
-							type="text" name="qnaContent" required /> 
-
-
-						<sec:authorize access="hasRole('ADMIN')">
-							<sec:authentication property="principal" var="principal" />
-							<%-- <c:if test="${principal.username == qnaPost.writer }"> --%>
-								<button id="addReplyQnaButton" class="btn btn-outline-secondary">
-									<i class="fa-solid fa-comment-dots"></i>
-								</button>
-							<%-- </c:if> --%>
-						</sec:authorize>
-					</div>
-				<!-- </form> -->
+					<sec:authorize access="hasRole('ADMIN')">
+						<sec:authentication property="principal" var="principal" />
+						<%-- <c:if test="${principal.username == qnaPost.writer }"> --%>
+						<button id="addReplyQnaButton" class="btn btn-outline-secondary">
+							<i class="fa-solid fa-comment-dots"></i>
+						</button>
+						<%-- </c:if> --%>
+					</sec:authorize>
 			<!-- </form> -->
+				</form>
 			</div>
 		</div>
-		<div class="row">
-			<div id="replyMessage" class="alert alert-primary" style="display: none;"></div>
-		</div>
+	</div>
+	
+	<div class="row">
+		<div id="replyMessage" class="alert alert-primary"
+			style="display: none;"></div>
 	</div>
 
 
