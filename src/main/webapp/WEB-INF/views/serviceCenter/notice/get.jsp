@@ -96,7 +96,7 @@
 							cols="30" rows="10" readonly>${post.body }</textarea>
 					</div>
 
-					<c:forEach items="${post.fileName }" var="file">
+		<%-- 			<c:forEach items="${post.fileName }" var="file">
 
 						<%
 							// 특수기호 파일명 가능하게 하는 자바코드 
@@ -131,7 +131,7 @@
 						파일추가
 						<input id="fileInput1" class="form-control mb-3" type="file"
 							accept="image/*" multiple="multiple" name="addFileList" />
-					</div>
+					</div> --%>
 
 					<button form="noticeModifyForm" id="modify-submit1"
 						class="btn btn-secondary d-none">수정</button>
@@ -145,7 +145,7 @@
 					<div class="row">
 						<div class="col">
 							<div class="mt-3">
-								<form action="${appRoot }/serviceCenter/notice" method="get">
+								<form action="${appRoot }/serviceCenter/freq" method="get">
 									<button class="btn btn-primary">목록보기</button>
 								</form>
 							</div>
@@ -155,7 +155,7 @@
 								<sec:authorize access="hasRole('ADMIN')">
 									<sec:authentication property="principal" var="principal" />
 									<c:if test="${principal.username == post.writer }">
-										<button id="edit-buttonNotice" class="btn btn-secondary">
+										<button id="edit-buttonFreq" class="btn btn-secondary">
 											<i class="fa-solid fa-user-pen"></i>
 										</button>
 									</c:if>

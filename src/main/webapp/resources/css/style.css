@@ -173,7 +173,7 @@ pre{ font-size: 16px; line-height: 1.5; }
 	.board_view .board_view_content .form-control{
 		border-width: 0px;
 		background-color: transparent;
-		min-height: 450px;
+		min-height: 300px;
 		
 		padding: 40px 20px;
 	}
@@ -190,9 +190,8 @@ pre{ font-size: 16px; line-height: 1.5; }
 		text-align: right;
 	}
 	
-
-
 	
+
 	
 	
 	

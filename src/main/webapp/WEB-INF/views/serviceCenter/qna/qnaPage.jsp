@@ -40,16 +40,17 @@
 			}
 
 		});
+	});	
 		
-	/* }); */	
+	
 // qnaPage reply ------------------------------------------------------------------------------------------
 		
 		// 페이지 로딩 후 reply List 가져오는 ajax 요청
-	 	const listReply = function(){
+		const listReply = function(){
 		
 			const data = {replyIndexId : ${qnaPost.indexId }};
 			$.ajax({
-				url : "${appRoot}/qnaReply/qnaPage",
+				url : "${appRoot}/qnaReply/qnaList",
 				type : "get",
 				data : data,
 				success : function(list){
@@ -64,7 +65,7 @@
 					
 					
 					
-				/* 	for (let i=0; i < list.length; i++){
+					for (let i=0; i < list.length; i++){
 						const replyElement = $("<li class='list-group-item' />");
 						replyElement.html(`
 								
@@ -218,15 +219,17 @@
 		}
 		
 		//댓글 가져오는 함수 발생
-		listReply(); 
+		listReply();  
 		
 		// ---------------------------------------------------------------------------------------------
 		
 		// addReplySubmitButton1 버튼 클릭시 ajax 댓글 추가 요청
-		$("#addReplySubmitButton1").click(function(e){
+		
+	$(document).ready(function() {	
+		$("#addReplyQnaButton").click(function(e){
 			e.preventDefault();
-			
-			const data = $("#insertReplyForm1").serialize();
+				
+			const data = $("#insertReplyQnaForm").serialize();
 			
 			$.ajax({
 				url :"${appRoot }/qnaReply/qna/insert",
@@ -235,18 +238,18 @@
 				success : function(data){
 			
 					// 새 댓글 등록되었다는 메세지 출력
-					$("#replyMessage1").show().text(data).fadeOut(3000);		
+					$("#replyMessage").show().text(data).fadeOut(3000);		
 					
 					// text input 초기화
-					$("#insertReplyContentInput1").val("");
+					$("#insertReplyContentInput").val("");
 					
 					// 모든 댓글 가져오는 ajax 요청
 					//댓글 가져오는 함수 발생
-						listReply();
+					//	listReply();
 					// console.log(data);
 				},
 				error : function(){
-					$("#replyMessage1").show().text("댓글을 작성할  수 없습니다.").fadeout(3000);
+					$("#replyMessage").show().text("댓글을 작성할  수 없습니다.").fadeout(3000);
 					console.log("문제 발생");
 				},
 				complete : function(){
@@ -254,8 +257,19 @@
 				}
 			});
 		});
-	 }); 
+	 });  
 	
+		
+
+/* 		$(document).ready(function() {
+			$(".replyContent").hide();
+			//content 클래스를 가진 div를 표시/숨김(토글)
+			$(".heading2").click(function()
+			{
+			$(this).next(".replyContent").slideToggle(500);
+			});
+		});
+			 */
 
 </script>
 
@@ -339,32 +353,34 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<form id="insertReplyForm1">
+				<!-- <form id="insertReplyQnaForm"> -->
 					<h3 style="color: blue;">답변</h3>
-					<%-- <form action="${appRoot }/serviceCenter/qna/insert" id="insertReplyForm1">  --%>
-					<div class="input-group">
-						<input type="hidden" name="indexId" value="${qnaPost.indexId }" />
-						<input id="insertReplyContentInput1" class="form-control"
-							type="text" name="qnaContent" required />
+					
+					
+
+
+				<%-- <form action="${appRoot }/serviceCenter/qna/insert" id="insertReplyForm1">  --%>
+				
+					<input type="hidden" name="replyIndexId" value="${qnaPost.indexId }" />
+						<input id="insertReplyContentInput" class="form-control"
+							type="text" name="qnaContent" required /> 
 
 
 						<sec:authorize access="hasRole('ADMIN')">
 							<sec:authentication property="principal" var="principal" />
-							<c:if test="${principal.username == qnaPost.writer }">
-								<button id="addReplySubmitButton1"
-									class="btn btn-outline-secondary">
+							<%-- <c:if test="${principal.username == qnaPost.writer }"> --%>
+								<button id="addReplyQnaButton" class="btn btn-outline-secondary">
 									<i class="fa-solid fa-comment-dots"></i>
 								</button>
-							</c:if>
+							<%-- </c:if> --%>
 						</sec:authorize>
 					</div>
-				</form>
-				<!-- 	</form> -->
+				<!-- </form> -->
+			<!-- </form> -->
 			</div>
 		</div>
 		<div class="row">
-			<div class="alert alert-primary" style="display: none;"
-				id="replyMessage1"></div>
+			<div id="replyMessage" class="alert alert-primary" style="display: none;"></div>
 		</div>
 	</div>
 
@@ -377,10 +393,7 @@
 			<div class="col">
 				<!-- 	<h3>댓글 <span id="numOfReply1"></span> 개</h3> -->
 
-				<ul id="replyList1" class="list-group">
-
-
-				</ul>
+			
 			</div>
 		</div>
 	</div>
