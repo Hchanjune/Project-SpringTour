@@ -4,10 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags"%>
 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
-
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -74,9 +76,7 @@
 							<div class="col">
 								<h1>
 									패키지
-
-									<sec:authorize access="isAuthenticated()">
-
+									<sec:authorize access="hasRole('ADMIN')">
 										<button id="edit-button1" class="btn btn-secondary">
 											<i class="fa-solid fa-pen-to-square"></i>
 										</button>
@@ -87,6 +87,29 @@
 								<c:if test="${not empty message }">
 									<div class="alert alert-primary">${message }</div>
 								</c:if>
+								
+									<c:forEach items="${tourPackage.fileName }" var="file">
+										<%
+										String file = (String) pageContext.getAttribute("file");
+										String encodedFileName = java.net.URLEncoder.encode(file, "utf-8");
+										pageContext.setAttribute("encodedFileName", encodedFileName);
+										%>
+										<div class="row">
+											<div class="col-1">
+												<div class="d-none removeFileCheckbox">
+													삭제 <br /> <input type="checkbox" name="removeFileList"
+														value="${file }" />
+												</div>
+											</div>
+											<div class="col-11">
+												<div>
+													<img class="img-fluid"
+														src="${imageUrl }/tourPackage/${tourPackage.packageName }/${encodedFileName }"
+														alt="" />
+												</div>
+											</div>
+										</div>
+									</c:forEach>
 
 								<form id="form1" action="${appRoot }/tourPackage/modify"
 									method="post" enctype="multipart/form-data">
@@ -120,28 +143,6 @@
 											id="input4" value="${tourPackage.city }" readonly />
 									</div>
 
-									<c:forEach items="${tourPackage.fileName }" var="file">
-										<%
-											String file = (String) pageContext.getAttribute("file");
-										String encodedFileName = java.net.URLEncoder.encode(file, "utf-8");
-										pageContext.setAttribute("encodedFileName", encodedFileName);
-										%>
-										<div class="row">
-											<div class="col-1">
-												<div class="d-none removeFileCheckbox">
-													삭제 <br /> <input type="checkbox" name="removeFileList"
-														value="${file }" />
-												</div>
-											</div>
-											<div class="col-11">
-												<div>
-													<img class="img-fluid"
-														src="${imageUrl }/tourPackage/${tourPackage.packageName }/${encodedFileName }"
-														alt="" />
-												</div>
-											</div>
-										</div>
-									</c:forEach>
 									<div id="addFileInputContainer1" class="d-none">
 										파일 추가: <input type="file" accept="image/*" multiple="multiple"
 											name="addFileList" />

@@ -3,9 +3,13 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags"%>
+
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -62,13 +66,20 @@ $(document).ready(function() {
 					const replyElement = $("<li class='list-group-item' />");
 					replyElement.html(`				
 							<div id="replyDisplayContainer\${list[i].replyId }">
-								<div class="fw-bold">
+								<div class="fw-bold">								
+									<span class="badge bg-light text-dark">
 									<i class="fa-solid fa-comment"></i> 
-									\${list[i].prettyInserted}
+									\${list[i].writerName}
+								</span>
+									 
+									<i class="fa-solid fa-user"></i>
+									\${list[i].writerGrade}
 									
 									<span id="modifyButtonWrapper\${list[i].replyId }">
 									</span>							 	
-																	
+											
+									
+																				
 								</div>
 							 	<span id="replyContent\${list[i].replyId}"</span>							 	
 							</div>
@@ -119,7 +130,7 @@ $(document).ready(function() {
 					
 					const data = {
 							reviewId : formElem.find("[name=reviewId]").val(),
-							id : formElem.find("[name=id]").val(),
+							replyId : formElem.find("[name=replyId]").val(),
 							content : formElem.find("[name=content]").val()
 					};
 					
@@ -262,9 +273,12 @@ $(document).ready(function() {
 							<h1>
 								리뷰
 								<sec:authorize access="isAuthenticated()">
+									<sec:authentication property="principal" var="principal" />
+									<c:if test="${principal.username == review.writer}">
 									<button id="edit-button1" class="btn btn-secondary">
 										<i class="fa-solid fa-pen-to-square"></i>
 									</button>
+									</c:if>
 								</sec:authorize>
 
 							</h1>
