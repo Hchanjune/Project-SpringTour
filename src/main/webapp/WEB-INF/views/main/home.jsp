@@ -12,87 +12,70 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-
-<link rel="stylesheet" href="css/style.css">
-
-<style>
-
-
-		.imtext {
-		position:absolute;
-		top:70px;
-		left:100px;
-		z-index:1;
-		color:white;
-		font-size:130px;
-		width:120px;
-		font-weight:bold;
-		
-	}
-	
-		.imtext2 {
-		position:absolute;
-		top:350px;
-		left:750px;
-		z-index:1;
-		color:#0a3d62;
-		font-size:130px;
-		width:120px;
-		font-weight:bold;
-		
-	}
-	
-	
-		.imtext3 {
-		position:absolute;
-		top:170px;
-		left:550px;
-		z-index:1;
-		color:#EAB543;
-		font-size:150px;
-		width:120px;
-		font-weight:bold;
-		
-	}
-	
-	
-</style>
+ <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
 
 
 <title>Welcome</title>
 </head>
 <body>
-	
-	<div class="container-fluid" style="background:#60a3bc;">
+
+	<div class="container-fluid" style="background: #60a3bc;">
 		<div class="row">
 			<div class="col-12">
-				<tag:login/>
-				<tag:navBar/>
+				<tag:login />
+				<tag:navBar />
 			</div>
 		</div>
-		
-		<div class="row">
-			 <div class="col-1"> 
 
-			</div>
+		<div class="row">
+			<div class="col-1"></div>
 			<div class="col-10">
 
 
 				<div id="carouselExampleControls" class="carousel slide"
 					data-bs-ride="carousel">
 					<div class="carousel-inner">
+
 						<div class="carousel-item active">
-							<img src="../resources/img2/mapgirl.jpg" class="d-block w-100" alt="...">
-							<span class="imtext">WHERE SHOULD WE GO?</span>
+
+							<img src="../resources/img2/lake.jpg" class="d-block w-100"
+								alt="...">
+							<div class="imtext txt-right blue">
+								<p>
+									HELLO,
+									<br>
+									SPRING
+									<br>
+									TOUR
+								</p>
+							</div>
+
 						</div>
 						<div class="carousel-item">
-							<img src="../resources/img2/resort.jpg" class="d-block w-100" alt="...">
-							<span class="imtext2">RELAXING VACATION</span>
+							<img src="../resources/img2/mapgirl.jpg" class="d-block w-100"
+								alt="...">
+							<div class="imtext">
+								<p>
+									WHERE
+									<br>
+									SHOULD
+									<br>
+									WE GO?
+								</p>
+							</div>
 						</div>
 						<div class="carousel-item">
-							<img src="../resources/img2/lake.jpg" class="d-block w-100" alt="...">
-							<span class="imtext3">HELLO, SPRING TOUR</span>
+							<img src="../resources/img2/resort.jpg" class="d-block w-100"
+								alt="...">
+							<div class="imtext txt-center orange">
+								<p>
+									RELAXING
+									<br>
+									VACATION
+								</p>
+							</div>
 						</div>
+
 					</div>
 					<button class="carousel-control-prev" type="button"
 						data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -108,11 +91,9 @@
 
 
 				<c:if test="${not empty resultMessage}">
-						<div class="alert alert-primary">
-							${resultMessage }
-						</div>
-					</c:if>
-					<%-- <h1>Welcome to Spring Tour!</h1>
+					<div class="alert alert-primary">${resultMessage }</div>
+				</c:if>
+				<%-- <h1>Welcome to Spring Tour!</h1>
 					<p><span>ServerTime : </span><span style="color:red">${serverTime }</span></p>
 					<p><span>Locale : </span><span style="color:red">${locale }</span></p>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum dignissimos quae vel animi sequi consectetur ducimus voluptatibus sint earum inventore fugit modi tenetur cum eveniet assumenda odit fugiat. Soluta repudiandae!</p>	
@@ -130,21 +111,8 @@
 					<p>You can Write a Post about Review where you've travled Right below Here by clicking this button! <br />
 					There is also a menubar upside, u can check the Reviews! on the board</p> --%>
 			</div>
-
-
-			<div class="col-1">
-			
-			</div>
-
-
 		</div>
-		
-		<div class="row">
-			<div class="col-12">
-			
-			</div>
-		</div>
-		
-	 </div> 
+	</div>
+	<footer style="height: 25px; background-color:black;"></footer> 
 </body>
 </html>

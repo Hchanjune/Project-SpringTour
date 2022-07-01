@@ -3,6 +3,9 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags"%>
+<!DOCTYPE html>
+<html>
+<head>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -18,9 +21,8 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-<!DOCTYPE html>
-<html>
-<head>
+<link rel="stylesheet" type="text/css" href="../../resources/css/style.css">	
+	
 <script>
 $(document).ready(function() {
 	$("#edit-button1").click(function() {
@@ -58,31 +60,27 @@ $(document).ready(function() {
 				$("#numOfReply1").text(list.length);
 				for(let i = 0; i < list.length; i++) {
 					const replyElement = $("<li class='list-group-item' />");
-					replyElement.html(`
-				
-							<div id="replyDisplayContainer\${list[i].indexId }">
+					replyElement.html(`				
+							<div id="replyDisplayContainer\${list[i].replyId }">
 								<div class="fw-bold">
 									<i class="fa-solid fa-comment"></i> 
 									\${list[i].prettyInserted}
 									
-									<span id="modifyButtonWrapper\${list[i].indexId }">
-									</span>
-									
-
-								 	
-								 	
+									<span id="modifyButtonWrapper\${list[i].replyId }">
+									</span>							 	
+																	
 								</div>
-							 	<span id="replyContent\${list[i].indexId}"</span>							 	
+							 	<span id="replyContent\${list[i].replyId}"</span>							 	
 							</div>
 							
-							<div id="replyEditFormContainer\${list[i].indexId }" 
+							<div id="replyEditFormContainer\${list[i].replyId }" 
 								style="display: none;">
 								<form action="${appRoot }/reviewReply/modify" method="post">
 									<div class="input-group">
 										<input type="hidden" name="reviewId" value="${review.indexId }" />
-										<input type="hidden" name="id" value="\${list[i].indexId }" />
+										<input type="hidden" name="replyId" value="\${list[i].replyId }" />
 										<input class="form-control" value="\${list[i].content }" type="text" name="content" required /> 
-										<button data-reply-id="\${list[i].id}" 
+										<button data-reply-id="\${list[i].replyId}" 
 											class="reply-modify-submit btn btn-outline-secondary">
 											<i class="fa-solid fa-comment-dots"></i>
 										</button>
@@ -90,27 +88,27 @@ $(document).ready(function() {
 								</form>
 							</div>
 					`);
-					
+										
 					replyListElement.append(replyElement);	
-					$("#replyContent"+list[i].id).text(list[i].content);
-					
-					
+					$("#replyContent"+list[i].replyId).text(list[i].content);
+										
 					//own이 true일 때만 수정,삭제 버튼 보이기
 					if(list[i].own){
-						$("#modifyButtonWrapper" + list[i].id).html(`
+						
+						$("#modifyButtonWrapper" + list[i].replyId).html(`
 							 	<span class="reply-edit-toggle-button badge bg-info text-dark" 
-							 		id="replyEditToggleButton\${list[i].id }" 
-							 		data-reply-id="\${list[i].id }" >
+							 		id="replyEditToggleButton\${list[i].replyId }" 
+							 		data-reply-id="\${list[i].replyId }">
 							 		<i class="fa-solid fa-pen-to-square"></i>
 						 		</span>
 							 	<span class="reply-delete-button badge bg-danger" 
-							 		data-reply-id="\${list[i].id }">
+							 		data-reply-id="\${list[i].replyId }">
 							 		<i class="fa-solid fa-trash-can"></i>
 							 	</span>					
 						`);
 					}
 					
-				} // end of for
+				} //end of for
 					
 				$(".reply-modify-submit").click(function (e){
 					e.preventDefault();
@@ -173,7 +171,7 @@ $(document).ready(function() {
 					//	$("#replyDeleteForm1").submit();
 					
 						$.ajax({
-							url : "${appRoot}/Review/reviewReply/delete/"+replyId,
+							url : "${appRoot}/reviewReply/delete/"+replyId,
 							type : "delete",
 							success : function(data){
 								console.log(replyId + "댓글 삭제됨");
@@ -270,7 +268,6 @@ $(document).ready(function() {
 								</sec:authorize>
 
 							</h1>
-
 							<c:if test="${not empty message }">
 								<div class="alert alert-primary">${message }</div>
 							</c:if>
@@ -290,8 +287,6 @@ $(document).ready(function() {
 									<textarea class="form-control" name="body" id="textarea1"
 										cols="30" rows="10" readonly>${review.body }</textarea>
 								</div>
-
-
 
 								<div>
 									<label for="input3" class="form-label">작성자</label> <input
@@ -314,7 +309,6 @@ $(document).ready(function() {
 								<button id="modify-submit1" class="btn btn-primary d-none">수정</button>
 								<button id="delete-submit1" class="btn btn-danger d-none">삭제</button>
 							</form>
-
 						</div>
 					</div>
 				</div>
@@ -352,6 +346,7 @@ $(document).ready(function() {
 							<h3>
 								댓글 <span id="numOfReply1"></span> 개
 							</h3>
+							<ul id="replyList1" class="list-group">
 							</ul>
 						</div>
 					</div>

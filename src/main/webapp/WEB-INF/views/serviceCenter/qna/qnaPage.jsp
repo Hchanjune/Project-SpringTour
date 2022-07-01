@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+<link rel="stylesheet" type="text/css" href="../../resources/css/style.css">
 <script>
 
 	$(document).ready(function() {
@@ -41,15 +41,15 @@
 
 		});
 		
-	});	
+	/* }); */	
 // qnaPage reply ------------------------------------------------------------------------------------------
 		
 		// 페이지 로딩 후 reply List 가져오는 ajax 요청
-	/* 	const listReply = function(){
+	 	const listReply = function(){
 		
 			const data = {replyIndexId : ${qnaPost.indexId }};
 			$.ajax({
-				url : "${appRoot}/serviceCenter/qnaList",
+				url : "${appRoot}/qnaReply/qnaPage",
 				type : "get",
 				data : data,
 				success : function(list){
@@ -75,8 +75,6 @@
 												
 												<span id="modifyButtonWrapper\${list[i].replyIndexId }">
 												</span>
-												
-											
 											</div>
 								
 									 		<span id="replyContent\${list[i].replyIndexId}"></span>
@@ -87,8 +85,8 @@
 										<div id="replyEditFormContainer\${list[i].replyIndexId }" style="display: none;">
 											<form action="${appRoot }/qnaReply/modify" method="post">
 												<div class="input-group">
-													 작성자 : ${board.writerNickName }
-													<input type="hidden" name="writerId" value="${qnaReply.writerId }" /> 
+													<!-- 작성자 : ${board.writerNickName }
+													<input type="hidden" name="writerId" value="${qnaReply.writerId }" />--> 
 													<input type="hidden" name="replyIndexId" value="\${list[i].replyIndexId }" />
 													<input class="form-control" value="\${list[i].qnaContent }" 
 													       type="text" name="qnaContent" required /> 
@@ -96,7 +94,6 @@
 													        class="reply-modify-submit btn btn-outline-secondary">
 														<i class="fa-solid fa-comment-dots"></i>
 													</button>
-													
 												</div>
 											</form>
 										</div>			
@@ -107,7 +104,7 @@
 						
 						
 						
-						$("#replyContent" + list[i].indexId).text(list[i].qnaContent);
+						$("#replyContent" + list[i].replyIndexId).text(list[i].qnaContent);
 						// own이 true 일 때만 수정, 삭제 버튼 보이기
 						if (list[i].own){
 							$("#modifyButtonWrapper" + list[i].replyIndexId).html(`
@@ -135,7 +132,7 @@
 						 const formElem = $("#replyEditFormContainer" + replyIndexId).find("form");
 						 // const data = formElem.serialize(); put방식은 controller에서 못 받음.
 						 const data = {
-								/* writerId : formElem.find("[name=writerId]").val(), 
+								<!--writerId : formElem.find("[name=writerId]").val(), -->
 								replyIndexId : formElem.find("[name=replyIndexId]").val(),
 								qnaContent : formElem.find("[name=qnaContent]").val()
 						 };
@@ -221,7 +218,7 @@
 		}
 		
 		//댓글 가져오는 함수 발생
-		listReply();
+		listReply(); 
 		
 		// ---------------------------------------------------------------------------------------------
 		
@@ -232,7 +229,7 @@
 			const data = $("#insertReplyForm1").serialize();
 			
 			$.ajax({
-				url :"${appRoot }/serviceCenter/qna/qnaPage",
+				url :"${appRoot }/qnaReply/qna/insert",
 				type :"post",
 				data : data,
 				success : function(data){
@@ -257,9 +254,9 @@
 				}
 			});
 		});
-	}); 
+	 }); 
 	
- */
+
 </script>
 
 
@@ -271,20 +268,10 @@
 	<tag:navBar/>
 
 	<c:url value="/serviceCenter/qna/modify" var="qnaModifyLink" />
-	<div class="container">
+	<div class="container board_view" style="padding-bottom: 25px;">
 		<div class="row">
 			<div class="col">
-
-				<div class="mt-3">
-					<sec:authorize access="hasRole('ADMIN')">
-						<sec:authentication property="principal" var="principal" />
-						<c:if test="${principal.username == qnaPost.writer }">
-							<button id="edit-buttonQna" class="btn btn-secondary">
-								<i class="fa-solid fa-user-pen"></i>
-							</button>
-						</c:if>
-					</sec:authorize>
-				</div>
+				
 				<c:if test="${not empty message }">
 					<div class="alert alert-primary">${message }</div>
 				</c:if>
@@ -292,23 +279,24 @@
 					enctype="multipart/form-data">
 					<input type="hidden" name="indexId" value="${qnaPost.indexId }" />
 
-					<div>
-						<label class="form-label" for="input1">제목</label>
+					<div class="board_view_title">
+						<!-- <label class="form-label" for="input1">제목</label> -->
 						<input class="form-control" type="text" name="title"
 							value="${qnaPost.title }" id="input1" readonly />
 					</div>
 
-					<div>
-						<label class="form-label" for="textarea1">본문</label>
+					<div class="board_view_date">
+						<!-- <label for="input2" class="form-label">작성일시</label> -->
+						<input class="form-control mb-3" type="datetime-local"
+							value="${qnaPost.inserted }" readonly />
+					</div>
+					
+					<div class="board_view_content">
+						<!-- <label class="form-label" for="textarea1">본문</label> -->
 						<textarea class="form-control" name="body" id="textarea1"
 							cols="30" rows="10" readonly>${qnaPost.body }</textarea>
 					</div>
 
-					<div>
-						<label for="input2" class="form-label">작성일시</label>
-						<input class="form-control mb-3" type="datetime-local"
-							value="${qnaPost.inserted }" readonly />
-					</div>
 
 					<button form="qnaModifyForm" id="modify-submit2"
 						class="btn btn-secondary d-none">수정</button>
@@ -316,50 +304,61 @@
 					<button id="delete-submit2" class="btn btn-danger d-none">삭제</button>
 
 				</form>
-
-				<div class="mt-3">
-					<form action="${appRoot }/serviceCenter/qnaList" method="get">
-						<button class="btn btn-primary">목록보기</button>
-					</form>
+				<div class="container_fluid board_view_bottom">
+					<div class="row">
+						<div class="col">
+							<div class="mt-3">
+								<form action="${appRoot }/serviceCenter/qnaList" method="get">
+									<button class="btn btn-primary">목록보기</button>
+								</form>
+							</div>
+						</div>
+						<div class="col">
+							<div class="txt-right">
+								<sec:authorize access="hasRole('ADMIN')">
+									<sec:authentication property="principal" var="principal" />
+									<c:if test="${principal.username == qnaPost.writer }">
+										<button id="edit-buttonQna" class="btn btn-secondary">
+											<i class="fa-solid fa-user-pen"></i>
+										</button>
+									</c:if>
+								</sec:authorize>
+							</div>
+						</div>
+					</div>	
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<br />
-
-
-
-
 
 
 
 	<%-- 댓글 추가 form -------------------------------------------------------------------------- --%>
 	<!-- .container.mt-3>.row>.col>form -->
 
-	<div class="container mt-3">
+	<div class="container">
 		<div class="row">
 			<div class="col">
-				<h3 style="color: blue;">답변</h3>
+				<form id="insertReplyForm1">
+					<h3 style="color: blue;">답변</h3>
 					<%-- <form action="${appRoot }/serviceCenter/qna/insert" id="insertReplyForm1">  --%>
-				<div class="input-group">
-					<input type="hidden" name="indexId" value="${qnaPost.indexId }" />
-					<input id="insertReplyContentInput1" class="form-control"
-						type="text" name="qnaContent" required />
+					<div class="input-group">
+						<input type="hidden" name="indexId" value="${qnaPost.indexId }" />
+						<input id="insertReplyContentInput1" class="form-control"
+							type="text" name="qnaContent" required />
 
 
-					<sec:authorize access="hasRole('ADMIN')">
-						<sec:authentication property="principal" var="principal" />
-						<c:if test="${principal.username == qnaPost.writer }">
-							<button id="addReplySubmitButton1"
-								class="btn btn-outline-secondary">
-								<i class="fa-solid fa-comment-dots"></i>
-							</button>
-						</c:if>
-					</sec:authorize>
-
-
-				</div>
+						<sec:authorize access="hasRole('ADMIN')">
+							<sec:authentication property="principal" var="principal" />
+							<c:if test="${principal.username == qnaPost.writer }">
+								<button id="addReplySubmitButton1"
+									class="btn btn-outline-secondary">
+									<i class="fa-solid fa-comment-dots"></i>
+								</button>
+							</c:if>
+						</sec:authorize>
+					</div>
+				</form>
 				<!-- 	</form> -->
 			</div>
 		</div>
