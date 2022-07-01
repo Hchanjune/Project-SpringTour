@@ -17,14 +17,6 @@ public class QnAreplyService {
 	private QnAreplyMapper mapper;
 
 
-
-	public List<QnAreplyDto> listQnaPost() {
-
-		return mapper.listQnaPost();
-	}
-
-
-
 	public boolean insertQnaReply(QnAreplyDto dto) {
 		//		dto.setInserted(LocalDateTime.now());
 		return mapper.insertQnaReply(dto) == 1;
@@ -35,13 +27,13 @@ public class QnAreplyService {
 		return mapper.selectAllQnaIndexId(replyIndexId, null);
 	}
 
-	public boolean updateQnaReply(QnAreplyDto reply, Principal principal) {
+	public boolean updateQnaReply(QnAreplyDto dto, Principal principal) {
 
-		QnAreplyDto old = mapper.selectQnaReplyByIndexId(reply.getReplyIndexId());
+		QnAreplyDto old = mapper.selectQnaReplyByIndexId(dto.getReplyIndexId());
 
 		if (old.getQnaContent().equals(principal.getName())) {
 			// 댓글 작성자와 로그인한 유저가 같을때만 수정
-			return mapper.updateQnaReply(reply) == 1;
+			return mapper.updateQnaReply(dto) == 1;
 
 		} else {
 			// 그렇지 않으면 return false;
@@ -67,17 +59,6 @@ public class QnAreplyService {
 		return mapper.selectAllQnaIndexId(replyIndexId, qnaContent);
 	}
 
-	public List<QnAreplyDto> listQnaPage(int qnaPage, int rowPerPage) {
-		
-		int from = (qnaPage-1) * rowPerPage;
-		
-		return mapper.listQnaPage(from, rowPerPage);
-	}
-
-	public int countQnaPage() {
-		return mapper.countQnaPage();
-	}
-	
 	
 }	
 	

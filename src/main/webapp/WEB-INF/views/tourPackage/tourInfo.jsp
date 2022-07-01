@@ -3,7 +3,14 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags"%>
+
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 	integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -19,9 +26,8 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-<!DOCTYPE html>
-<html>
-<head>
+<link rel="stylesheet" type="text/css" href="../resources/css/style.css">	
+	
 <script>
 	$(document).ready(function() {
 		$("#edit-button1").click(function() {
