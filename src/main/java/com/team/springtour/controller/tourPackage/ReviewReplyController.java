@@ -47,7 +47,7 @@ public class ReviewReplyController {
 
 	@PutMapping(path = "modify", produces = "text/plain;charset=UTF-8")
 	public ResponseEntity<String> modify(@RequestBody ReviewReplyDto dto, Principal principal) {
-
+		System.out.println(dto);
 		if (principal == null) {
 			return ResponseEntity.status(401).build();
 		} else {
