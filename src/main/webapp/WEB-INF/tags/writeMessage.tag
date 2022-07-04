@@ -11,5 +11,5 @@
 </script>
 
 <div>
-	<button id="writeMessageTagButton">메시지 쓰기</button>
+	<button class="btn btn-success" id="writeMessageTagButton">메시지 쓰기</button>
 </div>

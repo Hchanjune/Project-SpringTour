@@ -35,11 +35,12 @@
 		<!-- Body -->
 		<div class="row">
 			<!-- Left -->
-			<div class="col-2">
-				<tag:managementSideMenu/>
+			<div class="col-2 navbar-left d-none d-md-block">
+				<tag:managementSideMenu current="userList"/>
 			</div>
 			<!-- Main -->
 			<div class="col-10">
+				<h3>회원 목록</h3>
 				<table class="table board_list">
 					<thead>
 						<tr>
@@ -57,9 +58,9 @@
 							<tr>
 								<td>${user.id }</td>
 								<td>
-									<form action="${appRoot }/user/myPage" id="userListLinkForm" method="post">
+									<form action="${appRoot }/user/myPage" id="userListLinkForm" method="get">
 										<input type="hidden" name="userId" value="${user.id }" />
-										<input type="submit" value="${user.name }" />
+										<input class="btn" type="submit" value="${user.name }" />
 									</form>
 								</td>
 								<td>${user.birthDate }</td>

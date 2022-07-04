@@ -74,17 +74,19 @@
 		<br />
 		<p>가입하실때 등록하신 아이디와 이메일을 입력하여 주세요.</p>
 		<form id="findPwForm" action="${appRoot }/user/forgotPw" method="post">
-			<input type="text" name="id" id="findPwIdInput" placeholder="아이디를 입력해주세요." />
-			<input type="email" name="email" id="findPwEmailInput" placeholder="example@spring.com"/>
-			<button id="checkEmailaddressInDBbutton-fotgotPw">조회</button>
-			<button type="submit" id="findPwButton" disabled>재설정 메일 발송</button>
+			<label for="findPwIdInput">아이디</label>
+			<input class="form-control" type="text" name="id" id="findPwIdInput" placeholder="아이디를 입력해주세요." />
+			<label for="findPwEmailInput">이메일</label>
+			<input class="form-control" type="email" name="email" id="findPwEmailInput" placeholder="example@spring.com"/>
+			<button class="btn btn-primary" id="checkEmailaddressInDBbutton-fotgotPw">조회</button>
+			<button class="btn btn-success" type="submit" id="findPwButton" disabled>재설정 메일 발송</button>
 		</form>
 		<br />
 		<p>가입하신 이메일로 비밀번호 재설정 메일이 발송됩니다.</p>
 		<p id="checkEmailAndIdMessage"></p>
 		<p id="findPwMessage"></p>
 		<div style="text-align:center;">
-			<button onclick="self.close();"> 닫기 </button>
+			<button class="btn btn-secondary" onclick="self.close();"> 닫기 </button>
 		</div>
 	</div>	
 </body>

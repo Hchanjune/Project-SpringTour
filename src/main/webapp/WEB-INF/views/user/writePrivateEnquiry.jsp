@@ -13,30 +13,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
-
 <title>SpringTour - 1:1문의 작성</title>
 </head>
 <body>
 	<div class="container-fluid">
-		
 		<!-- Header -->
 		<div class="row">
 			<div class="col-12">
 				<tag:login/>
 				<tag:navBar/>
-				<br />
 			</div>
 		</div>
-		
 		<!-- Body -->
 		<div class="row">
-			
 			<!-- Left -->
-			<div class="col-2">
-				<tag:userSideMenu/>
+			<div class="col-2 navbar-left d-none d-md-block">
+				<tag:userSideMenu current="writePrivateEnquiry"/>
 			</div>
-			
-			
 			<!-- Main -->
 			<div class="col-10">
 				<h3>1:1 문의 등록</h3>
@@ -56,7 +49,9 @@
 					
 					<label for="">본문</label>
 					<textarea class="form-control" name="body" cols="30" rows="10" placeholder="이곳에 질문을 입력해 주세요" required></textarea>
-					<input type="submit" class="form-control" value="1:1 질문 등록하기" />
+					<div class="text-center">
+						<input class="btn btn-primary justify-content-center" type="submit" class="form-control" value="1:1 질문 등록하기" />
+					</div>
 				</form>
 				
 				

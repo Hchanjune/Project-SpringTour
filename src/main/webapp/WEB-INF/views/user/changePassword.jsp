@@ -11,7 +11,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../resources/css/style.css">
+<title>비밀번호 변경</title>
 <script>
 	$(document).ready(function(){
 		let changePwAvailable = false;
@@ -69,11 +70,11 @@
 		<!-- Body -->
 		<div class="row">
 			<!-- Left -->
-			<div class="col-1">
+			<div class="col-2 navbar-left  d-none d-md-block">
 				<tag:userSideMenu/>
 			</div>
 			<!-- Main -->
-			<div class="col-11">
+			<div class="col-10">
 				<c:if test="${not empty resultMessage}">
 					<div class="alert alert-primary">
 						${resultMessage }
@@ -81,14 +82,14 @@
 				</c:if>
 				<c:if test="${not empty userId}">
 					<div>
-						<p>${userId }님의 비밀번호 변경</p>
+						<h3>${userId }님의 비밀번호 변경</h3>
 						<form action="${appRoot }/user/modifyPassword" method="post">
 							<input type="hidden" name="userId" value="${userId }" />
 							<label for="changePasswordInput" class="form-label">변경하실 비밀번호</label>
 							<input type="password" name="newPassword" id="changePasswordInput" /><br />
 							<label for="inputUserPassword" class="form-label">변경하실 비밀번호 확인</label>
 							<input type="password" id="checkChangePasswordInput" /><br />
-							<input type="submit" value="비밀번호 변경" id="changePasswordRegisterButton" disabled />
+							<input type="submit" value="비밀번호 변경" id="changePasswordRegisterButton" disabled class="btn btn-success" />
 						</form>
 						<p id="passwordChangeCheckMessage"></p>
 					</div>

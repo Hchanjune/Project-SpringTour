@@ -49,12 +49,16 @@ $(document).ready(function(){
 		<!-- Body -->
 		<div class="row">
 			<!-- Left -->
-			<div class="col-2">
-				<tag:userSideMenu/>
+			<div class="col-2 navbar-left  d-none d-md-block">
+				<tag:userSideMenu current="receivedMessage"/>
 			</div>
 			<!-- Main -->
 			<div class="col-10">
 				<div>
+					<h3>받은 메시지 목록</h3>
+					<div class="row">
+						<tag:writeMessage/>
+					</div>
 					<table class="table board_list">
 					 	<thead>
 					 		<tr>
@@ -85,9 +89,6 @@ $(document).ready(function(){
 					 		</c:forEach>
 					 	</tbody>
 					</table>
-				</div>
-				<div class="row">
-					<tag:writeMessage/>
 				</div>
 			</div>
 		</div>
