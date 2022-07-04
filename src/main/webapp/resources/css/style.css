@@ -108,6 +108,8 @@ pre{ font-size: 16px; line-height: 1.5; }
 	.navbar-left{ 
 		background-color: #60a3bc;
 		padding: 30px 0;
+		@extend .d-none;
+		@extend .d-md-block;
 	 }
 	 
 	 .navbar_menu h3{

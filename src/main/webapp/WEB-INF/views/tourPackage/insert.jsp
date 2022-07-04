@@ -37,17 +37,17 @@
 			<div class="col-12">
 				<tag:login />
 				<tag:navBar />
-				<tag:managementSideMenu /> 
 			</div>
 		</div>
 		<!-- Body -->
 		<div class="row">
 			<!-- Left -->
-			<div class="col-2">
-				<tag:managementSideMenu/>
+			<div class="col-2 navbar-left">
+				<tag:managementSideMenu current="insertPackage"/>
 			</div>
 			<!-- Main -->
 			<div class="col-10">
+				<h3>패키지 상품 추가</h3>
 				<form action="${appRoot }/tourPackage/insert" method="post"
 					enctype="multipart/form-data">
 					<div class="mb-3">

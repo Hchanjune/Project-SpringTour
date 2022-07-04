@@ -29,7 +29,7 @@
 		<div class="row">
 			
 			<!-- Left -->
-			<div class="col-2">
+			<div class="col-2 navbar-left  d-none d-md-block">
 				<tag:userSideMenu/>
 			</div>
 			
@@ -48,7 +48,7 @@
 				<div class="row">
 					<div style="text-align:center;">
 						<form action="${appRoot }/user/userPrivateEnquiryList" method="get">
-							<button type="submit">목록 보기</button>
+							<button class="btn btn-primary" type="submit">목록 보기</button>
 						</form>
 					</div>
 				</div>

@@ -31,8 +31,8 @@
 		<div class="row">
 			
 			<!-- Left -->
-			<div class="col-2">
-				<tag:managementSideMenu/>
+			<div class="col-2 navbar-left  d-none d-md-block">
+				<tag:managementSideMenu current="replyPrivateEnquiry"/>
 			</div>
 			
 			

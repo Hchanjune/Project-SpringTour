@@ -108,8 +108,14 @@ public class UserController {
 	}
 	
 	@GetMapping("myPage")
-	public String myPage(Principal principal, Model model) {
-		UserDto user = userService.getUserById(principal.getName());
+	public String myPage(String userId, Principal principal, Model model) {
+		UserDto user = new UserDto();
+		if (userId != null) {
+			user = userService.getUserById(userId);
+			model.addAttribute("management","management");;
+		}else {
+			user = userService.getUserById(principal.getName());
+		}
 		model.addAttribute("user", user);
 		return "/user/myPage";
 	}
@@ -264,7 +270,6 @@ public class UserController {
 	@GetMapping("adminReadPrivateEnquiry")
 	public String adminReadPrivateEnquiry(int indexId, Principal principal, Model model, RedirectAttributes rttr , HttpServletRequest request) {
 		PrivateEnquiryDto privateEnquiry = userService.getPrivateEnquiryByIndexId(indexId);
-		System.out.println(privateEnquiry);
 		if (authorityCheck(privateEnquiry.getClientName(), principal, request)) {
 			model.addAttribute("privateEnquiry", privateEnquiry);
 			return "user/adminReadPrivateEnquiry";

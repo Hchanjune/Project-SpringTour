@@ -24,14 +24,16 @@
 		<form action="${appRoot }/user/sendMessage" id="sendMessageForm" method="post">
 			<input type="hidden" name="sender" value="${principal.username }" />
 			<label for="inputSendMessageReceiver">받는이</label>
-			<input class="form-control" type="text" name="receiver" id="inputSendMessageReceiver" value="${receiver }" placeholder="받으시는 분 아이디를 입력하여 주세요."/>
+			<input class="form-control" type="text" name="receiver" id="inputSendMessageReceiver" value="${receiver }" placeholder="받으시는 분 아이디를 입력하여 주세요." required/>
 			<label for="inputSendMessageTitle">제목</label>
-			<input class="form-control" type="text" name="title" id="inputSendMessageTitle" placeholder="제목을 입력하세요."/>
+			<input class="form-control" type="text" name="title" id="inputSendMessageTitle" placeholder="제목을 입력하세요." required/>
 			<label for="inputSendMessageBody">내용</label>
-			<textarea class="form-control" name="body" id="inputSendMessageBody" cols="30" rows="10" placeholder="내용을 입력하세요."></textarea>
+			<textarea class="form-control" name="body" id="inputSendMessageBody" cols="30" rows="10" placeholder="내용을 입력하세요." required></textarea>
 		</form>
-		<div>
-			<button form="sendMessageForm" type="submit">보내기</button>
+		<div style="text-align:center;">
+			<br />
+			<button class="btn btn-success" form="sendMessageForm" type="submit">보내기</button>
+			<button class="btn btn-secondary" onclick="self.close();"> 취소 </button>
 		</div>
 	</div>
 </body>
