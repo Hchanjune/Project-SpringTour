@@ -15,83 +15,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+<link rel="stylesheet" type="text/css" href="../resources/css/style.css">
+
 <script>
 
-	
+
 	$(document).ready(function() {
-		$("#freqSubmit").click(function(e){
-			e.preventDefault();
-			
-			/* const data = $("form1").serialize(); */
-			
-			$.ajax({
-				url :"${appRoot }/serviceCenter/freqPost",
-				type :"post",
-				data : $('form1').serialize(),
-				success : function(data){
-			
-					// 새 댓글 등록되었다는 메세지 출력
-					$("#answer1").show().text(data);
-					console.log(data);
-					
-				/* 	// text input 초기화
-					$("#insertReplyContentInput1").val("");
-					
-					// 모든 댓글 가져오는 ajax 요청
-					//댓글 가져오는 함수 발생
-						listReply();
-					// console.log(data); */
-				},
-				error : function(){
-					$("#answer1").show().text("작성할  수 없습니다.");
-					console.log("문제 발생");
-				},
-				complete : function(){
-					console.log("요청완료");
-				}
-			});
+		$(".freqContent").hide();
+		//content 클래스를 가진 div를 표시/숨김(토글)
+		$(".heading").click(function()
+		{
+		$(this).next(".freqContent").slideToggle(500);
 		});
 	});
 	
 
 
-
-
-
-/*  	// addReplySubmitButton1 버튼 클릭시 ajax 댓글 추가 요청
-	$("#addReplySubmitButton1").click(function(e){
-		e.preventDefault();
-		
-		const data = $("#insertReplyForm1").serialize();
-		
-		$.ajax({
-			url :"${appRoot }/serviceCenter/freq",
-			type :"post",
-			data : data,
-			success : function(data){
-		
-				// 새 댓글 등록되었다는 메세지 출력
-				$("#replyMessage1").show().text(data).fadeOut(3000);		
-				
-				// text input 초기화
-				$("#insertReplyContentInput1").val("");
-				
-				// 모든 댓글 가져오는 ajax 요청
-				//댓글 가져오는 함수 발생
-					listReply();
-				// console.log(data);
-			},
-			error : function(){
-				$("#replyMessage1").show().text("댓글을 작성할  수 없습니다.").fadeout(3000);
-				console.log("문제 발생");
-			},
-			complete : function(){
-				console.log("요청완료");
-			}
-		});
-	});
-});
-	 */ 
 </script>
 
 
@@ -102,27 +41,27 @@
 	<tag:login/>
 	<tag:navBar/>
 
-	<br />
-	<div class="containder-fluid" style="margin: 25px;">
+	
+	<div class="containder-fluid" >
 		<div class="row">
 			<div class="col-2 navbar-left">
-				<div class="navbar_menu"
-					style="background: #C2E2E8; text-align: center;">
-					<h3
-						style="background: #E6FFFF; text-align: center; padding-top: 10px;">
+				<div class="navbar_menu">
+					
+					<h3>
 						고객센터
 						<a class="nav-link disabled"></a>
 					</h3>
 					<a class="nav-link" href="${appRoot }/serviceCenter/notice">공지사항</a>
 					<a class="nav-link" href="${appRoot }/serviceCenter/qnaList">묻고답하기</a>
-					<a class="nav-link" href="${appRoot }/serviceCenter/freq">자주묻는질문</a>
-					<br /><br /><br /><br><br /><br /><br /><br /><br /><br /><br /><br /><br />
+					<a class="nav-link left_nav_active" href="${appRoot }/serviceCenter/freq">자주묻는질문</a>
+					
 				</div>
 			</div>
 
 
 			<div class="col-10">
-				<div class="">
+				<div class="contents">
+					
 					<h1>자주묻는질문</h1>
 					
 					<div class="nav justify-content-end">
@@ -147,99 +86,92 @@
 						</form>
 					</div>
 				</div>
-				
-				<br />
 
-				<table class="table mt-3">
+
+
+				<table class="table board_list" style="width: 1625px;">
 					<thead>
-						<form action="${appRoot }/serviceCenter/freq" class="d-flex" method="post">
-
-							<ul class="nav nav-tabs" id="myTab" role="tablist">
-								<li class="nav-item" role="presentation">
-									<button class="nav-link active" id="home-tab"
-										data-bs-toggle="tab" data-bs-target="#home-tab-pane"
-										type="button" role="tab" aria-controls="home-tab-pane"
-										aria-selected="true">전체</button>
-								</li>
-								<li class="nav-item" role="presentation">
-									<button class="nav-link" id="profile-tab" data-bs-toggle="tab"
-										data-bs-target="#profile-tab-pane" type="button" role="tab"
-										aria-controls="profile-tab-pane" aria-selected="false">예약/결제</button>
-								</li>
-								<li class="nav-item" role="presentation">
-									<button class="nav-link" id="contact-tab" data-bs-toggle="tab"
-										data-bs-target="#contact-tab-pane" type="button" role="tab"
-										aria-controls="contact-tab-pane" aria-selected="false">상품문의</button>
-								</li>
-								<li class="nav-item" role="presentation">
-									<button class="nav-link" id="disabled-tab" data-bs-toggle="tab"
-										data-bs-target="#disabled-tab-pane" type="button" role="tab"
-										aria-controls="disabled-tab-pane" aria-selected="false">기타</button>
-								</li>
-							</ul>
+						<ul class="nav nav-tabs" id="myTab" role="tablist">
+							<li class="nav-item" role="presentation">
+								<button class="nav-link active" id="home-tab"
+									data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+									type="button" role="tab" aria-controls="home-tab-pane"
+									aria-selected="true">전체</button>
+							</li>
+						<!-- 	<li class="nav-item" role="presentation">
+								<button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+									data-bs-target="#profile-tab-pane" type="button" role="tab"
+									aria-controls="profile-tab-pane" aria-selected="false">예약/결제</button>
+							</li>
+							<li class="nav-item" role="presentation">
+								<button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+									data-bs-target="#contact-tab-pane" type="button" role="tab"
+									aria-controls="contact-tab-pane" aria-selected="false">상품문의</button>
+							</li>
+							<li class="nav-item" role="presentation">
+								<button class="nav-link" id="disabled-tab" data-bs-toggle="tab"
+									data-bs-target="#disabled-tab-pane" type="button" role="tab"
+									aria-controls="disabled-tab-pane" aria-selected="false">기타</button>
+							</li> -->
+						</ul>
 
 
-							<div class="tab-content" id="myTabContent">
-								<div class="tab-pane fade show active" id="home-tab-pane"
-									role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-									<br />
-									${freqPost.title }
+						<!-- <div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade show active" id="home-tab-pane"
+								role="tabpanel" aria-labelledby="home-tab" tabindex="0"> -->
 
+								
+								<div>
 									<c:forEach items="${Page }" var="sc">
-										<ul class="list-group">
-											<form id="form1">
-												<div class="input-group">
-													<input type="button" name=freqPost
-														value="${freqPost.indexId } Q ${sc.title }"
-														id="freqSubmit" class="form-control"
-														style="text-align: left;" />
-
-
-													<%-- Q ${sc.title } --%>
-
-												</div>
-
-
-												<div id="answer1">${sc.body }</div>
-
-											</form>
+										<%-- <ul class="list-group">
+											<span name="toggle-control">
+												<input  type="button" 
+													value=" Q. ${sc.title }"
+													class="form-control" style="text-align: left; padding: 15px 15px;" />
+											</span>
 										</ul>
-									</c:forEach>
+										<span name="toggle-control" style="display: none;"> A.${sc.body }</span> --%>
+										
+										<ul class="list-group">
+											<div class="heading" >
+												<input  type="button" 
+													value=" Q. ${sc.title }"
+													class="form-control" style="text-align: left; padding: 15px 15px;" />
+											</div>
+											<div class="freqContent"  style="background-color:#dff9fb; padding: 15px 15px 15px 40px; " > A. ${sc.body }</div>
+										</ul>
+									 </c:forEach> 
 								</div>
-							</div>
-						</form>
+							<!-- </div>
+						</div> -->
 					</thead>
-
-
-					<%-- <br />
-					<tbody>
-						<tr>
-							<td scope="row">Q ${freqList.body }</td>
-						</tr>
-
-					</tbody> --%>
 				</table>
 
 
-
-
+			
 				<sec:authorize access="hasRole('ADMIN')">
 					<sec:authentication property="principal" var="principal" />
-					<div class="col justify-content-right" align="right">
+					<div class="col justify-content-right" align="right" style="padding-right:40px;">
 						<button class="btn btn-primary" style="background: #E6FFFF;">
 							<a href="${appRoot}/serviceCenter/freqInsert">글쓰기</a>
 						</button>
+
+						<button class="btn btn-primary" style="background: #E6FFFF;">
+							<a href="${appRoot }/serviceCenter/freqmd">
+								<i class="fa-solid fa-user-pen"></i>
+							</a>
+						</button>
+
 					</div>
 				</sec:authorize>
+				</div>
 				
-				
-				<br />
 				<tag:noticepagination path="freq" />
 		
 			</div>
 		</div>
-	</div>
-	
+
+	<!-- <footer style="height: 25px; background-color:black;"></footer>  -->
 
 </body>
 </html>

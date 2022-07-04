@@ -13,7 +13,8 @@ public interface ServiceCenterMapper {
 	ServiceCenterDto selectBoardByIndexId(int indexId);
 	
 	int insertBoard(ServiceCenterDto dto);
-
+	
+	
 	List<ServiceCenterDto> listServiceCenterPage
 	(@Param("from")int from, @Param("row")int row);
 
@@ -21,7 +22,7 @@ public interface ServiceCenterMapper {
 
 	ServiceCenterDto selectPostByIndexId(int indexId);
 
-	int updatePost(ServiceCenterDto dto);
+	int updatePost(ServiceCenterDto post);
 
 	int deletePost(int indexId);
 
@@ -45,18 +46,18 @@ public interface ServiceCenterMapper {
 	
 	// freq-자주묻는질문 -----------------------------------------------------------------------------------------------
 	
-	ServiceCenterDto selectFreqPost();
-
-	List<ServiceCenterDto> listFreqPage(@Param("from")int from, @Param("row")int row);
-
-	int countFreqPostPage();
-
-	List<ServiceCenterDto> selectFreqSearchAll(@Param("type")String type, 
-												@Param("Keyword")String Keyword, 
-												@Param("from")int from, 
-												@Param("row")int row);
-
-	int insertFreqList(ServiceCenterDto freq);
+	/*	ServiceCenterDto selectFreqPost();
+	
+		List<ServiceCenterDto> listFreqPage(@Param("from")int from, @Param("row")int row);
+	
+		int countFreqPostPage();
+	
+		List<ServiceCenterDto> selectFreqSearchAll(@Param("type")String type, 
+													@Param("Keyword")String Keyword, 
+													@Param("from")int from, 
+													@Param("row")int row);
+	
+		int insertFreqList(ServiceCenterDto freq);*/
 
 
 

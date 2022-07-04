@@ -33,7 +33,7 @@
 
 <nav class="navbar navbar-expand-sm bg-light" style="background-color: #e3f2fd;">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="${homeLink }">Spring Tour</a>
+		<a class="navbar-brand" style="font-size:2.25rem" href="${homeLink }">Spring Tour</a>
 		<button class="navbar-toggler" type="button"
 			data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
 			aria-controls="offcanvasNavbar">
@@ -49,33 +49,10 @@
 			<div class="offcanvas-body">
 				<ul class="navbar-nav justify-content-left flex-grow-1 pe-3">
 
-					<li class="nav-item">
+				<%-- 	<li class="nav-item">
 						<a class="nav-link active" aria-current="page" href="${homeLink }">Home</a>
-					</li>
+					</li> --%>
 
-					<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="${noticeLink }"
-								id="offcanvasNavbarDropdown" role="button"
-								data-bs-toggle="dropdown" aria-expanded="false"> Notice </a>
-							<ul class="dropdown-menu"
-								aria-labelledby="offcanvasNavbarDropdown">
-								<li>
-									<a class="dropdown-item" href="${noticeLink }">공지사항</a>
-								</li>
-								<li>
-									<hr class="dropdown-divider">
-								</li>
-								<li>
-									<a class="dropdown-item" href="${qnaListLink }">묻고 답하기</a>
-								</li>
-								<li>
-									<hr class="dropdown-divider">
-								</li>
-								<li>
-									<a class="dropdown-item" href="${freqListLink }">자주 묻는 질문</a>
-								</li>
-							</ul>
-						</li>
 
 					<li class="nav-item">
 						<a class="nav-link" href="${tourPackageLink }">TourPackage</a>
@@ -87,6 +64,31 @@
 
 					<li class="nav-item">
 						<a class="nav-link" href="${packageReviewLink }">PackageReviews</a>
+					</li>
+					
+					
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="${noticeLink }"
+							id="offcanvasNavbarDropdown" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"> Notice </a>
+						<ul class="dropdown-menu"
+							aria-labelledby="offcanvasNavbarDropdown">
+							<li>
+								<a class="dropdown-item" href="${noticeLink }">공지사항</a>
+							</li>
+							<li>
+								<hr class="dropdown-divider">
+							</li>
+							<li>
+								<a class="dropdown-item" href="${qnaListLink }">묻고 답하기</a>
+							</li>
+							<li>
+								<hr class="dropdown-divider">
+							</li>
+							<li>
+								<a class="dropdown-item" href="${freqListLink }">자주 묻는 질문</a>
+							</li>
+						</ul>
 					</li>
 
 					<sec:authorize access="isAuthenticated()">
@@ -175,9 +177,10 @@
 				<form class="d-flex" role="search">
 					<input class="form-control me-2" type="search" placeholder="Search"
 						aria-label="Search">
-					<button class="btn btn-outline" type="submit">Search</button>
+					<button class="btn btn-outline" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 				</form>
 			</div>
 		</div>
 	</div>
 </nav>
+

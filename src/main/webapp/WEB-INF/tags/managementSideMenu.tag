@@ -10,14 +10,14 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col">
+		<div class="col navbar-left">
 			<nav class="nav flex-column" style="posotion: relative; left: 0px; margin-top: 0px; bottom: inherit;">
 				<a class="nav-link" href="${userListSideLink }">회원 관리</a>
 				<a class="nav-link" href="${receivedMessagesSideLink }">메일 발송</a>
 				<a class="nav-link" href="${tourPackageInsertSideLink }">여행상품 추가</a>
 				<a class="nav-link" href="${flightInfoInsertSideLink }">항공편 추가</a>
 				<a class="nav-link" href="${adminPrivateEnquiryListSideLink }">1:1 문의 목록</a>
-			</nav>
+			 </nav>
 		</div>
 	</div>
 </div>

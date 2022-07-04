@@ -65,7 +65,9 @@
 	                       location.replace("info3")
 	                    }
 	                    else{
+	                    	return false;
 	                        alert("삭제를 실패하였습니다.");  
+	                        location.href="${pageContext.request.contextPath }/board/delete.do?board_idx=${boardContents.board_idx}";
 	                    }
 	                    
 	                }

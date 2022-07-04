@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.sql.Connection"%>
 <%@ page import="java.sql.PreparedStatement"%>
@@ -17,6 +18,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="../resources/css/style.css">
+
 <title>Welcome</title>
 </head>
 
@@ -34,23 +37,15 @@
 
 		<div class="row">
 			<!-- Left -->
-			<div class="col-1">
-				<p>메뉴123123123123123123</p>
-				<br />
-				<p>메뉴</p>
-				<br />
-				<p>메뉴</p>
-				<br />
-				<p>메뉴</p>
-				<br />
-				<p>메뉴</p>
-				<br />
+			<div class="col-2">
+				
 			</div>
 
 			<!-- Main -->
-			<div class="col-11">
-
+			<div class="col-10">
+				<br>
 				<h1>항공권 정보</h1>
+				<br>
 
 				<form action="${appRoot }/flight/info" method="post">
 
@@ -82,13 +77,21 @@
 							<option value="도쿄 국제공항">도쿄 국제공항</option>
 						</optgroup>
 					</select>
-
+					&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="submit" class="button-1" id=btn1>비행기 스케줄조회</button>
+					
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<sec:authorize access="hasRole('ADMIN')">
+						<button class="button-1" onclick="location.href='info2'"> 스케줄 추가하기</button>
+						&nbsp;&nbsp;
+						<button class="button-1" onclick="location.href='info3'"> 스케줄 수정하기</button>
+					</sec:authorize>
 
 				</form>
-
+				<br>
+				
 				<h2>비행기 스케줄</h2>
-
+				
 				<table >
 					<thead>
 						<tr>
@@ -98,6 +101,7 @@
 							<th>출발공항&nbsp;&nbsp;&nbsp;</th>
 							<th>도착공항</th>
 						</tr>
+						
 					</thead>
 
 					<c:forEach items="${flightList }" var="Flight" >
@@ -110,11 +114,8 @@
 						</tr>
 					</c:forEach>
 				</table>
-
-				<br> <br> <br> <br>
-				<button class="button-1" onclick="location.href='info2'"> 스케줄 추가하기</button>
-				&nbsp;&nbsp;&nbsp;
-				<button class="button-1" onclick="location.href='info3'"> 스케줄 수정하기</button>
+				
+				
 
 			</div>
 
