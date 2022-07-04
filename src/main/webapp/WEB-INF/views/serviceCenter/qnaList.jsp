@@ -25,21 +25,19 @@
 	<tag:navBar/>
 
 
-
-	<div class="containder-fluid">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-2 navbar-left">
-
 				<div class="navbar_menu">
-
 					<h3>
 						고객센터
 						<a class="nav-link disabled"></a>
 					</h3>
 					<a class="nav-link" href="${appRoot }/serviceCenter/notice">공지사항</a>
-					<a class="nav-link left_nav_active" href="${appRoot }/serviceCenter/qnaList">묻고답하기</a>
+					<a class="nav-link left_nav_active"
+						href="${appRoot }/serviceCenter/qnaList">묻고답하기</a>
 					<a class="nav-link" href="${appRoot }/serviceCenter/freq">자주묻는질문</a>
-					
+
 				</div>
 			</div>
 
@@ -47,7 +45,6 @@
 			<div class="col-10">
 				<div class="contents">
 					<h1>묻고답하기</h1>
-					
 					<div class="nav justify-content-end">
 
 						<form action="${appRoot }/serviceCenter/qnaList" class="d-flex"
@@ -70,11 +67,11 @@
 						</form>
 					</div>
 				</div>
-				
 
-				<table class="table board_list">
-					<thead>
-						<tr class="col justify-content-center" align="center">
+
+				<table class="table board_list" style="width: 1625px;">
+					<thead class="col justify-content-center">
+						<tr>
 							<th>번호</th>
 							<th>패키지명</th>
 							<th>제목</th>
@@ -84,7 +81,7 @@
 						</tr>
 					</thead>
 					<c:forEach items="${qnaPost }" var="list">
-						<tr class="col justify-content-center" align="center">
+						<tr class="col justify-content-center">
 							<td>${list.indexId }</td>
 							<td>${list.packageName }</td>
 							<td class="title">
@@ -98,32 +95,35 @@
 							<td>${list.writer }</td>
 							<td>${list.prettyInserted }</td>
 							<c:choose>
-								<c:when test="${not empty list.answer }"><td>답변 완료</td></c:when>
-								<c:otherwise><td>확인중</td></c:otherwise>
+								<c:when test="${not empty list.answer }">
+									<td>답변 완료</td>
+								</c:when>
+								<c:otherwise>
+									<td>확인중</td>
+								</c:otherwise>
 							</c:choose>
-							
-					
+
 						</tr>
 					</c:forEach>
 				</table>
-
+									
 
 				<sec:authorize access="isAuthenticated()">
 					<sec:authentication property="principal" var="principal" />
-					<div class="col justify-content-right" align="right">
+					<div class="col justify-content-right" align="right" style="padding-right:40px;" >
 						<button class="btn btn-primary" style="background: #E6FFFF;">
 							<a href="${appRoot}/serviceCenter/qna/insert">문의하기</a>
 						</button>
 					</div>
 				</sec:authorize>
 
-				
+
 				<tag:noticepagination path="qnaList" />
 
 			</div>
 		</div>
 	</div>
-
+	<!-- <footer style="height: 25px; background-color:black;"></footer>  -->
 
 
 

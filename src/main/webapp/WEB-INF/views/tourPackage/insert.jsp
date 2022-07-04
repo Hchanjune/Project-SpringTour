@@ -37,6 +37,7 @@
 			<div class="col-12">
 				<tag:login />
 				<tag:navBar />
+				<tag:managementSideMenu /> 
 			</div>
 		</div>
 		<!-- Body -->

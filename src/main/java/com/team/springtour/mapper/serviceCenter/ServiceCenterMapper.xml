@@ -25,6 +25,8 @@
 		INSERT INTO ServiceCenter (title, body, writer)
 		VALUES (#{title}, #{body}, #{writer})
 	</insert>
+	
+
 
 
 	<select id="listServiceCenterPage" resultType="com.team.springtour.domain.serviceCenter.ServiceCenterDto">
@@ -135,7 +137,7 @@
 	<!-- freq - 자주묻는 질문 ###################################################################  -->
 
 	
-	<select id="selectFreqPost" resultType="com.team.springtour.domain.serviceCenter.ServiceCenterDto">
+<!-- 	<select id="selectFreqPost" resultType="com.team.springtour.domain.serviceCenter.ServiceCenterDto">
 		SELECT indexId, title, body, inserted
 		FROM ServiceCenter
 	</select>
@@ -187,6 +189,6 @@
 		FROM ServiceCenter
 	</select>
 	
-
+ -->
 
 </mapper>

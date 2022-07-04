@@ -34,7 +34,8 @@ public class QnAreplyController {
 	@Autowired
 	private QnAreplyService service;
 
-	@PostMapping(path = "/qna/insert", produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	@PostMapping(path = "qna/insert", produces = "text/plain;charset=UTF-8")
 	public ResponseEntity<String> insert(QnAreplyDto dto, Principal principal) {
 
 		if (principal == null) {
@@ -43,7 +44,7 @@ public class QnAreplyController {
 
 			String qnaContent = principal.getName();
 			dto.setQnaContent(qnaContent);
-
+			
 			boolean success = service.insertQnaReply(dto);
 
 			if (success) {
@@ -55,12 +56,12 @@ public class QnAreplyController {
 	}
 
 	@PutMapping(path = "modify", produces = "text/plain;charset=UTF-8")
-	public ResponseEntity<String> modify(@RequestBody QnAreplyDto reply, Principal principal) {
+	public ResponseEntity<String> modify(@RequestBody QnAreplyDto dto, Principal principal) {
 
 		if (principal == null) {
 			return ResponseEntity.status(401).build();
 		} else {
-			boolean success = service.updateQnaReply(reply, principal);
+			boolean success = service.updateQnaReply(dto, principal);
 
 			if (success) {
 				return ResponseEntity.ok("댓글이 변경되었습니다.");
@@ -86,12 +87,13 @@ public class QnAreplyController {
 		}
 	}
 
-	/*	@ResponseBody*/
+	
 	@GetMapping("qnaList")
 
 	public List<QnAreplyDto> list(int replyIndexId, Principal principal) {
 
 		if (principal == null) {
+
 			return service.getReplyByqQnaIndexId(replyIndexId);
 
 		} else {

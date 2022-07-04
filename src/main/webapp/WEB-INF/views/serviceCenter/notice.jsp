@@ -24,12 +24,10 @@
 	<tag:navBar/>
 	
 
-	<div class="containder-fluid">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-2 navbar-left">
-
 				<div class="navbar_menu">
-
 					<h3>
 						고객센터
 						<a class="nav-link disabled"></a>
@@ -42,7 +40,6 @@
 
 			<div class="col-10">
 				<div class="contents">
-
 					<h1>공지사항</h1>
 					<div class="nav justify-content-end">
 
@@ -68,7 +65,6 @@
 			
 
 					<table class="table board_list" >
-	
 						<thead class="col justify-content-center">
 							<tr>
 								<th>번호</th>
@@ -110,7 +106,6 @@
 			</div>
 		</div>
 	</div>
-
-
+	<!-- <footer style="height: 25px; background-color:black;"></footer>  -->
 </body>
 </html>
