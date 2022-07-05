@@ -31,7 +31,7 @@ public class FreqService {
 
 
 	public List<FreqDto> freqSearchPost(String type, String keyword, int page, int rowPerPage) {
-			String Keyword = "%" + keyword + "%";
+		String Keyword = "%" + keyword + "%";
 			
 		int from = (page-1) * rowPerPage;
 			
