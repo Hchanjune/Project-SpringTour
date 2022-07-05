@@ -47,7 +47,7 @@ public class ReviewReplyController {
 
 	@PutMapping(path = "modify", produces = "text/plain;charset=UTF-8")
 	public ResponseEntity<String> modify(@RequestBody ReviewReplyDto dto, Principal principal) {
-
+		System.out.println(dto);
 		if (principal == null) {
 			return ResponseEntity.status(401).build();
 		} else {
@@ -95,7 +95,6 @@ public class ReviewReplyController {
 
 	@GetMapping("list")
 	@ResponseBody
-
 	public List<ReviewReplyDto> list(int reviewId, Principal principal) {
 		System.out.println("reveiw reply list@!@!@");
 		if(principal==null) {

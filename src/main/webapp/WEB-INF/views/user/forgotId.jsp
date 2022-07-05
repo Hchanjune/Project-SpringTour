@@ -67,16 +67,17 @@
 		<br />
 		<p>가입하실때 등록하신 이메일을 입력하여 주세요.</p>
 		<form id="findIdForm" action="${appRoot }/user/forgotId" method="post">
-			<input type="email" name="email" id="findIdEmailInput" placeholder="example@spring.com"/>
-			<button id="checkEmailaddressInDBbutton-forgotId">조회</button>
-			<button type="submit" id="findIdButton" disabled>아이디 발송</button>
+			<label for="findIdEmailInput">이메일</label>
+			<input class="form-control" type="email" name="email" id="findIdEmailInput" placeholder="example@spring.com"/>
+			<button class="btn btn-primary" id="checkEmailaddressInDBbutton-forgotId">조회</button>
+			<button class="btn btn-success" type="submit" id="findIdButton" disabled>아이디 발송</button>
 		</form>
 		<br />
 		<p>가입하신 이메일로 아이디가 발송됩니다.</p>
 		<p id="checkEmailMessage"></p>
 		<p id="findIdMessage"></p>
 		<div style="text-align:center;">
-			<button onclick="self.close();"> 닫기 </button>
+			<button class="btn btn-secondary" onclick="self.close();"> 닫기 </button>
 		</div>
 	</div>	
 </body>

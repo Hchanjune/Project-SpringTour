@@ -31,13 +31,14 @@
 		<div class="row">
 			
 			<!-- Left -->
-			<div class="col-2">
-				<tag:userSideMenu/>
+			<div class="col-2 navbar-left d-none d-md-block">
+				<tag:userSideMenu current="userPrivateEnquiryList"/>
 			</div>
 			
 			
 			<!-- Main -->
 			<div class="col-10">
+				<h3>나의 문의 목록</h3>
 				<c:if test="${not empty resultMessage}">
 					<div class="alert alert-primary">
 						${resultMessage }

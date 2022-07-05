@@ -3,6 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -51,7 +52,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col">
-							<h1>패키지 목록</h1>
+							<h1>후기 목록</h1>
 							<c:if test="${not empty message }">
 								<div class="alert alert-primary">${message }</div>
 							</c:if>
@@ -86,9 +87,11 @@
 								</tbody>
 							</table>
 							<div class="col justify-content-right" align="right">
-								<button>
-									<a href="${appRoot}/tourPackage/Review/reviewInsert">글쓰기</a>
-								</button>
+								<sec:authorize access="isAuthenticated()">
+									<button type="button" class="btn btn-primary btn-lg">
+										<a href="${appRoot}/tourPackage/Review/reviewInsert">글쓰기</a>
+									</button>
+								</sec:authorize>
 							</div>
 						</div>
 					</div>

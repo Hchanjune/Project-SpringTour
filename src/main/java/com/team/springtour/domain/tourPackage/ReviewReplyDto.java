@@ -2,12 +2,17 @@ package com.team.springtour.domain.tourPackage;
 
 import java.time.LocalDateTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 @Data
 public class ReviewReplyDto {
 	private int replyId;
 	private int reviewId;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME, pattern = "yyyy-MM-dd'T'HH:mm:SS")
 	private LocalDateTime inserted;
+	private String writerName;
+	private String writerGrade;
 	private boolean own;
 	private String content;
 	private String memberId;

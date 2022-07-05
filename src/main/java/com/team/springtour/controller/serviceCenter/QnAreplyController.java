@@ -35,7 +35,7 @@ public class QnAreplyController {
 	private QnAreplyService service;
 
 	@ResponseBody
-	@PostMapping(path = "/qna/insert", produces = "text/plain;charset=UTF-8")
+	@PostMapping(path = "qna/insert", produces = "text/plain;charset=UTF-8")
 	public ResponseEntity<String> insert(QnAreplyDto dto, Principal principal) {
 
 		if (principal == null) {

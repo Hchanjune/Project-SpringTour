@@ -58,10 +58,18 @@
 		</div>
 		
 		<div class="row">
-			<div class="col-2 ">
-				<tag:userSideMenu/>
+			<div class="col-2 navbar-left d-none d-md-block">
+			<c:choose>
+				<c:when test="${not empty management}">
+					<tag:managementSideMenu current="userList"/>
+				</c:when>
+				<c:otherwise>
+					<tag:userSideMenu current="mypage"/>
+				</c:otherwise>
+			</c:choose>
 			</div>
 			<div class="col-10">
+				<h3>회원 정보</h3>
 						<form id="userInfoForm" class="row g-3" action="${appRoot }/user/modifyInfo" method="post">
 						<div class="row g-3">
 							<div class="col-md-4">
@@ -116,18 +124,20 @@
 					</form>
 					<div>
 						<c:if test="${principal.username == user.id }">
-							<button id="userInfoModifyButton">회원정보 수정</button>
-							<button id="userInfoModifyPasswordButton" type="submit" form="userInfoModifyPasswordForm"  style="display : none;">비밀번호 변경</button>
-							<button id="userInfoWithdrawButton">회원 탈퇴</button>
+							<button class="btn btn-primary" id="userInfoModifyButton">회원정보 수정</button>
+							<button class="btn btn-primary" id="userInfoModifyPasswordButton" type="submit" form="userInfoModifyPasswordForm"  style="display : none;">비밀번호 변경</button>
+							<button class="btn btn-danger" id="userInfoWithdrawButton">회원 탈퇴</button>
 						</c:if>
 						
 						<sec:authorize access="hasAnyRole('ADMIN','DEVELOPER')">
-							<button id="userInfoModifyByAdminButton">관리자 권한으로 수정</button>
+						<div>
+							<button class="btn btn-warning float-right" id="userInfoModifyByAdminButton">관리자 권한으로 수정</button>						
+						</div>
 						</sec:authorize>
 					</div>
 					<div>
-						<button type="submit" form="userInfoForm" id="userInfoModifySubmitButton" style="display : none;">수정</button>
-						<button type="submit" form="userInfoModifyResetForm" id="userInfoModifyResetButton" style="display : none;">취소</button>
+						<button class="btn btn-success" type="submit" form="userInfoForm" id="userInfoModifySubmitButton" style="display : none;">수정</button>
+						<button class="btn btn-danger" type="submit" form="userInfoModifyResetForm" id="userInfoModifyResetButton" style="display : none;">취소</button>
 					</div>
 			</div>
 		</div>
