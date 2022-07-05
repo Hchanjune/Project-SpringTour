@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team.springtour.mapper.user.ReservationMapper">
+	
+	<insert id="insertReservationByUserId">
+		INSERT INTO Reservation (reservationId, packageName, clientName)
+		VALUES( #{reservationId}, #{packageName}, #{userId} )
+	</insert>
+	
+	<select id="selectReservationIdAll" resultType="string">
+		SELECT reservationId
+		FROM Reservation
+	</select>
+	
+	<select id="selectReservationListByUserId" resultType="com.team.springtour.domain.user.ReservationDto">
+		SELECT reservationId,
+				packageName,
+				clientName,
+				inserted,
+				retractable
+		FROM Reservation
+		WHERE clientName = #{userId}
+	</select>
+	
+	<delete id="deleteReservationByReservationId">
+		DELETE FROM Reservation
+		WHERE reservationId = #{reservationId}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

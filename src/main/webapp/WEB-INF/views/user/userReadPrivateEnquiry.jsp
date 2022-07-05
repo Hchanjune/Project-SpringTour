@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="../resources/css/style.css">
 <title>SpringTour - ${privateEnquiry.title }</title>
 </head>
 <body>
@@ -30,20 +31,20 @@
 			
 			<!-- Left -->
 			<div class="col-2 navbar-left  d-none d-md-block">
-				<tag:userSideMenu/>
+				<tag:userSideMenu current="userPrivateEnquiryList"/>
 			</div>
 			
 			
 			<!-- Main -->
 			<div class="col-10">
 				<form action="" class="form-control">
-					<h3>제목 : ${privateEnquiry.title }</h3>
+					<h3>문의제목 : ${privateEnquiry.title }</h3>
 					<label for="">카테고리</label>
 					<input type="text" class="form-control" value="${privateEnquiry.category }" readonly/>
 					<label for="">본문</label>
-					<textarea class="form-control" cols="30" rows="10" readonly>${privateEnquiry.body }</textarea>
+					<textarea class="form-control" cols="30" rows="5" readonly>${privateEnquiry.body }</textarea>
 					<label for="">답변</label>
-					<textarea class="form-control" cols="30" rows="10" readonly>${privateEnquiry.reply }</textarea>
+					<textarea class="form-control" cols="30" rows="5" readonly>${privateEnquiry.reply }</textarea>
 				</form>
 				<div class="row">
 					<div style="text-align:center;">
@@ -59,7 +60,7 @@
 		<!-- Footer -->
 		<div class="row">
 			<div class="col-12">
-			
+				<tag:footer/>
 			</div>
 		</div>
 		

@@ -178,7 +178,7 @@
 			</div>
 			
 			<div class="col-12">
-				
+				<tag:footer/>
 			</div>
 		</form>
 	</div>

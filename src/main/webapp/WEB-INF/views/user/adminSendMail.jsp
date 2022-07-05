@@ -13,10 +13,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="../resources/css/style.css">
-<title>SpringTour - 1:1문의 작성</title>
+<script>
+	$(document).ready(function(){
+		$("#sendMailConfirmButton").click(function(){
+			$(this).hide();
+			$("#sendEmailParagraph").text("메일을 발송중입니다. 잠시만 기다려주세요...");
+			$("#sendEmailParagraph").css("color", "blue");
+		});
+	});
+</script>
+<title>SpringTour - 메일 발송</title>
 </head>
 <body>
 	<div class="container-fluid">
+		
 		<!-- Header -->
 		<div class="row">
 			<div class="col-12">
@@ -24,38 +34,36 @@
 				<tag:navBar/>
 			</div>
 		</div>
+		
 		<!-- Body -->
 		<div class="row">
+			
 			<!-- Left -->
-			<div class="col-2 navbar-left d-none d-md-block">
-				<tag:userSideMenu current="writePrivateEnquiry"/>
+			<div class="col-2 navbar-left  d-none d-md-block">
+				<tag:managementSideMenu current="sendMail"/>
 			</div>
+			
+			
 			<!-- Main -->
 			<div class="col-10">
-				<h3>1:1 문의 등록</h3>
-				<p>문의해 주신 내용은 빠르게 확인하여 답변드리겠습니다!</p>
-				<br />
-				<form action="${appRoot }/user/insertPrivateEnquiry" class="form-control" method="post">
-					<input type="hidden" name="clientName" value="${principal.username }" />
-					<label for="">제목</label>
-					<input type="text" class="form-control" name="title" placeholder="제목을 입력해주세요." required/>
-					
-					<label for="">질문 종류</label>
-					<select id="userInfoUserGrade" name="category" class="form-control" size="1">
-						<c:forEach items="${categoryList }" var="category">
-							<option <c:if test="${category.categoryName eq '질문을 선택하여 주세요'}">selected</c:if> value="${category.categoryName }">${category.categoryName }</option>
-						</c:forEach>
-					</select>
-					
-					<label for="">본문</label>
-					<textarea class="form-control" name="body" cols="30" rows="10" placeholder="이곳에 질문을 입력해 주세요" required></textarea>
+				<h3>메일 발송</h3>
+				<c:if test="${not empty resultMessage}">
+					<div class="alert alert-primary">
+						${resultMessage }
+					</div>
+				</c:if>
+				<form id="writeEmailForm" class="form-control" action="${appRoot }/user/sendMail" method="post">
+					<label for="writeEmail_emailAddress">받는사람 이메일</label>
+					<input id="writeEmail_emailAddress" type="email" name="email" class="form-control" placeholder="example@springtour.com" required/>
+					<label for="writeEmail_title">제목</label>
+					<input id="writeEmail_title" type="text" name="title" class="form-control" placeholder="이곳에 제목을 입력하세요." required/>
+					<label for="writeEmail_body">본문</label>
+					<textarea class="form-control" name="body" id="writeEmail_body" cols="30" rows="10" placeholder="내용을 입력하세요." required>안녕하세요 SpringTour 입니다!</textarea>
 					<div class="text-center">
-						<input class="btn btn-primary justify-content-center" type="submit" class="form-control" value="1:1 질문 등록하기" />
+						<input form="writeEmailForm" id="sendMailConfirmButton" class="btn btn-success" type="submit" value="발송" />
+						<p id="sendEmailParagraph"></p>
 					</div>
 				</form>
-				
-				
-				
 			</div>
 		</div>
 		

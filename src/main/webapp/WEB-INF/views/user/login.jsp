@@ -55,7 +55,7 @@
 			</div>
 		</div>
 	</div>
-
+	<tag:footer/>
 <div class="d-none">
 	<form action="${appRoot }/user/register" id="loginPageRegisterForm"></form>
 </div>	

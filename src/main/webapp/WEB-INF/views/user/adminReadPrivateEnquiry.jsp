@@ -48,8 +48,9 @@
 			<div class="col-10">
 				<form action="${appRoot }/user/replyPrivateEnquiry" class="form-control" id="replyPrivateEnquiryForm" method="post">
 					<h3>제목 : ${privateEnquiry.title }</h3>
+					<h5>회원ID : ${privateEnquiry.clientName }</h5>
 					<c:if test="${privateEnquiry.replyInfo == true }">
-						<p>답변이 완료된 문의 입니다.</p>
+						<p style="color:green;">답변이 완료된 문의 입니다.</p>
 					</c:if>
 					<p style="display : none;" id="replyPrivateEnquiryParagraph" class="alert alert-primary">답변을 등록중입니다...</p>
 					<input type="hidden" name="indexId" value="${privateEnquiry.indexId }" />
@@ -78,7 +79,7 @@
 		<!-- Footer -->
 		<div class="row">
 			<div class="col-12">
-			
+				<tag:footer/>
 			</div>
 		</div>
 		
