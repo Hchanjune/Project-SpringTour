@@ -122,7 +122,6 @@
 						</div>
 						
 					</form>
-					<div>
 						<c:if test="${principal.username == user.id }">
 							<button class="btn btn-primary" id="userInfoModifyButton">회원정보 수정</button>
 							<button class="btn btn-primary" id="userInfoModifyPasswordButton" type="submit" form="userInfoModifyPasswordForm"  style="display : none;">비밀번호 변경</button>
@@ -154,9 +153,10 @@
 						<input type="hidden" name="userId" value="${user.id }" />
 					</form>
 				</div>	
+				<tag:footer/>
 			</div>
 		</div>
-	</div>
+	
 
 </body>
 </html>

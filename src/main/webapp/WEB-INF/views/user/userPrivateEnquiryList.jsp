@@ -68,10 +68,10 @@
 								<td>${enquiry.inserted }</td>
 								<c:choose>
 					 				<c:when test="${enquiry.replyInfo == false}">
-					 					<td>확인 중</td>
+					 					<td style="color:green;">확인 중</td>
 					 				</c:when>
 					 				<c:when test="${enquiry.replyInfo == true}">
-					 					<td>답변 완료</td>
+					 					<td style="color:blue;">답변 완료</td>
 					 				</c:when>
 					 			</c:choose>
 							</tr>
@@ -85,7 +85,7 @@
 		<!-- Footer -->
 		<div class="row">
 			<div class="col-12">
-			
+				<tag:footer/>
 			</div>
 		</div>
 		
