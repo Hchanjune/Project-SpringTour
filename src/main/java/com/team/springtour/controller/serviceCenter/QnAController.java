@@ -28,7 +28,6 @@ public class QnAController {
 	private QnAService service;
 	
 	
-	
 	@Autowired
 	private TourPackageService tourPackageService;
 

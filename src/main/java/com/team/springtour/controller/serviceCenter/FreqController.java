@@ -54,7 +54,7 @@ public class FreqController {
 		
 		
 		
-		 @GetMapping(value="freq", params = {"keyword", "type"})
+		 @PostMapping("freq")
 			 public void freqPostSearch(@RequestParam(name ="keyword")String keyword, @RequestParam("type")String type,
 					 					@RequestParam(name = "page", defaultValue = "1")int page,
 					 					Model model) {
