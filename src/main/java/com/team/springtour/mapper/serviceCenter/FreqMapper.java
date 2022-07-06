@@ -17,9 +17,9 @@ public interface FreqMapper {
 	int countFreqPostPage();
 
 	List<FreqDto> selectFreqSearchAll(@Param("type")String type, 
-												@Param("Keyword")String Keyword, 
-												@Param("from")int from, 
-												@Param("row")int row);
+									  @Param("Keyword")String Keyword, 
+									  @Param("from")int from, 
+									  @Param("row")int row);
 
 	int insertFreqList(FreqDto freq);
 
