@@ -27,8 +27,6 @@ public class QnAController {
 	@Autowired
 	private QnAService service;
 	
-	@Autowired
-	private QnAreplyService replyService;
 	
 	@Autowired
 	private TourPackageService tourPackageService;
@@ -87,6 +85,7 @@ public class QnAController {
 		List<TourPackageDto> tourList = tourPackageService.TourList("","");
 		model.addAttribute("tourList", tourList);
 		
+		
 	}
 	 
 	@PostMapping("qna/insert")
@@ -98,6 +97,7 @@ public class QnAController {
 		System.out.println(principal.getName());
 		System.out.println(qna);
 		qna.setWriter(principal.getName());
+	
 		boolean success = service.insertQnA(qna);
 		
 		if (success) {

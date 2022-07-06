@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.team.springtour.domain.serviceCenter.QnAreplyDto;
 import com.team.springtour.domain.serviceCenter.ServiceCenterDto;
 
 public interface ServiceCenterMapper {
@@ -41,8 +42,7 @@ public interface ServiceCenterMapper {
 
 	int countSearchedPostPage(@Param("type")String type, @Param("keyword")String searchKeyword);
 
-	
-	
+
 	
 	// freq-자주묻는질문 -----------------------------------------------------------------------------------------------
 	
