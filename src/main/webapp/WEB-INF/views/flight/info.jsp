@@ -80,17 +80,18 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="submit" class="button-1" id=btn1>비행기 스케줄조회</button>
 					
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<sec:authorize access="hasRole('ADMIN')">
-						<button class="button-1" onclick="location.href='info2'"> 스케줄 추가하기</button>
-						&nbsp;&nbsp;
-						<button class="button-1" onclick="location.href='info3'"> 스케줄 수정하기</button>
-					</sec:authorize>
+					
 
 				</form>
 				<br>
 				
 				<h2>비행기 스케줄</h2>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<sec:authorize access="hasRole('ADMIN')">
+						<button class="button-1" onclick="location.href='info2'"> 스케줄 추가하기</button>
+						&nbsp;&nbsp;
+						<button class="button-1" onclick="location.href='info3'"> 스케줄 수정하기</button>
+					</sec:authorize>
 				
 				<table >
 					<thead>
@@ -115,7 +116,12 @@
 					</c:forEach>
 				</table>
 				
-				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<sec:authorize access="hasRole('ADMIN')">
+						<button class="button-1" onclick="location.href='info2'"> 스케줄 추가하기</button>
+						&nbsp;&nbsp;
+						<button class="button-1" onclick="location.href='info3'"> 스케줄 수정하기</button>
+					</sec:authorize>
 
 			</div>
 
