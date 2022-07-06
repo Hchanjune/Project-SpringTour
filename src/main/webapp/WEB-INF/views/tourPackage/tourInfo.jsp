@@ -88,6 +88,9 @@
 									<div class="alert alert-primary">${message }</div>
 								</c:if>
 								
+								<form id="form1" action="${appRoot }/tourPackage/modify"
+									 method="post" enctype="multipart/form-data">
+								
 									<c:forEach items="${tourPackage.fileName }" var="file">
 										<%
 										String file = (String) pageContext.getAttribute("file");
@@ -110,9 +113,6 @@
 											</div>
 										</div>
 									</c:forEach>
-
-								<form id="form1" action="${appRoot }/tourPackage/modify"
-									method="post" enctype="multipart/form-data">
 
 									<div>
 										<label for="input1" class="form-label">패키지명</label> <input
