@@ -168,4 +168,8 @@ public class UserService {
 		}
 	}
 
+	public void sendMail(String email, String title, String body) {
+		mailService.sendMail(email, title, body);
+	}
+
 }

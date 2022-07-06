@@ -1,21 +1,23 @@
 package com.team.springtour.service.serviceCenter;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team.springtour.domain.serviceCenter.QnAreplyDto;
+import com.team.springtour.domain.serviceCenter.ServiceCenterDto;
 import com.team.springtour.mapper.serviceCenter.QnAreplyMapper;
+import com.team.springtour.mapper.serviceCenter.ServiceCenterMapper;
 
 @Service
 public class QnAreplyService {
 	
 	@Autowired
 	private QnAreplyMapper mapper;
-
+	
+	
 
 	public boolean insertQnaReply(QnAreplyDto dto) {
 		//		dto.setInserted(LocalDateTime.now());
@@ -59,7 +61,9 @@ public class QnAreplyService {
 		return mapper.selectAllQnaIndexId(replyIndexId, qnaContent);
 	}
 
-	
+
+
+
 }	
 	
 	

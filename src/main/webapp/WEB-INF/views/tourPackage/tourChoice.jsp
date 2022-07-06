@@ -42,9 +42,9 @@
 		<!-- Body -->
 		<div class="row">
 			<!-- Left -->
-			<div class="col-1"></div>
+			<div class="col-0"></div>
 			<!-- Main -->
-			<div class="col-11">
+			<div class="col-12">
 				<div class="container">
 					<div class="row">
 						<div class="col">											
@@ -56,21 +56,21 @@
   								</div>
   						<div class="carousel-inner">
     						<div class="carousel-item active">
-      							<img src="http://localhost:8080/springtour/resources/img/hanoi.jpg" class="d-block w-100" alt="...">
+      							<img src="../resources/img/hanoi.jpg" class="d-block w-100" alt="...">
       							<div class="carousel-caption d-none d-md-block">
         							<h5>2022 하반기 골프</h5>
        								<p>코로나 끝! 이젠 골프치러 다양한 혜택으로 가봐요!</p>
       							</div>
     						</div>
     					<div class="carousel-item">
-      						<img src="http://localhost:8080/springtour/resources/img/Tokyo.jpg" class="d-block w-100" alt="...">
+      						<img src="../resources/img/Tokyo.jpg" class="d-block w-100" alt="...">
       							<div class="carousel-caption d-none d-md-block">
        								 <h5>2022 훈훈한 노후여행</h5>
        								 <p>코로나 끝나고 부모님과 함께 가는 따뜻한 여행!</p>
       							</div>
     					</div>
    					 <div class="carousel-item">
-      					<img src="http://localhost:8080/springtour/resources/img/hawai.jpg" class="d-block w-100" alt="...">
+      					<img src="../resources/img/hawai.jpg" class="d-block w-100" alt="...">
       						<div class="carousel-caption d-none d-md-block">
         						   <h5>2022 S/S 웨딩&허니문</h5>
        								<p>한번 뿐인 허니문, 혜택 가득 찬스!</p>
@@ -139,7 +139,9 @@
 		</div>
 		<!-- Footer -->
 		<div class="row">
-			<div class="col-12"></div>
+			<div class="col-12">
+				<tag:footer/>
+			</div>
 		</div>
 
 	</div>

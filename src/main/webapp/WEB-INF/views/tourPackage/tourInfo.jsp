@@ -88,6 +88,9 @@
 									<div class="alert alert-primary">${message }</div>
 								</c:if>
 								
+								<form id="form1" action="${appRoot }/tourPackage/modify"
+									 method="post" enctype="multipart/form-data">
+								
 									<c:forEach items="${tourPackage.fileName }" var="file">
 										<%
 										String file = (String) pageContext.getAttribute("file");
@@ -110,9 +113,6 @@
 											</div>
 										</div>
 									</c:forEach>
-
-								<form id="form1" action="${appRoot }/tourPackage/modify"
-									method="post" enctype="multipart/form-data">
 
 									<div>
 										<label for="input1" class="form-label">패키지명</label> <input
@@ -152,15 +152,47 @@
 									<button id="delete-submit1" class="btn btn-danger d-none">삭제</button>
 								</form>
 							</div>
+							<div class="text-center">
+								<div class="d-none">
+									<form id="reservationFormLink" action="${appRoot }/reservation/reserve" method="post">
+										<input type="text" name="packageName" value="${tourPackage.packageName}" />
+									</form>
+									
+								</div>
+									<br />
+									<sec:authorize access="isAuthenticated()">
+										<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#reservationConfirmModal">예약하기</button>
+										<div class="modal fade" id="reservationConfirmModal" tabindex="-1" aria-labelledby="reservationConfirmModalLabel" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="reservationConfirmModalLabel">예약하기</h5>
+														<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<div class="modal-body">
+														${tourPackage.packageName } 상품을 정말 예약하시겠습니까?
+													</div>
+													<div class="modal-footer">
+														<button id="reserveButton" class="btn btn-warning" form="reservationFormLink" type="submit">예약하기</button>
+														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</sec:authorize>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			</div>
 			<!-- Footer -->
 			<div class="row">
-				<div class="col-12"></div>
+				<div class="col-12">
+					<tag:footer/>
+				</div>
 			</div>
-
+		
 		</div>
 </body>
 </html>

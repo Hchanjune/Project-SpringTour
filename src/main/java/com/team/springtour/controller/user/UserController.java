@@ -293,6 +293,19 @@ public class UserController {
 		return "redirect:/user/adminPrivateEnquiryList";
 	}
 	
+	@GetMapping("adminSendMail")
+	public String adminSendMailPage() {
+		
+		return "/user/adminSendMail";
+	}
+	
+	@PostMapping("sendMail")
+	public String sendMail(String email, String title, String body,  RedirectAttributes rttr) {
+		userService.sendMail(email, title, body);
+		rttr.addFlashAttribute("resultMessage", "메일 발송이 완료되었습니다.");
+		return "redirect:/user/adminSendMail";
+	}
+	
 }
 
 
