@@ -45,7 +45,7 @@
 	
 // qnaPage reply ------------------------------------------------------------------------------------------
 		
-	 	// 페이지 로딩 후 reply List 가져오는 ajax 요청
+/* 	 	// 페이지 로딩 후 reply List 가져오는 ajax 요청
 		const listReply = function(){
 		
 			const data = {replyIndexId : ${qnaPost.indexId }};
@@ -260,7 +260,7 @@
 	 });  
 	
 		
-
+ */
 
 </script>
 
