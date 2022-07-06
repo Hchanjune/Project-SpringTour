@@ -4,10 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tag" tagdir="/WEB-INF/tags"%>
 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
-
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -74,9 +76,7 @@
 							<div class="col">
 								<h1>
 									패키지
-
-									<sec:authorize access="isAuthenticated()">
-
+									<sec:authorize access="hasRole('ADMIN')">
 										<button id="edit-button1" class="btn btn-secondary">
 											<i class="fa-solid fa-pen-to-square"></i>
 										</button>
@@ -87,6 +87,29 @@
 								<c:if test="${not empty message }">
 									<div class="alert alert-primary">${message }</div>
 								</c:if>
+								
+									<c:forEach items="${tourPackage.fileName }" var="file">
+										<%
+										String file = (String) pageContext.getAttribute("file");
+										String encodedFileName = java.net.URLEncoder.encode(file, "utf-8");
+										pageContext.setAttribute("encodedFileName", encodedFileName);
+										%>
+										<div class="row">
+											<div class="col-1">
+												<div class="d-none removeFileCheckbox">
+													삭제 <br /> <input type="checkbox" name="removeFileList"
+														value="${file }" />
+												</div>
+											</div>
+											<div class="col-11">
+												<div>
+													<img class="img-fluid"
+														src="${imageUrl }/tourPackage/${tourPackage.packageName }/${encodedFileName }"
+														alt="" />
+												</div>
+											</div>
+										</div>
+									</c:forEach>
 
 								<form id="form1" action="${appRoot }/tourPackage/modify"
 									method="post" enctype="multipart/form-data">
@@ -120,28 +143,6 @@
 											id="input4" value="${tourPackage.city }" readonly />
 									</div>
 
-									<c:forEach items="${tourPackage.fileName }" var="file">
-										<%
-											String file = (String) pageContext.getAttribute("file");
-										String encodedFileName = java.net.URLEncoder.encode(file, "utf-8");
-										pageContext.setAttribute("encodedFileName", encodedFileName);
-										%>
-										<div class="row">
-											<div class="col-1">
-												<div class="d-none removeFileCheckbox">
-													삭제 <br /> <input type="checkbox" name="removeFileList"
-														value="${file }" />
-												</div>
-											</div>
-											<div class="col-11">
-												<div>
-													<img class="img-fluid"
-														src="${imageUrl }/tourPackage/${tourPackage.packageName }/${encodedFileName }"
-														alt="" />
-												</div>
-											</div>
-										</div>
-									</c:forEach>
 									<div id="addFileInputContainer1" class="d-none">
 										파일 추가: <input type="file" accept="image/*" multiple="multiple"
 											name="addFileList" />
@@ -151,15 +152,47 @@
 									<button id="delete-submit1" class="btn btn-danger d-none">삭제</button>
 								</form>
 							</div>
+							<div class="text-center">
+								<div class="d-none">
+									<form id="reservationFormLink" action="${appRoot }/reservation/reserve" method="post">
+										<input type="text" name="packageName" value="${tourPackage.packageName}" />
+									</form>
+									
+								</div>
+									<br />
+									<sec:authorize access="isAuthenticated()">
+										<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#reservationConfirmModal">예약하기</button>
+										<div class="modal fade" id="reservationConfirmModal" tabindex="-1" aria-labelledby="reservationConfirmModalLabel" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="reservationConfirmModalLabel">예약하기</h5>
+														<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<div class="modal-body">
+														${tourPackage.packageName } 상품을 정말 예약하시겠습니까?
+													</div>
+													<div class="modal-footer">
+														<button id="reserveButton" class="btn btn-warning" form="reservationFormLink" type="submit">예약하기</button>
+														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</sec:authorize>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			</div>
 			<!-- Footer -->
 			<div class="row">
-				<div class="col-12"></div>
+				<div class="col-12">
+					<tag:footer/>
+				</div>
 			</div>
-
+		
 		</div>
 </body>
 </html>

@@ -25,12 +25,12 @@
 		<div style="text-align:right;">
 			<form action="${appRoot }/user/replyMessage" id="replyMessageForm" method="post">
 				<input type="hidden" name="sender" value="${message.sender }" />
-				<button form="replyMessageForm" type="submit">답장쓰기</button>
+				<button class="btn btn-primary" form="replyMessageForm" type="submit">답장쓰기</button>
 			</form>
 		</div>
 		<div style="text-align:center;">
 				<br />
-				<button onclick="self.close();"> 닫기 </button>
+				<button class="btn btn-secondary" onclick="self.close();"> 닫기 </button>
 		</div>
 	</div>
 </body>

@@ -112,6 +112,7 @@
 				reply
 		FROM PrivateEnquiry
 		WHERE clientName = #{userId}
+		ORDER BY indexId DESC
 	</select>
 	
 	<insert id="insertPrivateEnquiry">
@@ -142,6 +143,7 @@
 				replyInfo,
 				reply
 		FROM PrivateEnquiry
+		ORDER BY indexId DESC
 	</select>
 	
 	<update id="updatePrivateEnquiryByReply">

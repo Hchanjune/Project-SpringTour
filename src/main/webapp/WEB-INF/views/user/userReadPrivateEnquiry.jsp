@@ -31,26 +31,26 @@
 		<div class="row">
 			
 			<!-- Left -->
-			<div class="col-2">
-				<tag:userSideMenu/>
+			<div class="col-2 navbar-left  d-none d-md-block">
+				<tag:userSideMenu current="userPrivateEnquiryList"/>
 			</div>
 			
 			
 			<!-- Main -->
 			<div class="col-10">
 				<form action="" class="form-control">
-					<h3>제목 : ${privateEnquiry.title }</h3>
+					<h3>문의제목 : ${privateEnquiry.title }</h3>
 					<label for="">카테고리</label>
 					<input type="text" class="form-control" value="${privateEnquiry.category }" readonly/>
 					<label for="">본문</label>
-					<textarea class="form-control" cols="30" rows="10" readonly>${privateEnquiry.body }</textarea>
+					<textarea class="form-control" cols="30" rows="5" readonly>${privateEnquiry.body }</textarea>
 					<label for="">답변</label>
-					<textarea class="form-control" cols="30" rows="10" readonly>${privateEnquiry.reply }</textarea>
+					<textarea class="form-control" cols="30" rows="5" readonly>${privateEnquiry.reply }</textarea>
 				</form>
 				<div class="row">
 					<div style="text-align:center;">
 						<form action="${appRoot }/user/userPrivateEnquiryList" method="get">
-							<button type="submit">목록 보기</button>
+							<button class="btn btn-primary" type="submit">목록 보기</button>
 						</form>
 					</div>
 				</div>
@@ -61,7 +61,7 @@
 		<!-- Footer -->
 		<div class="row">
 			<div class="col-12">
-			
+				<tag:footer/>
 			</div>
 		</div>
 		

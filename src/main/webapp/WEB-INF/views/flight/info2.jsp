@@ -26,21 +26,12 @@
 
 			<div class="row">
 				<!-- Left -->
-				<div class="col-1">
-					<p>메뉴123123123123123123</p>
-					<br />
-					<p>메뉴</p>
-					<br />
-					<p>메뉴</p>
-					<br />
-					<p>메뉴</p>
-					<br />
-					<p>메뉴</p>
-					<br />
+				<div class="col-2 navbar-left">
+					<tag:managementSideMenu current="insertFlight"/>
 				</div>
 
 				<!-- Main -->
-				<div class="col-11">
+				<div class="col-10">
 					
 					<h1>스케줄 추가하기</h1>
 					
@@ -56,11 +47,15 @@
 				
 				<!-- Footer -->
 				<div class="row">
-					<div class="col-12"></div>
+					<div class="col-12">
+						<tag:footer/>
+					</div>
 				</div>
 
 			</div>
 
 		</div>
+		
+	</div>
 </body>
 </html>

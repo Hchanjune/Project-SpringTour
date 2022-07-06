@@ -21,11 +21,13 @@
 		<security:intercept-url pattern="/user/messageInfo" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/user/readMessage" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/user/writeMessage" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/reservation/reseravtionList" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/user/writePrivateEnquiry" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/user/userPrivateEnquiryList" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/user/userReadPrivateEnquiry" access="isAuthenticated()"/>
 		<!-- ManagerPages -->
 		<security:intercept-url pattern="/user/userList" access="hasAnyRole('ADMIN')"/>
+		<security:intercept-url pattern="/user/adminSendMail" access="hasAnyRole('ADMIN')"/>
 		<security:intercept-url pattern="/user/adminPrivateEnquiryList" access="hasAnyRole('ADMIN')"/>
 		<security:intercept-url pattern="/user/adminReadPrivateEnquiry" access="hasAnyRole('ADMIN')"/>
 		

@@ -18,11 +18,11 @@
 <script>
 	$(document).ready(function(){
 		$("#forgotIdPopUpButton").click(function(){
-			window.open("${appRoot}/user/forgotId", 'forgotIdPopUp', 'width=400, height=300, left=200, top=100, menubar=no, status=no, toolbar=no');
+			window.open("${appRoot}/user/forgotId", 'forgotIdPopUp', 'width=500, height=500, left=200, top=100, menubar=no, status=no, toolbar=no');
 		});
 		
 		$("#forgotPwPopUpButton").click(function(){
-			window.open("${appRoot}/user/forgotPw", 'forgotPwPopUp', 'width=400, height=300, left=200, top=100, menubar=no, status=no, toolbar=no');
+			window.open("${appRoot}/user/forgotPw", 'forgotPwPopUp', 'width=500, height=500, left=200, top=100, menubar=no, status=no, toolbar=no');
 		});
 	});
 
@@ -33,25 +33,29 @@
 	<tag:navBar></tag:navBar>
 	<div class="container">
 		<h1>로그인</h1>
-		<div class="row justify-content-md-center">
+		<div>
 			<form action="${appRoot }/login" method="post">
-				아이디 : <input type="text" name="username" /><br />
-				비밀번호 : <input type="password" name="password"/><br />
+				<div class="col-md-3">
+					아이디 : <input class="form-control" type="text" name="username" />
+				</div>
+				<div class="col-md-3">
+					비밀번호 : <input class="form-control" type="password" name="password"/>
+				</div>
 				<input type="checkbox" name="remember-me"/> 로그인 상태 유지<br />
-				<input form="loginPageRegisterForm" type="submit" value="회원가입" />
-				<input type="submit" value="로그인" />
+				<input class="btn btn-success" form="loginPageRegisterForm" type="submit" value="회원가입" />
+				<input class="btn btn-primary" type="submit" value="로그인" />
 			</form>
 			<div class="col">
 				<div class="row">	
 					<div class="col">
-						<button id="forgotIdPopUpButton">아이디 찾기</button>
-						<button id="forgotPwPopUpButton">비밀번호 찾기</button>
+						<button class="btn btn-secondary" id="forgotIdPopUpButton">아이디 찾기</button>
+						<button class="btn btn-secondary" id="forgotPwPopUpButton">비밀번호 찾기</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	<tag:footer/>
 <div class="d-none">
 	<form action="${appRoot }/user/register" id="loginPageRegisterForm"></form>
 </div>	

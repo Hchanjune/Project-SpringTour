@@ -31,13 +31,14 @@
 		<div class="row">
 			
 			<!-- Left -->
-			<div class="col-2">
-				<tag:userSideMenu/>
+			<div class="col-2 navbar-left d-none d-md-block">
+				<tag:userSideMenu current="userPrivateEnquiryList"/>
 			</div>
 			
 			
 			<!-- Main -->
 			<div class="col-10">
+				<h3>나의 문의 목록</h3>
 				<c:if test="${not empty resultMessage}">
 					<div class="alert alert-primary">
 						${resultMessage }
@@ -67,10 +68,10 @@
 								<td>${enquiry.inserted }</td>
 								<c:choose>
 					 				<c:when test="${enquiry.replyInfo == false}">
-					 					<td>확인 중</td>
+					 					<td style="color:green;">확인 중</td>
 					 				</c:when>
 					 				<c:when test="${enquiry.replyInfo == true}">
-					 					<td>답변 완료</td>
+					 					<td style="color:blue;">답변 완료</td>
 					 				</c:when>
 					 			</c:choose>
 							</tr>
@@ -84,7 +85,7 @@
 		<!-- Footer -->
 		<div class="row">
 			<div class="col-12">
-			
+				<tag:footer/>
 			</div>
 		</div>
 		
