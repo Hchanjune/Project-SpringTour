@@ -108,8 +108,14 @@ public class UserController {
 	}
 	
 	@GetMapping("myPage")
-	public String myPage(Principal principal, Model model) {
-		UserDto user = userService.getUserById(principal.getName());
+	public String myPage(String userId, Principal principal, Model model) {
+		UserDto user = new UserDto();
+		if (userId != null) {
+			user = userService.getUserById(userId);
+			model.addAttribute("management","management");;
+		}else {
+			user = userService.getUserById(principal.getName());
+		}
 		model.addAttribute("user", user);
 		return "/user/myPage";
 	}
@@ -264,7 +270,6 @@ public class UserController {
 	@GetMapping("adminReadPrivateEnquiry")
 	public String adminReadPrivateEnquiry(int indexId, Principal principal, Model model, RedirectAttributes rttr , HttpServletRequest request) {
 		PrivateEnquiryDto privateEnquiry = userService.getPrivateEnquiryByIndexId(indexId);
-		System.out.println(privateEnquiry);
 		if (authorityCheck(privateEnquiry.getClientName(), principal, request)) {
 			model.addAttribute("privateEnquiry", privateEnquiry);
 			return "user/adminReadPrivateEnquiry";
@@ -286,6 +291,19 @@ public class UserController {
 		}
 		rttr.addFlashAttribute("resultMessage", resultMessage);
 		return "redirect:/user/adminPrivateEnquiryList";
+	}
+	
+	@GetMapping("adminSendMail")
+	public String adminSendMailPage() {
+		
+		return "/user/adminSendMail";
+	}
+	
+	@PostMapping("sendMail")
+	public String sendMail(String email, String title, String body,  RedirectAttributes rttr) {
+		userService.sendMail(email, title, body);
+		rttr.addFlashAttribute("resultMessage", "메일 발송이 완료되었습니다.");
+		return "redirect:/user/adminSendMail";
 	}
 	
 }

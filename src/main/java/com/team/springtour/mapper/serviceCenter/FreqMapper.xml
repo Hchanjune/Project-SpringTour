@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.springtour.mapper.serviceCenter.FreqMapper">
+
+	<select id="selectFreqPost" resultType="com.team.springtour.domain.serviceCenter.FreqDto">
+		SELECT freqIndexId, title, body, inserted
+		FROM Freq
+	</select>
+
+	<select id="listFreqPage" resultType="com.team.springtour.domain.serviceCenter.FreqDto">
+		SELECT freqIndexId, body, title
+		FROM Freq
+		GROUP BY freqIndexId
+		ORDER BY freqIndexId DESC
+		LIMIT #{from}, #{row}
+	</select>
+	
+	
+	<insert id="insertFreqList" useGeneratedKeys="true" keyColumn="freqIndexId" keyProperty="freqIndexId">
+		INSERT INTO Freq (freqIndexId, title, body)
+		VALUES (#{freqIndexId}, #{title}, #{body})
+	</insert>
+	
+	
+	<select id="selectFreqSearchAll" resultType="com.team.springtour.domain.serviceCenter.FreqDto">
+		SELECT freqIndexId, title, body
+		FROM Freq
+		
+		<if test="keyword != '%%'">
+			<choose>
+				<when test="type == 'all'">
+					WHERE title LIKE #{keyword } OR
+					      body LIKE #{keyword }
+				</when>
+				
+				<when test="type == 'title'">
+					WHERE title LIKE #{keyword }
+				</when>
+				
+				<when test="type == 'body'">
+					WHERE body LIKE #{keyword }
+				</when>
+			</choose>
+		</if>
+		
+		ORDER BY freqIndexId DESC
+		LIMIT #{from}, #{row}
+	</select>
+	
+	
+	
+	<select id="countFreqPostPage" resultType="int">
+		SELECT Count(freqIndexId)
+		FROM Freq
+	</select>
+	
+		<select id="countSearchedFreqPage" resultType="int">
+		SELECT Count(freqIndexId)
+		FROM Freq
+		
+		<if test="keyword != '%%'">
+			<choose>
+				<when test="type == 'all'">
+					WHERE title LIKE #{keyword } OR
+					body LIKE #{keyword }
+				</when>
+				<when test="type == 'title'">
+					WHERE title LIKE #{keyword }
+				</when>
+				<when test="type == 'body'">
+					WHERE body LIKE #{keyword }
+				</when>
+			</choose>
+		</if>
+
+	</select>
+	
+	<select id="selectFreqPostByIndexId" resultType="com.team.springtour.domain.serviceCenter.FreqDto">
+		SELECT freqIndexId, title, body, inserted
+		FROM Freq
+		WHERE freqIndexId = #{freqIndexId}
+	</select>
+
+	
+	<update id="updateFreqPost">
+		UPDATE Freq
+		SET title = #{title},
+		    body = #{body}
+		WHERE freqIndexId = #{freqIndexId}
+	</update>
+
+
+
+	<delete id="deleteFreqPost">
+		DELETE FROM Freq
+		WHERE freqIndexId = #{freqIndexId }
+	</delete>
+
+
+
+
+</mapper>

@@ -26,8 +26,8 @@
 
 			<div class="row">
 				<!-- Left -->
-				<div class="col-2">
-					<tag:managementSideMenu/>
+				<div class="col-2 navbar-left">
+					<tag:managementSideMenu current="insertFlight"/>
 				</div>
 
 				<!-- Main -->
@@ -47,7 +47,9 @@
 				
 				<!-- Footer -->
 				<div class="row">
-					<div class="col-12"></div>
+					<div class="col-12">
+						<tag:footer/>
+					</div>
 				</div>
 
 			</div>

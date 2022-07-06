@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.team.springtour.domain.serviceCenter.QnAreplyDto;
 import com.team.springtour.domain.serviceCenter.ServiceCenterDto;
 
 public interface ServiceCenterMapper {
@@ -13,7 +14,8 @@ public interface ServiceCenterMapper {
 	ServiceCenterDto selectBoardByIndexId(int indexId);
 	
 	int insertBoard(ServiceCenterDto dto);
-
+	
+	
 	List<ServiceCenterDto> listServiceCenterPage
 	(@Param("from")int from, @Param("row")int row);
 
@@ -40,23 +42,22 @@ public interface ServiceCenterMapper {
 
 	int countSearchedPostPage(@Param("type")String type, @Param("keyword")String searchKeyword);
 
-	
-	
+
 	
 	// freq-자주묻는질문 -----------------------------------------------------------------------------------------------
 	
-	ServiceCenterDto selectFreqPost();
-
-	List<ServiceCenterDto> listFreqPage(@Param("from")int from, @Param("row")int row);
-
-	int countFreqPostPage();
-
-	List<ServiceCenterDto> selectFreqSearchAll(@Param("type")String type, 
-												@Param("Keyword")String Keyword, 
-												@Param("from")int from, 
-												@Param("row")int row);
-
-	int insertFreqList(ServiceCenterDto freq);
+	/*	ServiceCenterDto selectFreqPost();
+	
+		List<ServiceCenterDto> listFreqPage(@Param("from")int from, @Param("row")int row);
+	
+		int countFreqPostPage();
+	
+		List<ServiceCenterDto> selectFreqSearchAll(@Param("type")String type, 
+													@Param("Keyword")String Keyword, 
+													@Param("from")int from, 
+													@Param("row")int row);
+	
+		int insertFreqList(ServiceCenterDto freq);*/
 
 
 

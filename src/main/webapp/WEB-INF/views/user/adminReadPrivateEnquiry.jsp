@@ -39,8 +39,8 @@
 		<div class="row">
 			
 			<!-- Left -->
-			<div class="col-2">
-				<tag:managementSideMenu/>
+			<div class="col-2 navbar-left  d-none d-md-block">
+				<tag:managementSideMenu current="replyPrivateEnquiry"/>
 			</div>
 			
 			
@@ -48,8 +48,9 @@
 			<div class="col-10">
 				<form action="${appRoot }/user/replyPrivateEnquiry" class="form-control" id="replyPrivateEnquiryForm" method="post">
 					<h3>제목 : ${privateEnquiry.title }</h3>
+					<h5>회원ID : ${privateEnquiry.clientName }</h5>
 					<c:if test="${privateEnquiry.replyInfo == true }">
-						<p>답변이 완료된 문의 입니다.</p>
+						<p style="color:green;">답변이 완료된 문의 입니다.</p>
 					</c:if>
 					<p style="display : none;" id="replyPrivateEnquiryParagraph" class="alert alert-primary">답변을 등록중입니다...</p>
 					<input type="hidden" name="indexId" value="${privateEnquiry.indexId }" />
@@ -64,9 +65,9 @@
 				<div class="row">
 					<div style="text-align:center;">
 						<form action="${appRoot }/user/adminPrivateEnquiryList" method="get">
-							<button type="submit">목록 보기</button>
+							<button type="submit" class="btn btn-primary">목록 보기</button>
 							<c:if test="${privateEnquiry.replyInfo == false }">
-								<button form="replyPrivateEnquiryForm" type="submit" id="replyPrivateEnquiryButton">답변 등록</button>
+								<button class="btn btn-success" form="replyPrivateEnquiryForm" type="submit" id="replyPrivateEnquiryButton">답변 등록</button>
 							</c:if>
 						</form>
 					</div>
@@ -78,7 +79,7 @@
 		<!-- Footer -->
 		<div class="row">
 			<div class="col-12">
-			
+				<tag:footer/>
 			</div>
 		</div>
 		

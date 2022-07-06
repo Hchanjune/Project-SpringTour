@@ -20,12 +20,13 @@
 <c:url value="/user/myPage" var="myPageLink" />
 <c:url value="/user/dmReceiveList" var="dmReceiveListLink" />
 <c:url value="/user/dmSendList" var="dmSendListLink" />
-
+<c:url value="/reservation/reservationList" var="reservationListLink" />
 <c:url value="/user/writePrivateEnquiry" var="writePrivateEnquiryLink" />
 <c:url value="/user/userPrivateEnquiryList"
 	var="userPrivateEnquiryListLink" />
 <!-- ManagementLinks -->
 <c:url value="/user/userList" var="userListPageLink" />
+<c:url value="/user/adminSendMail" var="adminSendMailPageLink" />
 <c:url value="/tourPackage/insert" var="tourPackageInsertLink" />
 <c:url value="/flight/info2" var="flightInfoInsertLink" />
 <c:url value="/user/adminPrivateEnquiryList" var="adminPrivateEnquiryListLink"/>
@@ -42,7 +43,7 @@
 		<div class="offcanvas offcanvas-end" tabindex="-1"
 			id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 			<div class="offcanvas-header">
-				<h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+				<h5 class="offcanvas-title" id="offcanvasNavbarLabel">SpringTour Menu</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
 					aria-label="Close"></button>
 			</div>
@@ -117,7 +118,7 @@
 									<hr class="dropdown-divider">
 								</li>
 								<li>
-									<a class="dropdown-item" href="${dmSendListLink }">예약목록 조회</a>
+									<a class="dropdown-item" href="${reservationListLink }">예약목록 조회</a>
 								</li>
 								<li>
 									<hr class="dropdown-divider">
@@ -149,7 +150,7 @@
 									<hr class="dropdown-divider">
 								</li>
 								<li>
-									<a class="dropdown-item" href="#">메일 발송</a>
+									<a class="dropdown-item" href="${adminSendMailPageLink }">메일 발송</a>
 								</li>
 								<li>
 									<hr class="dropdown-divider">

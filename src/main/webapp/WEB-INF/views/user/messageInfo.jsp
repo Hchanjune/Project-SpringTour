@@ -22,7 +22,7 @@
 			<textarea class="form-control" name="body" cols="30" rows="10" readonly>${message.body }</textarea>
 			<div style="text-align:center;">
 				<br />
-				<button onclick="self.close();"> 닫기 </button>
+				<button class="btn btn-secondary" onclick="self.close();"> 닫기 </button>
 			</div>
 	</div>
 </body>

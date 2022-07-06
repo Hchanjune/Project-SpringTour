@@ -48,11 +48,15 @@ $(document).ready(function(){
 		<!-- Body -->
 		<div class="row">
 			<!-- Left -->
-			<div class="col-2">
-				<tag:userSideMenu/>
+			<div class="col-2 navbar-left d-none d-md-block">
+				<tag:userSideMenu current="sendMessage"/>
 			</div>
 			<!-- Main -->
 			<div class="col-10">
+				<h3>보낸 메시지 목록</h3>
+				<div class="justify-content-sm-end">
+					<tag:writeMessage/>
+				</div>
 				<div>
 					<table class="table board_list">
 					 	<thead>
@@ -85,15 +89,12 @@ $(document).ready(function(){
 					 	</tbody>
 					</table>
 				</div>
-				<div class="row">
-					<tag:writeMessage/>
-				</div>
 			</div>
 		</div>
 		<!-- Footer -->
 		<div class="row">
 			<div class="col-12">
-			
+				<tag:footer/>
 			</div>
 		</div>
 		

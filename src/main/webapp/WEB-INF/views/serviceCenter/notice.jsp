@@ -106,6 +106,6 @@
 			</div>
 		</div>
 	</div>
-	<footer style="height: 25px; background-color:black;"></footer> 
+	<!-- <footer style="height: 25px; background-color:black;"></footer>  -->
 </body>
 </html>

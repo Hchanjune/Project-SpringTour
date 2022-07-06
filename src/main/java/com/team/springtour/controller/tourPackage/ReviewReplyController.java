@@ -95,7 +95,6 @@ public class ReviewReplyController {
 
 	@GetMapping("list")
 	@ResponseBody
-
 	public List<ReviewReplyDto> list(int reviewId, Principal principal) {
 		System.out.println("reveiw reply list@!@!@");
 		if(principal==null) {

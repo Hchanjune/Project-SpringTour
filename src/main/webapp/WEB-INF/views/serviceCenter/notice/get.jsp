@@ -17,7 +17,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css"
 	integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link rel="stylesheet" type="text/css" href="../../resources/css/style.css">
+<link rel="stylesheet" type="text/css" href="../../resources/css/style.css">
 	
 	
 <script
@@ -32,14 +32,14 @@
 		$("#edit-buttonNotice").click(function() {
 			$("#input1").removeAttr("readonly");
 			$("#textarea1").removeAttr("readonly");
-			$("#modify-submit1").removeClass("d-none");
-			$("#delete-submit1").removeClass("d-none");
+			$("#noticeModify-submit1").removeClass("d-none");
+			$("#noticeDelete-submit1").removeClass("d-none");
 			$("#addFileInputContainer1").removeClass("d-none");
 			$(".removeFileCheckbox").removeClass("d-none");
 			
 		});
 		
-		$("#delete-submit1").click(function(e) {
+		$("#noticeDelete-submit1").click(function(e) {
 			e.preventDefault();
 			
 			if (confirm("삭제하시겠습니까?")) {
@@ -131,12 +131,12 @@
 						파일추가
 						<input id="fileInput1" class="form-control mb-3" type="file"
 							accept="image/*" multiple="multiple" name="addFileList" />
-					</div>
+					</div> 
 
-					<button form="noticeModifyForm" id="modify-submit1"
+					<button form="noticeModifyForm" id="noticeModify-submit1"
 						class="btn btn-secondary d-none">수정</button>
 
-					<button id="delete-submit1" class="btn btn-danger d-none">삭제</button>
+					<button id="noticeDelete-submit1" class="btn btn-danger d-none">삭제</button>
 
 
 				</form>

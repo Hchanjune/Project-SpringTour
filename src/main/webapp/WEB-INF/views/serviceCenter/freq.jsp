@@ -19,40 +19,17 @@
 
 <script>
 
-	
+
 	$(document).ready(function() {
-		$("#freqSubmit").click(function(e){
-			e.preventDefault();
-			
-			$.ajax({
-				url :"${appRoot }/serviceCenter/freqPost",
-				type :"post",
-				data : $('form1').serialize(),
-				success : function(data){
-			
-					// 새 댓글 등록되었다는 메세지 출력
-					$("#answer1").show().text(data);
-					console.log(data);
-					
-				/* 	// text input 초기화
-					$("#insertReplyContentInput1").val("");
-					
-					// 모든 댓글 가져오는 ajax 요청
-					//댓글 가져오는 함수 발생
-						listReply();
-					// console.log(data); */
-				},
-				error : function(){
-					$("#answer1").show().text("작성할  수 없습니다.");
-					console.log("문제 발생");
-				},
-				complete : function(){
-					console.log("요청완료");
-				}
-			});
+		$(".freqContent").hide();
+		//content 클래스를 가진 div를 표시/숨김(토글)
+		$(".heading").click(function()
+		{
+		$(this).next(".freqContent").slideToggle(500);
 		});
 	});
 	
+
 
 </script>
 
@@ -89,115 +66,111 @@
 					
 					<div class="nav justify-content-end">
 
-						<form action="${appRoot }/serviceCenter/freq" class="d-flex"
-							method="post">
+						<form action="${appRoot }/serviceCenter/freq" class="d-flex" method="get">
 							<div class="input-group">
 								<!-- select.form-select>option*3 -->
 								<select name="type" id="" class="form-select"
 									style="flex: 0 0 100px;">
 									<option value="all"
 										${param.type != 'title' && param.type != 'body' ? 'selected' : '' }>전체</option>
-									<%-- <option value="title" ${param.type=='title' ? 'selected' : '' }>제목</option> --%>
+									<option value="title" ${param.type=='title' ? 'selected' : '' }>제목</option> 
 									<option value="body" ${param.type=='body' ? 'selected' : '' }>본문</option>
 								</select>
 
 								<input type="search" class="form-control" name="keyword" />
 								<button class="btn btn-outline-success">
-									<i class="fa-solid fa-magnifying-glass"></i>
+								<i class="fa-solid fa-magnifying-glass"></i>
 								</button>
 							</div>
 						</form>
 					</div>
 				</div>
-				
-			
+
+
 
 				<table class="table board_list" style="width: 1625px;">
 					<thead>
-						<form action="${appRoot }/serviceCenter/freq" class="d-flex" method="post">
-
-							<ul class="nav nav-tabs" id="myTab" role="tablist">
-								<li class="nav-item" role="presentation">
-									<button class="nav-link active" id="home-tab"
-										data-bs-toggle="tab" data-bs-target="#home-tab-pane"
-										type="button" role="tab" aria-controls="home-tab-pane"
-										aria-selected="true">전체</button>
-								</li>
-								<li class="nav-item" role="presentation">
-									<button class="nav-link" id="profile-tab" data-bs-toggle="tab"
-										data-bs-target="#profile-tab-pane" type="button" role="tab"
-										aria-controls="profile-tab-pane" aria-selected="false">예약/결제</button>
-								</li>
-								<li class="nav-item" role="presentation">
-									<button class="nav-link" id="contact-tab" data-bs-toggle="tab"
-										data-bs-target="#contact-tab-pane" type="button" role="tab"
-										aria-controls="contact-tab-pane" aria-selected="false">상품문의</button>
-								</li>
-								<li class="nav-item" role="presentation">
-									<button class="nav-link" id="disabled-tab" data-bs-toggle="tab"
-										data-bs-target="#disabled-tab-pane" type="button" role="tab"
-										aria-controls="disabled-tab-pane" aria-selected="false">기타</button>
-								</li>
-							</ul>
+						<ul class="nav nav-tabs" id="myTab" role="tablist">
+							<li class="nav-item" role="presentation">
+								<button class="nav-link active" id="home-tab"
+									data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+									type="button" role="tab" aria-controls="home-tab-pane"
+									aria-selected="true">전체</button>
+							</li>
+						<!-- 	<li class="nav-item" role="presentation">
+								<button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+									data-bs-target="#profile-tab-pane" type="button" role="tab"
+									aria-controls="profile-tab-pane" aria-selected="false">예약/결제</button>
+							</li>
+							<li class="nav-item" role="presentation">
+								<button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+									data-bs-target="#contact-tab-pane" type="button" role="tab"
+									aria-controls="contact-tab-pane" aria-selected="false">상품문의</button>
+							</li>
+							<li class="nav-item" role="presentation">
+								<button class="nav-link" id="disabled-tab" data-bs-toggle="tab"
+									data-bs-target="#disabled-tab-pane" type="button" role="tab"
+									aria-controls="disabled-tab-pane" aria-selected="false">기타</button>
+							</li> -->
+						</ul>
 
 
-							<div class="tab-content" id="myTabContent">
-								<div class="tab-pane fade show active" id="home-tab-pane"
-									role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-									<br />
-									${freqPost.title }
+						<!-- <div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade show active" id="home-tab-pane"
+								role="tabpanel" aria-labelledby="home-tab" tabindex="0"> -->
 
+								
+								<div>
 									<c:forEach items="${Page }" var="sc">
-										<ul class="list-group">
-											<form id="form1">
-												<div class="input-group">
-													<input type="button" name=freqPost
-														value="${freqPost.indexId } Q ${sc.title }"
-														id="freqSubmit" class="form-control"
-														style="text-align: left;" />
-
-
-													<%-- Q ${sc.title } --%>
-
-												</div>
-
-												<div id="answer1">${sc.body }</div>
-
-											</form>
+										<%-- <ul class="list-group">
+											<span name="toggle-control">
+												<input  type="button" 
+													value=" Q. ${sc.title }"
+													class="form-control" style="text-align: left; padding: 15px 15px;" />
+											</span>
 										</ul>
-									</c:forEach>
+										<span name="toggle-control" style="display: none;"> A.${sc.body }</span> --%>
+										
+										<ul class="list-group">
+											<div class="heading" >
+												<input  type="button" 
+													value=" Q. ${sc.title }"
+													class="form-control" style="text-align: left; padding: 15px 15px;" />
+											</div>
+											<div class="freqContent"  style="background-color:#dff9fb; padding: 15px 15px 15px 40px; " > A. ${sc.body }</div>
+										</ul>
+									 </c:forEach> 
 								</div>
-							</div>
-						</form>
+							<!-- </div>
+						</div> -->
 					</thead>
-
-
-					<%-- <br />
-					<tbody>
-						<tr>
-							<td scope="row">Q ${freqList.body }</td>
-						</tr>
-
-					</tbody> --%>
 				</table>
 
 
-
+			
 				<sec:authorize access="hasRole('ADMIN')">
 					<sec:authentication property="principal" var="principal" />
 					<div class="col justify-content-right" align="right" style="padding-right:40px;">
 						<button class="btn btn-primary" style="background: #E6FFFF;">
 							<a href="${appRoot}/serviceCenter/freqInsert">글쓰기</a>
 						</button>
+
+						<button class="btn btn-primary" style="background: #E6FFFF;">
+							<a href="${appRoot }/serviceCenter/freqmd">
+								<i class="fa-solid fa-user-pen"></i>
+							</a>
+						</button>
+
 					</div>
 				</sec:authorize>
+				</div>
 				
 				<tag:noticepagination path="freq" />
 		
 			</div>
 		</div>
-	</div>
-	<footer style="height: 25px; background-color:black;"></footer> 
+
+	<!-- <footer style="height: 25px; background-color:black;"></footer>  -->
 
 </body>
 </html>

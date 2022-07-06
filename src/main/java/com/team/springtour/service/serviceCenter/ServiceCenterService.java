@@ -218,42 +218,42 @@ public class ServiceCenterService {
 	
 	// freq - 자주묻는 질문 -----------------------------------------------------------------------------------------------
 
-	public ServiceCenterDto getFreqPost() {
-		ServiceCenterDto freq = mapper.selectFreqPost();
-		return freq;
-	}
-
-
-	public List<ServiceCenterDto> listFreqPage(int page, int rowPerPage) {
-		
-		int from = (page-1) * rowPerPage;
-		
-		return mapper.listFreqPage(from, rowPerPage);
-	}
-
-
-	public List<ServiceCenterDto> freqSearchPost(String type, String keyword, int page, int rowPerPage) {
-			String Keyword = "%" + keyword + "%";
+	/*	public ServiceCenterDto getFreqPost() {
+			ServiceCenterDto freq = mapper.selectFreqPost();
+			return freq;
+		}
+	
+	
+		public List<ServiceCenterDto> listFreqPage(int page, int rowPerPage) {
 			
-		int from = (page-1) * rowPerPage;
+			int from = (page-1) * rowPerPage;
 			
-		return mapper.selectFreqSearchAll(type, Keyword, from, rowPerPage);
-	}
-
-
-	public int countFreqPostPage() {
-		return mapper.countFreqPostPage();
-	}
-
-
-
-	public boolean insertFreq(ServiceCenterDto freq) {
-		
-//		int cnt = mapper.insertFreqList(freq);
-		int cnt = mapper.insertBoard(freq);
-		
-		return cnt == 1;
-	}
+			return mapper.listFreqPage(from, rowPerPage);
+		}
+	
+	
+		public List<ServiceCenterDto> freqSearchPost(String type, String keyword, int page, int rowPerPage) {
+				String Keyword = "%" + keyword + "%";
+				
+			int from = (page-1) * rowPerPage;
+				
+			return mapper.selectFreqSearchAll(type, Keyword, from, rowPerPage);
+		}
+	
+	
+		public int countFreqPostPage() {
+			return mapper.countFreqPostPage();
+		}
+	
+	
+	
+		public boolean insertFreq(ServiceCenterDto freq) {
+			
+	    //int cnt = mapper.insertFreqList(freq);
+			int cnt = mapper.insertBoard(freq);
+			
+			return cnt == 1;
+		}*/
 
 }
 

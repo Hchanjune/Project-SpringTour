@@ -92,16 +92,7 @@
 		<div class="row">
 			<!-- Left -->
 			<div class="col-2">
-				<p>메뉴123123123123123123</p>
-				<br />
-				<p>메뉴</p>
-				<br />
-				<p>메뉴</p>
-				<br />
-				<p>메뉴</p>
-				<br />
-				<p>메뉴</p>
-				<br />
+				<tag:managementSideMenu/>
 			</div>
 
 			<!-- Main -->
@@ -152,7 +143,9 @@
 
 			<!-- Footer -->
 			<div class="row">
-				<div class="col-12"></div>
+				<div class="col-12">
+					<tag:footer/>
+				</div>
 			</div>
 
 		</div>

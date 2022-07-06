@@ -19,8 +19,8 @@
 
 	$(document).ready(function() {
 		$("#edit-buttonQna").click(function() {
-			$("#input1").removeAttr("readonly");
-			$("#textarea1").removeAttr("readonly");
+			$("#qnaInput").removeAttr("readonly");
+			$("#qnaTextarea").removeAttr("readonly");
 			$("#modify-submit2").removeClass("d-none");
 			$("#delete-submit2").removeClass("d-none");
 			/* $("#addFileInputContainer1").removeClass("d-none");
@@ -40,49 +40,50 @@
 			}
 
 		});
+	});	
 		
-	/* }); */	
+	
 // qnaPage reply ------------------------------------------------------------------------------------------
 		
-		// 페이지 로딩 후 reply List 가져오는 ajax 요청
-	 	const listReply = function(){
+	 	// 페이지 로딩 후 reply List 가져오는 ajax 요청
+		const listReply = function(){
 		
 			const data = {replyIndexId : ${qnaPost.indexId }};
 			$.ajax({
-				url : "${appRoot}/qnaReply/qnaPage",
+				url : "${appRoot}/qnaReply/qnaList",
 				type : "get",
 				data : data,
 				success : function(list){
 					//console.log("댓글 가져오기 성공");
 					console.log(list);
 					
-					const replyListElement = $("#replyList1");
+					const replyListElement = $("#replyQnaList");
 					replyListElement.empty();
 					
 					// 댓글 개수 표시
-					$("#numOfReply1").text(list.length);
+					$("#numOfQnaReply").text(list.length);
 					
 					
 					
-				/* 	for (let i=0; i < list.length; i++){
+					for (let i=0; i < list.length; i++){
 						const replyElement = $("<li class='list-group-item' />");
 						replyElement.html(`
 								
-									<div id="replyDisplayContainer\${list[i].replyIndexId }" >
+									<div id="replyContainer\${list[i].replyIndexId }" >
 										<div class="fw-bold">
 												<i class="fa-solid fa-comment"></i> 
 												\${list[i].prettyInserted}
 												
-												<span id="modifyButtonWrapper\${list[i].replyIndexId }">
+												<span id="modifyButton\${list[i].replyIndexId }">
 												</span>
 											</div>
 								
-									 		<span id="replyContent\${list[i].replyIndexId}"></span>
+									 		<span id="replyQnaContent\${list[i].replyIndexId}"></span>
 										 	
 								
 										</div>
 										
-										<div id="replyEditFormContainer\${list[i].replyIndexId }" style="display: none;">
+										<div id="replyEditForm\${list[i].replyIndexId }" style="display: none;">
 											<form action="${appRoot }/qnaReply/modify" method="post">
 												<div class="input-group">
 													<!-- 작성자 : ${board.writerNickName }
@@ -91,7 +92,7 @@
 													<input class="form-control" value="\${list[i].qnaContent }" 
 													       type="text" name="qnaContent" required /> 
 													<button data-reply-id="\${list[i].replyIndexId}" 
-													        class="reply-modify-submit btn btn-outline-secondary">
+													        class="reply-QnaModify-submit btn btn-outline-secondary">
 														<i class="fa-solid fa-comment-dots"></i>
 													</button>
 												</div>
@@ -104,13 +105,13 @@
 						
 						
 						
-						$("#replyContent" + list[i].replyIndexId).text(list[i].qnaContent);
+						$("#replyQnaContent" + list[i].replyIndexId).text(list[i].qnaContent);
 						// own이 true 일 때만 수정, 삭제 버튼 보이기
 						if (list[i].own){
-							$("#modifyButtonWrapper" + list[i].replyIndexId).html(`
+							$("#modifyButton" + list[i].replyIndexId).html(`
 										
 								<span class="reply-edit-toggle-button badge bg-info text-dark" 
-								             id="replyEditToggleButton\${list[i].replyIndexId }" 
+								             id="replyEditToggleButtonQna\${list[i].replyIndexId }" 
 								             data-reply-id="\${list[i].replyIndexId }" >
 							 			<i class="fa-solid fa-pen-to-square"></i>
 						 		</span>
@@ -125,11 +126,11 @@
 						
 					  } 
 				
-					  $(".reply-modify-submit").click(function(e){
+					  $(".reply-QnaModify-submit").click(function(e){
 						 e.preventDefault();
 						 
 						 const replyIndexId = $(this).attr("data-reply-replyIndexId");
-						 const formElem = $("#replyEditFormContainer" + replyIndexId).find("form");
+						 const formElem = $("#replyEditForm" + replyIndexId).find("form");
 						 // const data = formElem.serialize(); put방식은 controller에서 못 받음.
 						 const data = {
 								<!--writerId : formElem.find("[name=writerId]").val(), -->
@@ -147,12 +148,12 @@
 								console.log(data);
 								
 								// 메세지 보여주기
-								$("#replyMessage1").show().text(data).fadeOut(3000);
+								$("#replyQnaMessage").show().text(data).fadeOut(3000);
 								// 댓글 refresh
 								listReply();
 							},
 							error : function(){
-								$("#replyMessage1").show().text("댓글을 수정할 수 없습니다.").fadeOut(3000);
+								$("#replyQnaMessage").show().text("댓글을 수정할 수 없습니다.").fadeOut(3000);
 								console.log("수정 실패");
 							},
 							complete : function(){
@@ -166,8 +167,8 @@
 						$(".reply-edit-toggle-button").click(function() {
 							console.log("버튼클릭");
 							const replyId = $(this).attr("data-reply-replyIndexId");
-							const displayDivId = "#replyDisplayContainer" + replyId;
-							const editFormId = "#replyEditFormContainer" + replyId;
+							const displayDivId = "#replyContainer" + replyId;
+							const editFormId = "#replyEditForm" + replyId;
 							
 							console.log(replyId);
 							console.log(displayDivId);
@@ -197,10 +198,10 @@
 										// 댓글 list refresh
 										listReply();
 										// 메세지 출력
-										$("#replyMessage1").show().text(data).fadeOut(3000);
+										$("#replyQnaMessage").show().text(data).fadeOut(3000);
 									},
 									error : function(){
-										$("#replyMessage1").show().text("댓글을 삭제할 수 없습니다.").fadeout(3000);
+										$("#replyQnaMessage").show().text("댓글을 삭제할 수 없습니다.").fadeout(3000);
 										console.log(replyId + "댓글 삭제 중 문제 발생됨.");	
 									},
 									complete : function(){
@@ -218,44 +219,48 @@
 		}
 		
 		//댓글 가져오는 함수 발생
-		listReply(); 
+		listReply();  
 		
 		// ---------------------------------------------------------------------------------------------
 		
 		// addReplySubmitButton1 버튼 클릭시 ajax 댓글 추가 요청
-		$("#addReplySubmitButton1").click(function(e){
+		
+	
+		$("#addReplyQnaButton").click(function(e){
 			e.preventDefault();
-			
-			const data = $("#insertReplyForm1").serialize();
+				
+			const data = $("#insertReplyQnaForm").serialize();
 			
 			$.ajax({
-				url :"${appRoot }/qnaReply/qna/insert",
+				url :"${appRoot }/qnaReply/qna/qnaInsert",
 				type :"post",
 				data : data,
 				success : function(data){
 			
 					// 새 댓글 등록되었다는 메세지 출력
-					$("#replyMessage1").show().text(data).fadeOut(3000);		
+					$("#replyQnaMessage").show().text(data).fadeOut(3000);		
 					
 					// text input 초기화
-					$("#insertReplyContentInput1").val("");
+					$("#insertReplyContentInput").val("");
 					
 					// 모든 댓글 가져오는 ajax 요청
 					//댓글 가져오는 함수 발생
-						listReply();
+					//	listReply();
 					// console.log(data);
 				},
 				error : function(){
-					$("#replyMessage1").show().text("댓글을 작성할  수 없습니다.").fadeout(3000);
+					$("#replyQnaMessage").show().text("댓글을 작성할  수 없습니다.").fadeout(3000);
 					console.log("문제 발생");
 				},
 				complete : function(){
 					console.log("요청완료");
 				}
 			});
-		});
-	 }); 
+		}); 
+	 });  
 	
+		
+
 
 </script>
 
@@ -282,7 +287,7 @@
 					<div class="board_view_title">
 						<!-- <label class="form-label" for="input1">제목</label> -->
 						<input class="form-control" type="text" name="title"
-							value="${qnaPost.title }" id="input1" readonly />
+							value="${qnaPost.title }" id="qnaInput" readonly />
 					</div>
 
 					<div class="board_view_date">
@@ -293,7 +298,7 @@
 					
 					<div class="board_view_content">
 						<!-- <label class="form-label" for="textarea1">본문</label> -->
-						<textarea class="form-control" name="body" id="textarea1"
+						<textarea class="form-control" name="body" id="qnaTextarea"
 							cols="30" rows="10" readonly>${qnaPost.body }</textarea>
 					</div>
 
@@ -339,33 +344,36 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<form id="insertReplyForm1">
-					<h3 style="color: blue;">답변</h3>
-					<%-- <form action="${appRoot }/serviceCenter/qna/insert" id="insertReplyForm1">  --%>
+				<form action="${appRoot }/serviceCenter/qna/qnaPage" id="insertReplyQnaForm">
 					<div class="input-group">
-						<input type="hidden" name="indexId" value="${qnaPost.indexId }" />
-						<input id="insertReplyContentInput1" class="form-control"
-							type="text" name="qnaContent" required />
+					<h3 style="color: blue;">답변</h3>
+
+					<%-- <form action="${appRoot }/serviceCenter/qna/insert" id="insertReplyForm1">  --%>
+
+					<input type="hidden" name="replyIndexId"
+						value="${qnaPost.indexId }" />
+					<input id="insertReplyContentInput" class="form-control"
+						type="text" name="qnaContent" required />
 
 
-						<sec:authorize access="hasRole('ADMIN')">
-							<sec:authentication property="principal" var="principal" />
-							<c:if test="${principal.username == qnaPost.writer }">
-								<button id="addReplySubmitButton1"
-									class="btn btn-outline-secondary">
-									<i class="fa-solid fa-comment-dots"></i>
-								</button>
-							</c:if>
-						</sec:authorize>
+					<sec:authorize access="hasRole('ADMIN')">
+						<sec:authentication property="principal" var="principal" />
+						<%-- <c:if test="${principal.username == qnaPost.writer }"> --%>
+						<button id="addReplyQnaButton" class="btn btn-outline-secondary">
+							<i class="fa-solid fa-comment-dots"></i>
+						</button>
+						<%-- </c:if> --%>
+					</sec:authorize>
+			<!-- </form> -->
 					</div>
 				</form>
-				<!-- 	</form> -->
 			</div>
 		</div>
-		<div class="row">
-			<div class="alert alert-primary" style="display: none;"
-				id="replyMessage1"></div>
-		</div>
+	</div>
+	
+	<div class="row">
+		<div id="replyQnaMessage" class="alert alert-primary"
+			style="display: none;"></div>
 	</div>
 
 
@@ -375,12 +383,10 @@
 	<div class="container mt-3">
 		<div class="row">
 			<div class="col">
-				<!-- 	<h3>댓글 <span id="numOfReply1"></span> 개</h3> -->
+				<!-- <h3>댓글 <span id="numOfQnaReply"></span> 개</h3>
+				<ul id="replyQnaList" class="list-group">
 
-				<ul id="replyList1" class="list-group">
-
-
-				</ul>
+				</ul> -->
 			</div>
 		</div>
 	</div>
