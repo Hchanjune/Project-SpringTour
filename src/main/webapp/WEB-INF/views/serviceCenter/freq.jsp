@@ -59,12 +59,12 @@
 			</div>
 
 
-			<div class="col-10">
-				<div class="contents">
+			<div class="col-10" style="width: 1200px;">
+				<div class="contents" >
 					
 					<h1>자주묻는질문</h1>
 					
-					<div class="nav justify-content-end">
+					<div class="nav justify-content-end" >
 
 						<form action="${appRoot }/serviceCenter/freq" class="d-flex" method="get">
 							<div class="input-group">
@@ -88,7 +88,7 @@
 
 
 
-				<table class="table board_list" style="width: 1625px;">
+				<table class="table board_list"  style="width: 1100px;">
 					<thead>
 						<ul class="nav nav-tabs" id="myTab" role="tablist">
 							<li class="nav-item" role="presentation">
@@ -155,11 +155,11 @@
 							<a href="${appRoot}/serviceCenter/freqInsert">글쓰기</a>
 						</button>
 
-						<button class="btn btn-primary" style="background: #E6FFFF;">
+					<%-- 	<button class="btn btn-primary" style="background: #E6FFFF;">
 							<a href="${appRoot }/serviceCenter/freqmd">
 								<i class="fa-solid fa-user-pen"></i>
 							</a>
-						</button>
+						</button> --%>
 
 					</div>
 				</sec:authorize>
