@@ -69,7 +69,7 @@
 				</div>
 
 
-				<table class="table board_list" style="width: 1625px;">
+				<table class="table board_list" style="width: 1200px;">
 					<thead class="col justify-content-center">
 						<tr>
 							<th>번호</th>
