@@ -14,6 +14,8 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencyManagement>
+	
+	
 	<!-- aws java sdk https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/get-started.html -->
 		<dependencies>
 			<dependency>
@@ -26,6 +28,13 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
+		
+		<!--  javax.annotations -->
+		<dependency>
+    		<groupId>javax.annotation</groupId>
+    		<artifactId>javax.annotation-api</artifactId>
+    		<version>1.3.2</version>
+		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
